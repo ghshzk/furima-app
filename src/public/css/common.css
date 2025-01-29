@@ -3,6 +3,47 @@ body {
     height: 100%;
 }
 
+.app {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
 .header {
     background: #000;
+    height: 82px;
+    display: grid;
+    align-items: center;
+
+    grid-template-columns: repeat(3,1fr);
+    grid-template-rows: 1fr;
+}
+
+.header-logo {
+    margin: 25px;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    height:  100%;
+}
+
+.btn {
+    display: block;
+    margin-top: 70px;
+    padding: 15px;
+    background-color: #FF5555;
+    color: #FFF;
+    border-radius: 5px;
+    font-size: 26px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.link {
+    color: #0073CC;
+    font-size: 24.2px;
+    text-decoration: none;
+    cursor: pointer;
 }
