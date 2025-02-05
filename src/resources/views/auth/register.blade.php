@@ -14,28 +14,36 @@
                 <label class="register-form__label" for="name">ユーザー名</label>
                 <input class="register-form__input" type="text" id="name" name="name">
                 <p class="register-form__error-message">
-                    エラー
+                    @error('name')
+                    {{ $message }}
+                    @enderror
                 </p>
             </div>
             <div class="register-form__group">
                 <label class="register-form__label" for="email">メールアドレス</label>
                 <input class="register-form__input" type="email" id="email" name="email">
                 <p class="register-form__error-message">
-                    エラー
+                    @error('email')
+                    {{ $message }}
+                    @enderror
                 </p>
             </div>
             <div class="register-form__group">
                 <label class="register-form__label" for="password">パスワード</label>
                 <input class="register-form__input" type="password" id="password" name="password">
                 <p class="register-form__error-message">
-                    エラー
+                    @error('password')
+                    {{ $message }}
+                    @enderror
                 </p>
             </div>
             <div class="register-form__group">
                 <label class="register-form__label" for="password_confirmation">確認用パスワード</label>
                 <input class="register-form__input" type="password" id="password_confirmation" name="password_confirmation">
                 <p class="register-form__error-message">
-                    エラー
+                    @error('password_confirmation')
+                    {{ $message }}
+                    @enderror
                 </p>
             </div>
             <button class="register-form__btn btn" type="submit">登録する</button>

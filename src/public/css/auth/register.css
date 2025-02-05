@@ -27,7 +27,7 @@
 .register-form__group {
     display: flex;
     flex-direction: column;
-    margin-top: 6px;
+    margin-top: 30px;
 }
 
 .register-form__link-container {
@@ -56,5 +56,6 @@
 
 .register-form__btn {
     width: 100%;
+    margin-top: 100px;
 }
 
