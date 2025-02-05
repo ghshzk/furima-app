@@ -11,12 +11,22 @@ body {
 
 .header {
     background: #000;
+    font-size: 24px;
     height: 82px;
     display: grid;
     align-items: center;
 
     grid-template-columns: repeat(3,1fr);
     grid-template-rows: 1fr;
+}
+
+.header-logo,
+.header-search-form,
+.header-nav {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .header-logo {
