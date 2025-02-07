@@ -29,5 +29,12 @@
 @endsection
 
 @section('content')
-<p>おすすめ</p>
+<div class="items">
+    <div class="item__container">
+        <div class="item__img">
+            <img src="" alt="商品画像">
+        </div>
+        <label for="name">商品名</label>
+    </div>
+</div>
 @endsection
