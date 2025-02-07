@@ -133,6 +133,14 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'email' => [
+            'required' => 'メールアドレスを入力してください',
+            'email' => 'メールアドレスは「ユーザー名@ドメイン」形式で入力してください',
+        ],
+        'password' => [
+            'required' => 'パスワードを入力してください',
+            'min' => 'パスワードは8文字以上で入力してください'
+        ],
     ],
 
     /*
@@ -146,5 +154,10 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'name' => 'お名前',
+        'email' => 'メールアドレス',
+        'password' => 'パスワード'
+    ],
+
 ];
