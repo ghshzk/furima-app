@@ -1,9 +1,10 @@
 <?php
 
 namespace Database\Seeders;
-use Illuminate\Support\Facades\DB;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
+use App\Models\Category;
 
 class CategoriesTableSeeder extends Seeder
 {
@@ -14,7 +15,7 @@ class CategoriesTableSeeder extends Seeder
      */
     public function run()
     {
-        $contents = [
+        $categories = [
             'ファッション',
             '家電',
             'インテリア',
@@ -31,8 +32,8 @@ class CategoriesTableSeeder extends Seeder
             'ベビー・キッズ'
         ];
 
-        foreach ($contents as $content) {
-            DB::table('categories')->insert(['content' => $content]);
+        foreach ($categories as $category) {
+            Category::create(['content' => $category]);
         }
     }
 }
