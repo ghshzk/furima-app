@@ -44,6 +44,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function getProfileImage()
+    {
+        return $this->image_path ? asset('storage/' . $this->image_path) : asset('images/default_icon.png');
+    }
+
     public function likedItems()
     {
         return $this->belongsToMany(Item::class,'likes')->withTimestamps();

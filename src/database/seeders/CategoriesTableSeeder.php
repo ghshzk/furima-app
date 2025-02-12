@@ -32,8 +32,6 @@ class CategoriesTableSeeder extends Seeder
             'ベビー・キッズ'
         ];
 
-        foreach ($categories as $category) {
-            Category::create(['content' => $category]);
-        }
+        DB::table('categories')->insert($categories);
     }
 }
