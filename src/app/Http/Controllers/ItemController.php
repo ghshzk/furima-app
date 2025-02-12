@@ -6,8 +6,9 @@ use Illuminate\Http\Request;
 
 class ItemController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return view('top');
+        $tab = $request->query('tab','recommend');
+        return view('top',compact('tab'));
     }
 }

@@ -49,3 +49,41 @@
 .header-nav__link-sell {
     color: #000;
 }
+
+/**ここからヘッダー編集後に追加した*/
+.tabs {
+    margin-top:60px;
+    font-size: 24px;
+}
+
+.tab-nav {
+    max-width: 100%;
+    border-bottom: 2px solid #5F5F5F;
+}
+
+.tab-nav a {
+    text-decoration: none;
+    color: #5F5F5F;
+    font-weight: 700;
+}
+
+.tab-nav a.active {
+    color: #FF0000;
+}
+
+.tab-nav__list {
+    display: flex;
+    list-style: none;
+    margin-left: 30px;
+}
+
+.tab-nav__item {
+    width: 135px;
+    height: 40px;
+    text-align: right;
+    margin-left: 75px;
+}
+
+.tab-content {
+    margin: 100px;
+}

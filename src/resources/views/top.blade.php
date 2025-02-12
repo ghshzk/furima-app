@@ -29,12 +29,31 @@
 @endsection
 
 @section('content')
-<div class="items">
-    <div class="item__container">
-        <div class="item__img">
-            <img src="" alt="商品画像">
-        </div>
-        <label for="name">商品名</label>
+<div class="tabs">
+    <div class="tab-nav">
+        <ul class="tab-nav__list">
+            <li class="tab-nav__item">
+                <a class="{{ $tab == 'recommend' ? 'active' : '' }}" href="{{ route('top', ['tab' => 'recommend']) }}">
+                    おすすめ
+                </a>
+            </li>
+            <li class="tab-nav__item">
+                <a class="{{ $tab == 'mylist' ? 'active' : '' }}" href="{{ route('top',['tab' => 'mylist']) }}">
+                    マイリスト
+                </a>
+            </li>
+        </ul>
+    </div>
+
+
+    <div class="tab-content">
+        @if ($tab == 'recommend')
+        <p>おすすめの商品</p>
+        <!-- おすすめ商品一覧を表示-->
+        @elseif ($tab == 'mylist')
+        <p>マイリストの商品</p>
+        <!-- マイリストの一覧表示 -->
+        @endif
     </div>
 </div>
 @endsection
