@@ -20,3 +20,4 @@ Route::get('/',[ItemController::class,'index'])->name('top');;
 
 Route::get('/mypage',[UserController::class,'index']);
 
+Route::get('/mypage/profile',[UserController::class,'update']);
