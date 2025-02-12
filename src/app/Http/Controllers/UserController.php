@@ -10,4 +10,12 @@ class UserController extends Controller
     {
         return view('mypage');
     }
+
+
+    public function update()
+    {
+        return view('editing');
+    }
 }
+
+
