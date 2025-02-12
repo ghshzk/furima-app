@@ -1,3 +1,4 @@
+/* ヘッダーのデザイン */
 .header-search-form {
     display: flex;
     align-items: center;
@@ -50,7 +51,7 @@
     color: #000;
 }
 
-/**ここからヘッダー編集後に追加した*/
+/* タブ切替部分のデザイン */
 .tabs {
     margin-top:60px;
     font-size: 24px;
@@ -87,3 +88,5 @@
 .tab-content {
     margin: 100px;
 }
+
+/* 商品 */
