@@ -9,7 +9,12 @@ class Category extends Model
 {
     use HasFactory;
 
-    protected $guarded = [
-        'id',
+    protected $fillable = [
+        'content',
     ];
+
+    public function items()
+    {
+        return $this->belongsToMany(Item::class,'categorizations');
+    }
 }

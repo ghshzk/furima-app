@@ -22,7 +22,7 @@ class User extends Authenticatable
         'postcode',
         'address',
         'building',
-        'profile_image',
+        'image_path',
     ];
 
     /**
@@ -43,6 +43,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getProfileImage()
+    {
+        return $this->image_path ? asset('storage/' . $this->image_path) : asset('images/default_icon.png');
+    }
 
     public function likedItems()
     {

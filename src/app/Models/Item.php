@@ -9,13 +9,19 @@ class Item extends Model
 {
     use HasFactory;
 
-    protected $guarded = [
-        'id',
+    protected $fillable = [
+        'name',
+        'price',
+        'description',
+        'condition',
+        'image_path',
+        'brand',
+        'user_id'
     ];
 
-    public function category()
+    public function categories()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsToMany(Category::class,'categorizations');
     }
 
     public function user()
