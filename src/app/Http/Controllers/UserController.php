@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use App\Models\User;
 
 class UserController extends Controller
 {
@@ -11,10 +14,18 @@ class UserController extends Controller
         return view('mypage');
     }
 
-
-    public function update()
+    /* 編集する情報の表示 */
+    public function edit()
     {
-        return view('editing');
+        $user = User::find(1);/*Auth::user();*/
+        return view('editing', compact('user'));
+    }
+
+    /* 情報の更新 */
+    public function update(Request $request)
+    {
+        $user = User::find(1);
+        return view('editing', compact('user'));
     }
 }
 
