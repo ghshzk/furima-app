@@ -31,7 +31,7 @@ class ProfileRequest extends FormRequest
     public function messages()
     {
         return [
-            'image_path.mimes' => '画像はjpeg.png形式のファイルを選択してください'
+            'image_path.mimes' => 'プロフィール画像はjpeg.png形式のファイルを選択してください'
         ];
     }
 }

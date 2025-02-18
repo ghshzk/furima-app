@@ -32,7 +32,6 @@
     <h2 class="profile-form__heading">プロフィール設定</h2>
     <div class="profile-form__inner">
         <form class="profile-form__form" action="/mypage/profile" method="post" enctype="multipart/form-data">
-            @method('PATCH')
             @csrf
             <div class="profile-form__group--img">
                 @if ($user->image_path)

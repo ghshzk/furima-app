@@ -20,4 +20,7 @@ Route::get('/',[ItemController::class,'index'])->name('top');;
 
 Route::get('/mypage',[UserController::class,'index']);
 
-Route::get('/mypage/profile',[UserController::class,'edit']);
+Route::middleware(['auth'])->group(function(){
+    Route::get('/mypage/profile',[UserController::class,'edit']);
+    Route::post('/mypage/profile',[UserController::class,'update']);
+});
