@@ -1,0 +1,205 @@
+/* ヘッダーのデザイン */
+.header-search-form {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header-search-form__form {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 5px;
+    padding:  5px 10px;
+    height: 50px;
+    width: 500px;
+}
+
+.header-nav {
+    display: flex;
+    align-items: center;
+}
+
+.header-nav__list {
+    display: flex;
+    align-items: center;
+    list-style: none;
+}
+
+.header-nav__item {
+    flex: auto;
+    width: 135px;
+    text-align: center;
+    margin-left: 15px;
+}
+
+.header-nav__item:last-child {
+    background-color: #fff;
+    width: 100px;
+    height: 50px;
+    border-radius: 4px;
+    margin-left: 30px;
+    align-content: center;
+}
+
+.header-nav__link {
+    color: #fff;
+    text-decoration: none;
+}
+
+.header-nav__link-sell {
+    color: #000;
+}
+
+/* コンテンツのデザイン */
+.sell-form__ttl {
+    padding-bottom: 10px;
+    margin: 50px 0 35px;
+    font-size: 30px;
+    font-weight: 700;
+    color: #5F5F5F;
+    border-bottom: 1px solid #5F5F5F;
+}
+
+.sell-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 48px;
+    font-size: 24px;
+}
+
+.sell-form__heading {
+    text-align: center;
+    font-size: 36px;
+}
+
+.sell-form__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.sell-form__form {
+    width: 100%;
+    max-width: 680px;
+}
+
+/*画像選択のデザイン*/
+.sell-form__upload-inner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px dashed #5F5F5F;
+    border-radius: 4px;
+    height: 150px;
+    margin: 5px 0;
+}
+
+.sell-form__upload {
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #FF5655;
+    border: 2px solid #FF5555;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* カテゴリー選択のデザイン */
+.sell-form__checkbox-inner {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 25px;
+}
+
+.sell-form__checkbox {
+    margin: 30px 0 0 13px;
+    padding: 3px 18px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 500;
+    color: #FF5655;
+    border: 2px solid #FF5655;
+    border-radius: 200px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+input[type="checkbox"]:checked + label {
+    color: #FFF;
+    background-color: #FF5655;
+    border: 2px solid #FF5655;
+}
+
+/* 商品状態選択のデザイン */
+.sell-form__select-wrap {
+    display: inline-block;
+    margin-top: 12px;
+    position: relative;
+}
+
+.sell-form__select-inner {
+    appearance: none;
+    width: 100%;
+    height: 45px;
+    padding: 9.5px 15px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #000;
+    border: 1px solid #5F5F5F;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.sell-form__select-inner:invalid {
+    color: #5F5F5F; /* 初期状態の色 */
+}
+
+.sell-form__select-arrow {
+    position: absolute;
+    top: 16px;
+    right: 18px;
+    border-style: solid;
+    border-width: 17px 9px 0 9px;
+    border-color: #5F5F5F transparent transparent transparent;
+
+}
+
+/* その他入力箇所のデザイン */
+.sell-form__group {
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+}
+
+.sell-form__label {
+    font-weight: 700;
+}
+
+.sell-form__input {
+    display: block;
+    border: 1px solid #5F5F5F;
+    border-radius: 4px;
+    padding: 9.5px 15px;
+    margin: 2px 0;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+textarea.sell-form__input{
+    height: 125px;
+}
+
+.sell-form__error-message {
+    color: #FF5555;
+    font-size: 20px;
+    font-weight: 700;
+    margin-top: 5px;
+}
+
+.sell-form__btn {
+    width: 100%;
+    margin-top: 100px;
+}
