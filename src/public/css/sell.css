@@ -164,7 +164,29 @@ input[type="checkbox"]:checked + label {
     border-style: solid;
     border-width: 17px 9px 0 9px;
     border-color: #5F5F5F transparent transparent transparent;
+}
 
+/* 価格のデザイン */
+.sell-form__price-container {
+    display: flex;
+    align-items: center;
+    border: 1px solid #5F5F5F;
+    border-radius: 4px;
+    padding: 3.5px 15px;
+    margin: 2px 0;
+    font-weight: 700;
+}
+
+.sell-form__price-symbol {
+    font-size: 24px;
+    transform: scaleX(80%);
+    margin-right: 25px;
+}
+
+.sell-from__price-input {
+    width: 100%;
+    font-size: 16px;
+    font-weight: 700;
 }
 
 /* その他入力箇所のデザイン */
@@ -190,6 +212,7 @@ input[type="checkbox"]:checked + label {
 
 textarea.sell-form__input{
     height: 125px;
+    resize: none;
 }
 
 .sell-form__error-message {

@@ -110,7 +110,10 @@
             </div>
             <div class="sell-form__group">
                 <label class="sell-form__label" for="price">販売価格</label>
-                <input class="sell-form__input" type="number" id="price" name="price">
+                <div class="sell-form__price-container">
+                    <span class="sell-form__price-symbol">¥</span>
+                    <input class="sell-from__price-input" type="text" id="price" name="price">
+                </div>
                 <p class="sell-form__error-message">
                     @error('price')
                     {{ $message }}
