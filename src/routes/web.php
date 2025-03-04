@@ -18,13 +18,20 @@ use App\Http\Controllers\OrderController;
 
 Route::get('/',[ItemController::class,'index'])->name('top');;
 
-
 Route::get('/mypage',[UserController::class,'index'])->name('mypage');
+
 
 Route::middleware(['auth'])->group(function(){
     Route::get('/mypage/profile',[UserController::class,'edit']);
     Route::post('/mypage/profile',[UserController::class,'update']);
 });
+
+Route::middleware(['auth'])->group(function(){
+    Route::get('/sell',[ItemController::class,'create']);
+    Route::post('/sell',[ItemController::class,'store']);
+
+});
+
 
 Route::middleware(['auth'])->group(function(){
     Route::get('/purchase/{item_id}',[OrderController::class,'index']);
