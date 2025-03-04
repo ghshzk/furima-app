@@ -29,7 +29,7 @@ return [
         'array'   => ':attributeの項目は、:min個から:max個にしてください。',
     ],
     'boolean'              => ":attributeには、'true'か'false'を指定してください。",
-    'confirmed'            => ':attributeと:attribute確認が一致しません。',
+    'confirmed'            => ':attributeが一致しません。',
     'date'                 => ':attributeは、正しい日付ではありません。',
     'date_equals'          => ':attributeは:dateに等しい日付でなければなりません。',
     'date_format'          => ":attributeの形式は、':format'と合いません。",
@@ -38,7 +38,7 @@ return [
     'digits_between'       => ':attributeは、:min桁から:max桁にしてください。',
     'dimensions'           => ':attributeの画像サイズが無効です',
     'distinct'             => ':attributeの値が重複しています。',
-
+    'email'                => ':attributeはメール形式で入力してください',
     'ends_with'            => ':attributeは、次のうちのいずれかで終わらなければなりません。: :values',
     'exists'               => '選択された:attributeは、有効ではありません。',
     'file'                 => ':attributeはファイルでなければいけません。',
@@ -96,7 +96,7 @@ return [
     'password'             => 'パスワードが正しくありません。',
     'present'              => ':attributeが存在している必要があります。',
     'regex'                => ':attributeには、有効な正規表現を指定してください。',
-
+    'required'             => ':attributeを入力してください',
     'required_if'          => ':otherが:valueの場合、:attributeを指定してください。',
     'required_unless'      => ':otherが:values以外の場合、:attributeを指定してください。',
     'required_with'        => ':valuesが指定されている場合、:attributeも指定してください。',
@@ -133,7 +133,9 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
-
+        'password' => [
+            'min' => 'パスワードは8文字以上で入力してください'
+        ]
     ],
 
     /*
@@ -146,6 +148,10 @@ return [
     | of "email". This simply helps us make messages a little cleaner.
     |
     */
-
-
+  
+    'attributes' => [
+        'name' => 'お名前',
+        'email' => 'メールアドレス',
+        'password' => 'パスワード'
+    ],
 ];
