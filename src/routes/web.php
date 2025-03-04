@@ -16,7 +16,9 @@ use App\Http\Controllers\OrderController;
 |
 */
 
-Route::get('/',[ItemController::class,'index'])->name('top');;
+Route::get('/',[ItemController::class,'index'])->name('top');
+
+Route::get('/item/{item_id}',[ItemController::class,'show']);
 
 Route::get('/mypage',[UserController::class,'index']);
 
