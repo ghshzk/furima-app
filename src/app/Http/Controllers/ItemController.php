@@ -19,6 +19,12 @@ class ItemController extends Controller
         return view('top',compact('tab', 'items'));
     }
 
+    public function show($id)
+    {
+        $item = Item::findOrFail($id);
+        return view('exhibition', compact('item'));
+    }
+
     public function create()
     {
         $user = Auth::user();
