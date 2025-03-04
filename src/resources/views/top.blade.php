@@ -48,11 +48,25 @@
 
     <div class="tab-content">
         @if ($tab == 'recommend')
-        <p>おすすめの商品</p>
         <!-- おすすめ商品一覧を表示-->
+        <div class="item-container">
+            @foreach($items as $item)
+                <div class="item-card">
+                    <img class="item-card__img" src="{{ asset('storage/' . $item->image_path) }}" alt="{{ $item->name }}">
+                    <p class="item-card__content">{{ $item->name }}</p>
+                </div>
+            @endforeach
+        </div>
         @elseif ($tab == 'mylist')
-        <p>マイリストの商品</p>
         <!-- マイリストの一覧表示 -->
+        <div class="item-container">
+            @foreach($items as $item)
+                <div class="item-card">
+                    <img class="item-card__img" src="{{ asset('storage/' . $item->image_path) }}" alt="{{ $item->name }}">
+                    <p class="item-card__content">{{ $item->name }}</p>
+                </div>
+            @endforeach
+        </div>
         @endif
     </div>
 </div>

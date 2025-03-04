@@ -1,3 +1,4 @@
+/* ヘッダーのデザイン */
 .header-search-form {
     display: flex;
     align-items: center;
@@ -50,7 +51,7 @@
     color: #000;
 }
 
-/**ここからヘッダー編集後に追加した*/
+/* タブ切替部分のデザイン */
 .tabs {
     margin-top:60px;
     font-size: 24px;
@@ -85,5 +86,33 @@
 }
 
 .tab-content {
-    margin: 100px;
+    margin: 50px auto;
+    width: 100%;
+}
+
+/* 商品 */
+.item-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px; /* 画像間の余白 */
+    margin: 0 auto;
+    padding: 0 50px;
+}
+
+.item-card {
+    width: calc(25% - 38px); /* 4つ並ぶ調整 */
+    margin-bottom: 20px;
+    text-align: left;
+    box-sizing: border-box;
+}
+
+.item-card__img {
+    width: 100%;
+    aspect-ratio: 1 / 1; /* 画像正方形 */
+    object-fit: cover;
+}
+
+.item-card__name {
+    margin-top: 5px;
+    font-size: 16px;
 }
