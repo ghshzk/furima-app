@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Item;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Item;
@@ -14,7 +15,8 @@ class ItemController extends Controller
     public function index(Request $request)
     {
         $tab = $request->query('tab','recommend');
-        return view('top',compact('tab'));
+        $items = Item::all();
+        return view('top',compact('tab', 'items'));
     }
 
     public function create()

@@ -112,7 +112,7 @@ class ItemsTableSeeder extends Seeder
         ];
 
         foreach ($items as $index => $item) {
-            $imagePath = isset($imageFiles[$index]) ? "storage/items/" . $imageFiles[$index] : null;
+            $imagePath = isset($imageFiles[$index]) ? "items/" . $imageFiles[$index] : null;
 
             $createdItem = Item::create([
                 'name' => $item['name'],
