@@ -1,0 +1,105 @@
+/* ヘッダーのデザイン */
+.header-search-form {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header-search-form__form {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 5px;
+    padding:  5px 10px;
+    height: 50px;
+    width: 500px;
+}
+
+.header-nav {
+    display: flex;
+    align-items: center;
+}
+
+.header-nav__list {
+    display: flex;
+    align-items: center;
+    list-style: none;
+}
+
+.header-nav__item {
+    flex: auto;
+    width: 135px;
+    text-align: center;
+    margin-left: 15px;
+}
+
+.header-nav__item:last-child {
+    background-color: #fff;
+    width: 100px;
+    height: 50px;
+    border-radius: 4px;
+    margin-left: 30px;
+    align-content: center;
+}
+
+.header-nav__link {
+    color: #fff;
+    text-decoration: none;
+}
+
+.header-nav__link-sell {
+    color: #000;
+}
+
+/*コンテンツのデザイン*/
+.address-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 48px;
+    font-size: 24px;
+}
+
+.address-form__heading {
+    text-align: center;
+    font-size: 36px;
+}
+
+.address-form__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.address-form__form {
+    width: 100%;
+    max-width: 680px;
+    margin-top: 50px;
+}
+
+.address-form__group {
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+}
+
+.address-form__label {
+    font-weight: 700;
+}
+
+.address-form__input {
+    display: block;
+    border: 1px solid #5F5F5F;
+    border-radius: 4px;
+    padding: 9.5px;
+    margin: 2px 0 20px;
+}
+
+.address-form__error-message {
+    color: #FF5555;
+}
+
+.address-form__btn {
+    width: 100%;
+    margin-top: 80px;
+}
