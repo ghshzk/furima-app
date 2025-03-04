@@ -18,5 +18,5 @@ use App\Http\Controllers\UserController;
 Route::get('/',[ItemController::class,'index'])->name('top');;
 
 
-Route::get('/mypage',[UserController::class,'index']);
+Route::get('/mypage',[UserController::class,'index'])->name('mypage');
 
