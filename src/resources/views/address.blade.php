@@ -34,7 +34,7 @@
 <div class="address-form">
     <h2 class="address-form__heading">住所の変更</h2>
     <div class="address-form__inner">
-        <form class="address-form__form" action="/purchase/:item_id" method="post">
+        <form class="address-form__form" action="{{ route('purchase.updateAddress',['item_id' => $item->id]) }}" method="post">
             @csrf
             <div class="address-form__group">
                 <label class="address-form__label" for="postcode">郵便番号</label>

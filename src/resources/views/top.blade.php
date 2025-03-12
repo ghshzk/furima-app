@@ -58,9 +58,12 @@
             @foreach($items as $item)
                 <div class="item-card">
                     <a class="item-card__link" href="{{ url('/item/' . $item->id) }}">
-                        <img class="item-card__img" src="{{ asset('storage/' . $item->image_path) }}" alt="{{ $item->name }}">
+                        <img class="item-card__img {{ $item->is_sold ? 'sold' : '' }}" src="{{ asset('storage/' . $item->image_path) }}" alt="{{ $item->name }}">
                         <p class="item-card__content">{{ $item->name }}</p>
                     </a>
+                    @if($item->sold)
+                    <div class="sold-overlay">SOLD</div>
+                    @endif
                 </div>
             @endforeach
         </div>
@@ -69,8 +72,10 @@
         <div class="item-container">
             @foreach($items as $item)
                 <div class="item-card">
-                    <img class="item-card__img" src="{{ asset('storage/' . $item->image_path) }}" alt="{{ $item->name }}">
-                    <p class="item-card__content">{{ $item->name }}</p>
+                    <a class="item-card__link" href="{{ url('/item/' . $item->id) }}">
+                        <img class="item-card__img" src="{{ asset('storage/' . $item->image_path) }}" alt="{{ $item->name }}">
+                        <p class="item-card__content">{{ $item->name }}</p>
+                </a>
                 </div>
             @endforeach
         </div>

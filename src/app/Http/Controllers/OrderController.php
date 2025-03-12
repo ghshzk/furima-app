@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
-    public function index($itemId)
+    public function show(Request $request, $itemId)
     {
         $user = Auth::user();
         $item = Item::findOrFail($itemId);
@@ -23,6 +23,13 @@ class OrderController extends Controller
         $payment_method = session('payment_method', '未選択');
 
         return view('purchase',compact('user','item', 'order','payment_method'));
+    }
+
+    public function updatePayment(Request $request, $itemId)
+    {
+        session(['payment_method' => $request->payment_method]);
+        session()->save();
+        return redirect()->route('purchase.show', ['item_id' => $itemId]);
     }
 
     /* 住所変更ページ表示 */
@@ -47,14 +54,14 @@ class OrderController extends Controller
             'order_address' => $request->address,
             'order_building' => $request->building,
         ]);
+        session()->save();
 
-        return redirect('/purchase/{item_id}');
+        return redirect()->route('purchase.show', ['item_id' => $itemId]);
     }
 
-    public function updatePayment(PurchaseRequest $request, $itemId)
-    {
-        session(['payment_method' => $request->payment_method]);
 
-        return redirect('purchase',['item_id' => $itemId]);
+    public function order(PurchaseRequest $request, $item_id)
+    {
+        
     }
 }

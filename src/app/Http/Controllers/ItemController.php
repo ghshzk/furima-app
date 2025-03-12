@@ -14,7 +14,28 @@ class ItemController extends Controller
     public function index(Request $request)
     {
         $tab = $request->query('tab','recommend');
-        $items = Item::all();
+        $items = Item::query();
+
+        /* 出品商品を除外 */
+        if (Auth::check()) {
+            $items->where('user_id', '!=', Auth::id());
+        }
+        $items = $items->get();
+
+        /* お気に入り商品のみ表示 */
+        if ($tab == 'mylist') {
+            if(Auth::check()) {
+                $items = Auth::user()->likedItems;
+            } else {
+                $items = collect();
+            }
+        }
+
+        $items = Item::all()->map(function($item){
+            $item->sold = $item->orders()->exists();
+            return $item;
+        });
+
         return view('top',compact('tab', 'items'));
     }
 
@@ -24,20 +45,8 @@ class ItemController extends Controller
         $categories = Category::find($id);
         $commentCount = $item->comments->count();
         $likeCount = $item->likedByUsers->count();
+
         return view('exhibition', compact('item','categories' ,'commentCount','likeCount'));
-    }
-
-    public function like($id)
-    {
-        $user = Auth::user();
-        $item = Item::findOrFail($id);
-
-        if ($user->likedItems()->wherePivot('item_id', $item->id)->exists()){
-            $user->likedItems()->detach($id);
-        } else {
-            $user->likedItems()->attach([$item->id]);
-        }
-        return redirect()->back();
     }
 
     public function create()

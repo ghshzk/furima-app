@@ -121,6 +121,40 @@
     margin-top: 60px;
 }
 
+.item-content__comment {
+    margin-top: 35px;
+}
+
+.comment-user {
+    display: flex;
+    align-items: center;
+    margin-top: -15px;
+    gap: 20px;
+}
+
+.comment-user__img {
+    width: calc(16%);
+    margin-left: -10px;
+}
+
+.comment-user__name {
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.comment-user__content {
+    font-size: 20px;
+    font-weight: 300;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #E5E5E5;
+}
+
+/*コメント入力部分*/
+.comment-form {
+    margin: 45px 0 100px;
+}
+
 .comment-form__label {
     font-size: 28px;
     font-weight: 700;
@@ -133,14 +167,20 @@
     padding: 9.5px 15px;
     border: 2px solid #5F5F5F;
     border-radius: 5px;
+    font-size: 24px;
 }
 
 .comment-form__btn {
     width: 100%;
-    margin-top: 40px;
+    margin-top: 35px;
     padding: 6px;
     font-size: 25px;
     text-align: center;
     text-decoration: none;
+}
 
+.comment-form__error-message {
+    color: #FF5555;
+    font-weight: 700;
+    font-size: 24px;
 }

@@ -87,6 +87,12 @@
     box-sizing: border-box;
 }
 
+.item-card__link {
+    text-decoration: none;
+    color: #000;
+    cursor: pointer;
+}
+
 .item-card__img {
     width: 100%;
     aspect-ratio: 1 / 1; /* 画像正方形 */

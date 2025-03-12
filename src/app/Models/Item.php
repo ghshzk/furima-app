@@ -56,4 +56,9 @@ class Item extends Model
     {
         return $this->comments()->count();
     }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 }

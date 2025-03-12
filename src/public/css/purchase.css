@@ -1,0 +1,163 @@
+.purchase-container {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    margin: 80px auto;
+    gap: 60px;
+}
+
+.purchase-group {
+    width: 60%;
+}
+
+.purchase-group:last-of-type {
+    width: 40%;
+    justify-items: right;
+}
+
+.purchase-content {
+    border-bottom: 1px solid #000;
+    gap: 50px;
+}
+
+
+/*購入商品表示*/
+.purchase-content:first-of-type {
+    display: flex;
+    padding-bottom: 40px;
+}
+
+.item-card {
+    width: calc(28%);
+}
+
+.item-card__img {
+    width: 100%;
+    aspect-ratio: 1 / 1; /* 画像正方形 */
+    object-fit: cover;
+}
+
+.item-card__name {
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.item-card__price {
+    font-size: 27px;
+    font-weight: 400;
+    margin-top: 10px;
+}
+
+.item-card__price > span {
+    font-size: 32px;
+}
+
+/*支払い方法*/
+.payment {
+    width: 93%;
+    margin: 25px auto 50px;
+}
+
+.purchase-content__ttl {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.purchase-content__inner {
+    width: 83%;
+    margin: 30px auto;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.payment-form__select-wrap {
+    display: inline-block;
+    position: relative;
+    width: 260px;
+}
+
+.payment-form__select-inner {
+    appearance: none;
+    width: 100%;
+    padding: 7px 10px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #5F5F5F;
+    border: 1px solid #5F5F5F;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.payment-form__select-inner:invalid {
+    color: #5F5F5F; /* 初期状態の色 */
+}
+
+.payment-form__select-arrow {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    border-style: solid;
+    border-width: 13px 7px 0 7px;
+    border-color: #5F5F5F transparent transparent transparent;
+}
+
+/*配送先*/
+.address {
+    width: 93%;
+    margin: 25px auto 50px;
+}
+
+.address__ttl {
+    display: flex;
+    justify-content: space-between;
+}
+
+.purchase-content__link {
+    text-decoration: none;
+    color: #0073CC;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+
+/*画面右側*/
+.purchase-form {
+    width: 95%;
+}
+
+.purchase-form__summary {
+    border: 1px solid #000;
+}
+
+.purchase-form__price {
+    border-bottom: 1px solid #000;
+}
+
+.purchase-form__price,
+.purchase-form__payment {
+    display: flex;
+    align-items: center;
+    padding: 9% 40px;
+    gap: 50px;
+}
+
+.purchase-form__label {
+    width: 40%;
+    font-size: 20px;
+    text-align: center;
+}
+
+.purchase-form__data {
+    font-size: 24px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.purchase-form__data > span {
+    font-size: 28px;
+}
+
+.purchase-btn {
+    width: 100%;
+    margin-top: 60px;
+}

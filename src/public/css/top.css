@@ -56,10 +56,30 @@
 .item-card {
     width: calc(25% - 38px); /* 4つ並ぶ調整 */
     text-align: left;
+    position: relative;
 }
 
 .item-card__img {
     width: 100%;
     aspect-ratio: 1 / 1; /* 画像正方形 */
     object-fit: cover;
+}
+
+.item-card__img.sold {
+    filter: grayscale(100%); /* 画像をグレーアウト */
+}
+
+.sold-overlay {
+    position: absolute; /* 画像の上に重ねて表示 */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5); /* 半透明の背景 */
+    color: white;
+    font-size: 2em;
+    font-weight: bold;
 }

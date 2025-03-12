@@ -32,38 +32,67 @@
 
 @section('content')
 <div class="purchase-container">
-    <div class="purchase__group">
-        <div class="purchase-form__group--img">
-            <img class="purchase-form__img" src="{{ asset('storage/items/' . $item->image_path) }}" alt="商品画像">
-            <p class="purchase-form">{{ $item->name }}</p>
-            <p class="purchase-form">¥{{ number_format($item->price) }}</p>
+    <div class="purchase-group">
+        <div class="purchase-content">
+            <div class="item-card">
+                <img class="item-card__img" src="{{ asset('storage/' . $item->image_path) }}" alt="商品画像">
+            </div>
+            <div class="item-card">
+                <h2 class="item-card__name">{{ $item->name }}</h2>
+                <p class="item-card__price">¥<span>{{ number_format($item->price) }}</span></p>
+            </div>
+        </div>
+
+        <div class="purchase-content">
+            <div class="payment">
+                <h3 class="purchase-content__ttl">支払い方法</h3>
+                <div class="purchase-content__inner">
+                    <form class="payment-form" action="{{ route('purchase.updatePayment',['item_id' => $item->id]) }}" method="post">
+                        @csrf
+                        <div class="payment-form__select-wrap">
+                            <select class="payment-form__select-inner" name="payment_method" onchange="this.form.submit()">
+                                <option value="" hidden>選択してください</option>
+                                <option value="コンビニ払い">コンビニ払い</option>
+                                <option value="カード支払い">カード支払い</option>
+                            </select>
+                            <div class="payment-form__select-arrow"></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="purchase-content">
+            <div class="address">
+                <div class="address__ttl">
+                    <h3  class="purchase-content__ttl">配送先</h3>
+                    <a class="purchase-content__link" href="/purchase/address/{{ $item->id }}">変更する</a>
+                </div>
+                <div class="purchase-content__inner">
+                    <p>〒 {{ $order->postcode }}</p>
+                    <p>{{ $order->address }} {{ $order->building }}</p>
+                </div>
+            </div>
         </div>
     </div>
 
-    <form action="/" method="POST">
-        @csrf
-        <label>支払い方法</label>
-        <select name="payment_method" onchange="this.form.submit()">
-            <option value="">選択してください</option>
-            <option value="コンビニ支払い">コンビニ支払い</option>
-            <option value="カード支払い">カード支払い</option>
-        </select>
-    </form>
+    <div class="purchase-group">
+        <form class="purchase-form" action="">
+            @csrf
+            <div class="purchase-form__summary">
+                <div class="purchase-form__price">
+                    <p class="purchase-form__label">商品代金</p>
+                    <p class="purchase-form__data">¥ <span> {{ number_format($item->price) }}</span></p>
+                </div>
+                <div class="purchase-form__payment">
+                    <p class="purchase-form__label">支払い方法</p>
+                    <p class="purchase-form__data">{{ !empty(session('payment_method')) ? session('payment_method') : '未選択' }}</p>
+                </div>
+            </div>
+            <button class="purchase-btn btn">購入する</button>
+        </form>
 
-    <h3>配送先</h3>
-    <p>〒 {{ $order->postcode }}</p>
-    <p>{{ $order->address }} {{ $order->building }}</p>
-    <a href="">変更する</a>
-
-    <div class="summary">
-        <h4>商品代金</h4>
-        <p>¥{{ number_format($item->price) }}</p>
-
-        <h4>支払い方法</h4>
-        <p>{{ session('payment_method', '未選択') }}</p>
     </div>
-
-    <button class="purchase-btn">購入する</button>
 </div>
 
 

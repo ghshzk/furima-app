@@ -67,7 +67,7 @@
                 </div>
             </div>
 
-            <a class="item-content__btn btn" href="">購入手続きへ</a>
+            <a class="item-content__btn btn" href="/purchase/{{ $item->id }}">購入手続きへ</a>
             <h3 class="item-content__ttl">商品説明</h3>
             <p class="item-content__description">{{ $item->description }}</p>
     
@@ -94,19 +94,32 @@
                     @endif
                 </p>
             </div>
-            
+
+            <!-- コメント表示 -->
             <h3 class="item-content__ttl">コメント({{ $commentCount }})</h3>
             @foreach($item->comments as $comment)
             <div class="item-content__comment">
-                <strong>{{ $comment->user->name }}</strong>
-                <p>{{ $comment->content }}</p>
+                <div class="comment-user">
+                    @if ($comment->user->image_path)
+                    <img class="comment-user__img" src="{{ asset('storage/profile/' . $comment->user->image_path) }}" alt="{{ $comment->user->name }}">
+                    @else
+                    <img class="comment-user__img" src="{{ asset('storage/images/default_icon.png') }}" alt="NoImage">
+                    @endif
+                    <strong class="comment-user__name">{{ $comment->user->name }}</strong>
+                </div>
+                <p class="comment-user__content">{{ $comment->content }}</p>
             </div>
             @endforeach
             
-            <form class="comment-form" action="" >
+            <form class="comment-form" action="{{ route('item.comment', ['item_id' => $item->id]) }}" method="post">
                 @csrf
                 <strong class="comment-form__label">商品へのコメント</strong>
-                <textarea class="comment-form__input" name="description"></textarea>
+                <textarea class="comment-form__input" name="content"></textarea>
+                <p class="comment-form__error-message">
+                    @error('content')
+                    {{ $message }}
+                    @enderror
+                </p>
                 <button class="comment-form__btn btn" type="submit">コメントを送信する</button>
             </form>
         </div>
