@@ -20,22 +20,17 @@ Route::get('/',[ItemController::class,'index'])->name('top');
 
 Route::get('/item/{item_id}',[ItemController::class,'show']);
 
-Route::get('/mypage',[UserController::class,'index'])->name('mypage');
-
 
 Route::middleware(['auth'])->group(function(){
+    Route::post('/item/{item_id}',[itemController::class,'like'])->name('item.like');
+
+    Route::get('/mypage',[UserController::class,'index'])->name('mypage');
     Route::get('/mypage/profile',[UserController::class,'edit']);
     Route::post('/mypage/profile',[UserController::class,'update']);
-});
 
-Route::middleware(['auth'])->group(function(){
     Route::get('/sell',[ItemController::class,'create']);
     Route::post('/sell',[ItemController::class,'store']);
 
-});
-
-
-Route::middleware(['auth'])->group(function(){
     Route::get('/purchase/{item_id}',[OrderController::class,'index']);
     Route::get('/purchase/address/{item_id}',[OrderController::class,'edit']);
     Route::post('/purchase/address/{item_id}',[OrderController::class,'update']);

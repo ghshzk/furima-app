@@ -1,63 +1,9 @@
-/* ヘッダーのデザイン */
-.header-search-form {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.header-search-form__form {
-    display: flex;
-    align-items: center;
-    background-color: #fff;
-    border-radius: 5px;
-    padding:  5px 10px;
-    height: 50px;
-    width: 500px;
-}
-
-.header-nav {
-    display: flex;
-    align-items: center;
-}
-
-.header-nav__list {
-    display: flex;
-    align-items: center;
-    list-style: none;
-}
-
-.header-nav__item {
-    flex: auto;
-    width: 135px;
-    text-align: center;
-    margin-left: 15px;
-}
-
-.header-nav__item:last-child {
-    background-color: #fff;
-    width: 100px;
-    height: 50px;
-    border-radius: 4px;
-    margin-left: 30px;
-    align-content: center;
-}
-
-.header-nav__link {
-    color: #fff;
-    text-decoration: none;
-}
-
-.header-nav__link-sell {
-    color: #000;
-}
-
 /*コンテンツのデザイン*/
 .profile-form {
     display: flex;
     flex-direction: column;
     justify-content: center;
     padding: 48px;
-    margin-top: 50px;
     font-size: 24px;
 }
 
@@ -82,11 +28,12 @@
     display: flex;
     align-items: center;
     margin-top: 30px;
-    gap: 20px;
 }
 
 .profile-form__img {
-    width: calc(35%);
+    width: calc(30%);
+    position: relative;
+    right: 20px;
 }
 
 .profile-form__upload {
@@ -126,5 +73,5 @@
 
 .profile-form__btn {
     width: 100%;
-    margin-top: 100px;
+    margin-top: 75px;
 }

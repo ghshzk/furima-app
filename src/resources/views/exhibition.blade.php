@@ -35,46 +35,81 @@
 @endsection
 
 @section('content')
-<div class="item-form">
-    <div class="item-form__inner">
-        <form class="item-form__form" action="/" method="post" novalidate>
-            @csrf
-            <h3 class="item-form__heading">{{ $item->name }}</h3>
-            <h3 class="item-form__ttl"></h3>
-            <div class="item-form__group">
-                <label class="item-form__label" for="">カテゴリー</label>
-            </div>
-            <div class="item-form__group">
-                <label class="item-form__label" for="">商品状態</label>
-                </div>
-            </div>
-            <button class="item-form__btn btn" type="submit">購入の手続きへ</button>
+<div class="item">
+    <div class="item-content">
+        <img class="item-content__img" src="{{ asset('storage/' . $item->image_path) }}" alt="商品画像">
+    </div>
 
-            <h4 class="item-form__ttl">商品説明</h4>
-            <div class="item-form__group">
-                <label class="item-form__label" for="name">商品名</label>
-                <input class="item-form__input" type="text" id="name" name="name">
-            </div>
-            <div class="item-form__group">
-                <label class="item-form__label" for="brand">ブランド名</label>
-                <input class="item-form__input" type="text" id="brand" name="brand">
-            </div>
-            <div class="item-form__group">
-                <label class="item-form__label" for="price">販売価格</label>
-                <div class="item-form__price-container">
-                    <span class="item-form__price-symbol">¥</span>
-                    <input class="item-from__price-input" type="text" id="price" name="price">
+    <div class="item-content">
+        <div class="item-content__inner">
+            <h2 class="item-content__name">{{ $item->name }}</h2>
+            <p class="item-content__brand">{{ $item->brand }}</p>
+            <p class="item-content__price">¥<span>{{ number_format($item->price) }} </span>(税込)</p>
+
+            <div class="item-content__count">
+                <!-- いいねアイコン -->
+                <div class="item-content__count-group">
+                    <form class="like-form"  action="{{ route('item.like', ['item_id' => $item->id]) }}" method="post">
+                        @csrf
+                        <button type="submit" class="like-form__btn {{ Auth::check() && $item->likedBy(Auth::user()) ? 'liked' : '' }}">
+                            <img class="like-form__icon" src="{{ asset('images/star.png') }}" alt="いいね">
+                        </button>
+                    </form>
+                    <span class="like-form__count">{{ $likeCount }}</span>
+                </div>
+
+                <!-- コメントアイコン -->
+                <div class="item-content__count-group">
+                    <div>
+                        <img class="comment__icon" src="{{ asset('images/comment.png') }}" alt="コメント">
+                    </div>
+                    <span class="comment__count">{{ $commentCount }}</span>
                 </div>
             </div>
-            <h4 class="item-form__ttl">商品の情報</h4>
-        </form>
-        <form action="">
-            <div class="comment-form__group">
-                <label class="comment-form__label" for="comment">商品へのコメント</label>
-                <textarea name="description" id="description" class="item-form__input"></textarea>
+
+            <a class="item-content__btn btn" href="">購入手続きへ</a>
+            <h3 class="item-content__ttl">商品説明</h3>
+            <p class="item-content__description">{{ $item->description }}</p>
+    
+            <h3 class="item-content__ttl">商品の情報</h3>
+            <div class="item-content__group">
+                <strong class="item-content__label">カテゴリー</strong>
+                <div class="item-content__categories">
+                    @foreach($item->categories as $category)
+                    <p class="item-content__category">{{ $category->content }}</p>
+                    @endforeach
+                </div>
             </div>
-            <button class="comment-form__btn btn" type="submit">コメントを送信する</button>
-        </form>
+            <div class="item-content__group">
+                <strong class="item-content__label">商品の状態</strong>
+                <p class="item-content__condition">
+                    @if($item['condition'] == 1)
+                    良好
+                    @elseif($item['condition'] == 2)
+                    目立った傷や汚れはなし
+                    @elseif($item['condition'] == 3)
+                    やや傷や汚れあり
+                    @elseif($item['condition'] == 4)
+                    状態が悪い
+                    @endif
+                </p>
+            </div>
+            
+            <h3 class="item-content__ttl">コメント({{ $commentCount }})</h3>
+            @foreach($item->comments as $comment)
+            <div class="item-content__comment">
+                <strong>{{ $comment->user->name }}</strong>
+                <p>{{ $comment->content }}</p>
+            </div>
+            @endforeach
+            
+            <form class="comment-form" action="" >
+                @csrf
+                <strong class="comment-form__label">商品へのコメント</strong>
+                <textarea class="comment-form__input" name="description"></textarea>
+                <button class="comment-form__btn btn" type="submit">コメントを送信する</button>
+            </form>
+        </div>
     </div>
 </div>
 @endsection

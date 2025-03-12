@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Item;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use App\Models\Item;
 use App\Models\Category;
 use App\Http\Requests\ExhibitionRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 
 class ItemController extends Controller
@@ -21,8 +20,24 @@ class ItemController extends Controller
 
     public function show($id)
     {
+        $item = Item::with(['comments.user', 'likedByUsers'])->findOrFail($id);
+        $categories = Category::find($id);
+        $commentCount = $item->comments->count();
+        $likeCount = $item->likedByUsers->count();
+        return view('exhibition', compact('item','categories' ,'commentCount','likeCount'));
+    }
+
+    public function like($id)
+    {
+        $user = Auth::user();
         $item = Item::findOrFail($id);
-        return view('exhibition', compact('item'));
+
+        if ($user->likedItems()->wherePivot('item_id', $item->id)->exists()){
+            $user->likedItems()->detach($id);
+        } else {
+            $user->likedItems()->attach([$item->id]);
+        }
+        return redirect()->back();
     }
 
     public function create()

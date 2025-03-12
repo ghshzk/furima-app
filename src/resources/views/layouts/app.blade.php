@@ -13,7 +13,9 @@
 <body>
     <div class="app">
         <header class="header">
-            <img class="header-logo" src="{{ asset('images/logo.svg') }}" alt="サイトロゴ">
+                <a href="{{ url('/') }}">
+                    <img class="header-logo" src="{{ asset('images/logo.svg') }}" alt="サイトロゴ">
+                </a>
             @yield('header-nav')
         </header>
         <div class="content">

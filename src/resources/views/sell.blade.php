@@ -15,7 +15,10 @@
 <nav class="header-nav">
     <ul class="header-nav__list">
         <li class="header-nav__item">
-            <a class="header-nav__link" href="/login">ログアウト</a>
+            <form action="/logout" method="post">
+                @csrf
+                <input class="header-nav__link" type="submit" value="ログアウト">
+            </form>
         </li>
         <li class="header-nav__item">
             <a class="header-nav__link" href="/mypage">マイページ</a>

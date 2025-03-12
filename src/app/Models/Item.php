@@ -34,6 +34,14 @@ class Item extends Model
         return $this->belongsToMany(User::class,'likes')->withTimestamps();
     }
 
+    public function likedBy($user)
+    {
+        if(!$user) {
+            return false;
+        }
+        return $this->likedByUsers->contains($user->id);
+    }
+
     public function likeCount()
     {
         return $this->likedByUsers()->count();

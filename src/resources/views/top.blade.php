@@ -9,14 +9,20 @@
     <form class="header-search-form__form" action="" method="get">
         @csrf
         <input class="header-search-form__input" type="text" value="{{ request('search') }}" placeholder="なにをお探しですか？">
-        <button class="header-search-form__button" type="submit">検索</button>
     </form>
 </div>
 
 <nav class="header-nav">
     <ul class="header-nav__list">
         <li class="header-nav__item">
+            @auth
+            <form action="/logout" method="post">
+                @csrf
+                <input class="header-nav__link" type="submit" value="ログアウト">
+            </form>
+            @else
             <a class="header-nav__link" href="/login">ログイン</a>
+            @endauth
         </li>
         <li class="header-nav__item">
             <a class="header-nav__link" href="/mypage">マイページ</a>
@@ -45,15 +51,16 @@
         </ul>
     </div>
 
-
     <div class="tab-content">
         @if ($tab == 'recommend')
         <!-- おすすめ商品一覧を表示-->
         <div class="item-container">
             @foreach($items as $item)
                 <div class="item-card">
-                    <img class="item-card__img" src="{{ asset('storage/' . $item->image_path) }}" alt="{{ $item->name }}">
-                    <p class="item-card__content">{{ $item->name }}</p>
+                    <a class="item-card__link" href="{{ url('/item/' . $item->id) }}">
+                        <img class="item-card__img" src="{{ asset('storage/' . $item->image_path) }}" alt="{{ $item->name }}">
+                        <p class="item-card__content">{{ $item->name }}</p>
+                    </a>
                 </div>
             @endforeach
         </div>
