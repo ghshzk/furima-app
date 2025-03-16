@@ -14,26 +14,28 @@ class ItemController extends Controller
     public function index(Request $request)
     {
         $tab = $request->query('tab','recommend');
-        $items = Item::query();
-
-        /* 出品商品を除外 */
-        if (Auth::check()) {
-            $items->where('user_id', '!=', Auth::id());
-        }
-        $items = $items->get();
+        $user = Auth::user();
 
         /* お気に入り商品のみ表示 */
         if ($tab == 'mylist') {
-            if(Auth::check()) {
-                $items = Auth::user()->likedItems;
+            if($user) {
+                $items = $user->likedItems()->with('orders')->get();
             } else {
                 $items = collect();
             }
+        } else {
+            /* 出品商品を除外 */
+            $query = Item::query();
+
+            if ($user) {
+                $query->where('user_id', '!=', $user->id);
+            }
+
+            $items = $query->with('orders')->get();
         }
 
-        $items = Item::all()->map(function($item){
+        $items->each(function ($item) {
             $item->sold = $item->orders()->exists();
-            return $item;
         });
 
         return view('top',compact('tab', 'items'));

@@ -44,7 +44,7 @@
                 </a>
             </li>
             <li class="tab-nav__item">
-                <a class="{{ $tab == 'mylist' ? 'active' : '' }}" href="{{ route('top',['tab' => 'mylist']) }}">
+                <a class="{{ $tab == 'mylist' ? 'active' : '' }}" href="{{ route('top', ['tab' => 'mylist']) }}">
                     マイリスト
                 </a>
             </li>
@@ -61,7 +61,7 @@
                         <img class="item-card__img {{ $item->is_sold ? 'sold' : '' }}" src="{{ asset('storage/' . $item->image_path) }}" alt="{{ $item->name }}">
                         <p class="item-card__content">{{ $item->name }}</p>
                     </a>
-                    @if($item->sold)
+                    @if($item->isSold())
                     <div class="sold-overlay">SOLD</div>
                     @endif
                 </div>
@@ -75,7 +75,10 @@
                     <a class="item-card__link" href="{{ url('/item/' . $item->id) }}">
                         <img class="item-card__img" src="{{ asset('storage/' . $item->image_path) }}" alt="{{ $item->name }}">
                         <p class="item-card__content">{{ $item->name }}</p>
-                </a>
+                    </a>
+                    @if($item->isSold())
+                    <div class="sold-overlay">SOLD</div>
+                    @endif
                 </div>
             @endforeach
         </div>

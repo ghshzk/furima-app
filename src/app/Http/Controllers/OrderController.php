@@ -15,16 +15,13 @@ class OrderController extends Controller
     {
         $user = Auth::user();
         $item = Item::findOrFail($itemId);
-        $order = new Order([
-            'postcode' => session('order_postcode', $user->postcode),
-            'address' => session('order_address', $user->address),
-            'building' => session('order_building', $user->building),
-        ]);
+        $shippingAddress = session('shipping_address', "{$user->postcode}\n{$user->address}\n{$user->building}");
         $payment_method = session('payment_method', '未選択');
 
-        return view('purchase',compact('user','item', 'order','payment_method'));
+        return view('purchase',compact('user', 'item', 'shippingAddress', 'payment_method'));
     }
 
+    /*支払い方法の選択反映 */
     public function updatePayment(Request $request, $itemId)
     {
         session(['payment_method' => $request->payment_method]);
@@ -37,31 +34,44 @@ class OrderController extends Controller
     {
         $user = Auth::user();
         $item = Item::findOrFail($itemId);
-        $order = new Order([
-            'postcode' => session('order_postcode', $user->postcode),
-            'address' => session('order_address', $user->address),
-            'building' => session('order_building', $user->building),
-        ]);
 
-        return view('address', compact('user', 'item','order'));
+        return view('address', compact('user', 'item'));
     }
 
     /* 住所の更新 */
     public function update(AddressRequest $request, $itemId)
     {
-        session([
-            'order_postcode' => $request->postcode,
-            'order_address' => $request->address,
-            'order_building' => $request->building,
-        ]);
+        $shippingAddress = $request->postcode . "\n" . $request->address . "\n" . $request->building;
+        session(['shipping_address' => $shippingAddress]);
         session()->save();
 
         return redirect()->route('purchase.show', ['item_id' => $itemId]);
     }
 
 
-    public function order(PurchaseRequest $request, $item_id)
+    public function order(PurchaseRequest $request, $itemId)
     {
-        
+        $user = Auth::user();
+        if (!$user) {
+            return redirect()->route('login');
+        }
+        $item = Item::findOrFail($itemId);
+        $paymentMethod = [
+            'コンビニ払い' => 1,
+            'カード支払い' => 2,
+        ];
+
+        $order = new Order();
+        $order->user_id = $user->id; // ログインユーザーのID
+        $order->item_id = $itemId;
+        $order->price = $item->price;
+        $order->payment_method = $paymentMethod[$request->payment_method] ?? null;
+        $order->shipping_address = $request->shipping_address;
+        $order->save();
+
+        // 支払い方法、住所のセッションを削除
+        session()->forget(['payment_method','shipping_address']);
+
+        return redirect('/');
     }
 }

@@ -59,6 +59,11 @@ class Item extends Model
 
     public function orders()
     {
-        return $this->hasMany(Order::class);
+        return $this->hasMany(Order::class, 'item_id');
+    }
+
+    public function isSold()
+    {
+        return $this->orders()->exists();
     }
 }

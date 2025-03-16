@@ -11,7 +11,7 @@
         <form class="login-form__form" action="/login" method="post" novalidate>
             @csrf
             <div class="login-form__group">
-                <label class="login-form__label" for="email">ユーザー名/メールアドレス</label>
+                <label class="login-form__label" for="email">メールアドレス</label>
                 <input class="login-form__input" type="email" id="email" name="email">
                 <p class="login-form__error-message">
                     @error('email')

@@ -69,16 +69,18 @@
                     <a class="purchase-content__link" href="/purchase/address/{{ $item->id }}">変更する</a>
                 </div>
                 <div class="purchase-content__inner">
-                    <p>〒 {{ $order->postcode }}</p>
-                    <p>{{ $order->address }} {{ $order->building }}</p>
+                    <p>〒{!! nl2br(e($shippingAddress)) !!}</p>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="purchase-group">
-        <form class="purchase-form" action="">
+        <form class="purchase-form" action="{{ route('purchase.order', ['item_id' => $item->id]) }}" method="post">
             @csrf
+            <input type="hidden" name="payment_method" value="{{ session('payment_method') }}">
+            <input type="hidden" name="shipping_address" value="{{ session('shipping_address', $user->postcode . "\n" . $user->address . "\n" . $user->building) }}">
+
             <div class="purchase-form__summary">
                 <div class="purchase-form__price">
                     <p class="purchase-form__label">商品代金</p>
@@ -89,7 +91,16 @@
                     <p class="purchase-form__data">{{ !empty(session('payment_method')) ? session('payment_method') : '未選択' }}</p>
                 </div>
             </div>
-            <button class="purchase-btn btn">購入する</button>
+            @if ($errors->any())
+                <div class="error">
+                    <p class="error-message">
+                    @foreach ($errors->all() as $error)
+                    {{ $error }}
+                    @endforeach
+                    </p>
+                </div>
+            @endif
+            <button class="purchase-btn btn" type="submit">購入する</button>
         </form>
 
     </div>

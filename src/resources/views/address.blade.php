@@ -36,9 +36,15 @@
     <div class="address-form__inner">
         <form class="address-form__form" action="{{ route('purchase.updateAddress',['item_id' => $item->id]) }}" method="post">
             @csrf
+            <input type="hidden" name="name" value="{{ $user->name }}">
+            <p class="address-form__error-message">
+                @error('postcode')
+                {{ $message }}
+                @enderror
+            </p>
             <div class="address-form__group">
                 <label class="address-form__label" for="postcode">郵便番号</label>
-                <input class="address-form__input" type="text" id="postcode" name="postcode" value="{{ old('postcode', $order->postcode) }}">
+                <input class="address-form__input" type="text" id="postcode" name="postcode" value="{{ old('postcode', $user->postcode) }}">
                 <p class="address-form__error-message">
                     @error('postcode')
                     {{ $message }}
@@ -47,7 +53,7 @@
             </div>
             <div class="address-form__group">
                 <label class="address-form__label" for="address">住所</label>
-                <input class="address-form__input" type="text" id="address" name="address" value="{{ old('address', $order->address) }}">
+                <input class="address-form__input" type="text" id="address" name="address" value="{{ old('address', $user->address) }}">
                 <p class="address-form__error-message">
                     @error('address')
                     {{ $message }}
@@ -56,7 +62,7 @@
             </div>
             <div class="address-form__group">
                 <label class="address-form__label" for="building">建物名</label>
-                <input class="address-form__input" type="text" id="building" name="building" value="{{ old('building', $order->building) }}">
+                <input class="address-form__input" type="text" id="building" name="building" value="{{ old('building', $user->building) }}">
                 <p class="address-form__error-message">
                     @error('building')
                     {{ $message }}

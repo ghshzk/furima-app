@@ -39,5 +39,5 @@ Route::middleware(['web', 'auth'])->group(function(){
     Route::post('/purchase/{item_id}',[OrderController::class,'updatePayment'])->name('purchase.updatePayment');
     Route::get('/purchase/address/{item_id}',[OrderController::class,'edit']);
     Route::post('/purchase/address/{item_id}',[OrderController::class,'update'])->name('purchase.updateAddress');
-    Route::post('/purchase/{item_id}/order',[OrderController::class,'order'])->name('purchase.order');
+    Route::post('/purchase/order/{item_id}',[OrderController::class,'order'])->name('purchase.order');
 });
