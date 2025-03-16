@@ -14,12 +14,17 @@ class ItemController extends Controller
     public function index(Request $request)
     {
         $tab = $request->query('tab','recommend');
+        $keyword = $request->query('keyword');
         $user = Auth::user();
 
         /* お気に入り商品のみ表示 */
         if ($tab == 'mylist') {
             if($user) {
-                $items = $user->likedItems()->with('orders')->get();
+                $query = $user->likedItems()->with('orders');
+                if(!empty($keyword)) {
+                    $query->where('name', 'like', "%{$keyword}%");
+                }
+                $items = $query->get();
             } else {
                 $items = collect();
             }
@@ -30,6 +35,9 @@ class ItemController extends Controller
             if ($user) {
                 $query->where('user_id', '!=', $user->id);
             }
+            if(!empty($keyword)){
+                $query->where('name', 'like', "%{$keyword}%");
+            }
 
             $items = $query->with('orders')->get();
         }
@@ -38,7 +46,7 @@ class ItemController extends Controller
             $item->sold = $item->orders()->exists();
         });
 
-        return view('top',compact('tab', 'items'));
+        return view('top',compact('tab', 'items', 'keyword'));
     }
 
     public function show($id)
@@ -86,21 +94,5 @@ class ItemController extends Controller
         }
 
         return redirect()->route('mypage');
-    }
-
-    public function search(Request $request)
-    {
-        $keyword = $request->input('keyword');
-        $searchResults =Item::where('name', 'like', "%{$keyword}%")->get();
-
-        // 画像パスが正しいか確認
-        foreach ($searchResults as $item) {
-            \Log::info('Item Image Path: ' . $item->image_path);
-        }
-
-        if($request->ajax()) {
-            return response()->json(['searchResults' => $searchResults]);
-        }
-        return view('layouts.app',['searchResults' => $searchResults]);
     }
 }

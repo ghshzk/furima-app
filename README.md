@@ -31,7 +31,6 @@ php artisan migrate
 ```
 php artisan storage:link
 ```
-
 8. シーディングの実行
 ```
 php artisan db:seed
