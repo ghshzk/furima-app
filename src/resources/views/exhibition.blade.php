@@ -7,7 +7,7 @@
 @section('content')
 <div class="item">
     <div class="item-content">
-        <img class="item-content__img" src="{{ asset('storage/' . $item->image_path) }}" alt="商品画像">
+        <img class="item-content__img" src="{{ Storage::url($item->image_path) }}" alt="商品画像">
     </div>
 
     <div class="item-content">

@@ -93,6 +93,11 @@ class ItemController extends Controller
         $keyword = $request->input('keyword');
         $searchResults =Item::where('name', 'like', "%{$keyword}%")->get();
 
+        // 画像パスが正しいか確認
+        foreach ($searchResults as $item) {
+            \Log::info('Item Image Path: ' . $item->image_path);
+        }
+
         if($request->ajax()) {
             return response()->json(['searchResults' => $searchResults]);
         }

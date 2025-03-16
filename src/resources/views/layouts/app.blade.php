@@ -94,7 +94,7 @@
 
                                     const itemImage = document.createElement('img');
                                     itemImage.classList.add('search-result__img');
-                                    itemImage.src = "{{ asset('storage') }}/" + item.image_path;  // 画像パス
+                                    itemImage.src = "{{ Storage::url('') }}" + item.image_path;  // 画像パス
                                     itemImage.alt = item.name;
 
                                     const itemContent = document.createElement('p');

@@ -27,7 +27,12 @@ php artisan key:generate
 ```
 php artisan migrate
 ```
-7. シーディングの実行
+7. シンボリックリンクの設定
+```
+php artisan storage:link
+```
+
+8. シーディングの実行
 ```
 php artisan db:seed
 ```

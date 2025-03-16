@@ -124,6 +124,10 @@ body {
     color: transparent;
 }
 
+.search-result__card {
+    display: flex;
+}
+
 .search-result__content {
     width: calc(25% - 38px); /* 4つ並ぶ調整 */
     text-align: left;
