@@ -39,7 +39,7 @@ php artisan db:seed
 - Nginx 1.21.1
 
 ## ER図
-![def]: /furima.drawio.svg
+![ER図](/furima.drawio.svg)
 
 ## URL
 - 開発環境：http://localhost/
