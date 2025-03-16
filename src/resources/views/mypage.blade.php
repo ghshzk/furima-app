@@ -4,32 +4,6 @@
 <link rel="stylesheet" href="{{ asset('css/mypage.css') }}">
 @endsection
 
-@section('header-nav')
-<div class="header-search-form">
-    <form class="header-search-form__form" action="" method="get">
-        @csrf
-        <input class="header-search-form__input" type="text" value="{{ request('search') }}" placeholder="なにをお探しですか？">
-    </form>
-</div>
-
-<nav class="header-nav">
-    <ul class="header-nav__list">
-        <li class="header-nav__item">
-            <form action="/logout" method="post">
-                @csrf
-                <input class="header-nav__link" type="submit" value="ログアウト">
-            </form>
-        </li>
-        <li class="header-nav__item">
-            <a class="header-nav__link" href="/mypage">マイページ</a>
-        </li>
-        <li class="header-nav__item">
-            <a class="header-nav__link header-nav__link-sell" href="/sell">出品</a>
-        </li>
-    </ul>
-</nav>
-@endsection
-
 @section('content')
 <div class="mypage-container">
     <div class="mypage__group">
@@ -72,7 +46,7 @@
             @foreach($items as $item)
                 <div class="item-card">
                     <a class="item-card__link" href="{{ url('/item/' . $item->id) }}">
-                        <img class="item-card__img" src="{{ asset('storage/' . $item->image_path) }}" alt="{{ $item->name }}">
+                        <img class="item-card__img" src="{{ Storage::url($item->image_path) }}" alt="{{ $item->name }}">
                         <p class="item-card__content">{{ $item->name }}</p>
                     </a>
                 </div>

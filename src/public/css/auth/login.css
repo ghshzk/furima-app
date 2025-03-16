@@ -52,6 +52,8 @@
 
 .login-form__error-message {
     color: #FF5555;
+    font-weight: 600;
+    font-size: 20px;
 }
 
 .login-form__btn {

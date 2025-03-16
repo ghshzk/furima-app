@@ -19,7 +19,7 @@ use App\Http\Controllers\CommentController;
 */
 
 Route::get('/',[ItemController::class,'index'])->name('top');
-
+Route::get('/item/search',[ItemController::class,'search'])->name('item.search');
 Route::get('/item/{item_id}',[ItemController::class,'show'])->name('item.show');
 
 Route::middleware(['auth'])->group(function(){
@@ -31,7 +31,7 @@ Route::middleware(['auth'])->group(function(){
     Route::post('/mypage/profile',[UserController::class,'update']);
 
     Route::get('/sell',[ItemController::class,'create']);
-    Route::post('/sell',[ItemController::class,'store']);
+    Route::post('/sell',[ItemController::class,'store'])->name('sell');
 });
 
 Route::middleware(['web', 'auth'])->group(function(){

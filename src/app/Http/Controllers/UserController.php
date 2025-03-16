@@ -55,8 +55,6 @@ class UserController extends Controller
         
         $user->save();
 
-        return redirect('/?tab=mylist');
+        return redirect()->route('mypage');
     }
 }
-
-

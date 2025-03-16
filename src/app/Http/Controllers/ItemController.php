@@ -64,17 +64,38 @@ class ItemController extends Controller
         $user = Auth::user();
 
         if($request->hasFile('image_path')){
-            $path = $request->file('image_path')->store('public/items');
-            $filename = str_replace('public/', '', $path);
-        }else{
-            $filename = null;
+            $imagePath = $request->file('image_path')->store('public/items');
+        } else {
+            $imagePath = null;
         }
 
-        Item::create([
-            'image_path' => $filename,
+        $request->flash();
+
+        $item = Item::create([
+            'user_id' => $user->id,
+            'name' => $request->name,
+            'description' => $request->description,
+            'image_path' => $imagePath,
+            'condition' => $request->condition,
+            'price' => $request->price,
+            'brand' => $request->brand,
         ]);
 
-        return redirect('/?tab=mylist');
+        if ($request->has('categories')) {
+            $item->categories()->sync($request->categories);
+        }
+
+        return redirect()->route('mypage');
     }
 
+    public function search(Request $request)
+    {
+        $keyword = $request->input('keyword');
+        $searchResults =Item::where('name', 'like', "%{$keyword}%")->get();
+
+        if($request->ajax()) {
+            return response()->json(['searchResults' => $searchResults]);
+        }
+        return view('layouts.app',['searchResults' => $searchResults]);
+    }
 }

@@ -4,32 +4,6 @@
 <link rel="stylesheet" href="{{ asset('css/editing.css') }}">
 @endsection
 
-@section('header-nav')
-<div class="header-search-form">
-    <form class="header-search-form__form" action="" method="get">
-        @csrf
-        <input class="header-search-form__input" type="text" value="{{ request('search') }}" placeholder="なにをお探しですか？">
-    </form>
-</div>
-
-<nav class="header-nav">
-    <ul class="header-nav__list">
-        <li class="header-nav__item">
-            <form action="/logout" method="post">
-                @csrf
-                <input class="header-nav__link" type="submit" value="ログアウト">
-            </form>
-        </li>
-        <li class="header-nav__item">
-            <a class="header-nav__link" href="/mypage">マイページ</a>
-        </li>
-        <li class="header-nav__item">
-            <a class="header-nav__link header-nav__link-sell" href="/sell">出品</a>
-        </li>
-    </ul>
-</nav>
-@endsection
-
 @section('content')
 <div class="profile-form">
     <h2 class="profile-form__heading">プロフィール設定</h2>
@@ -38,12 +12,12 @@
             @csrf
             <div class="profile-form__group--img">
                 @if ($user->image_path)
-                <img class="profile-form__img" src="{{ asset('storage/profile/' . $user->image_path) }}" alt="プロフィール画像">
+                <img class="profile-form__img" id="preview" src="{{ asset('storage/profile/' . $user->image_path) }}" alt="プロフィール画像">
                 @else
-                <img class="profile-form__img" src="{{ asset('storage/images/default_icon.png') }}" alt="NoImage">
+                <img class="profile-form__img" id="preview" src="{{ asset('storage/images/default_icon.png') }}" alt="NoImage">
                 @endif
                 <label class="profile-form__upload" for="fileInput">画像を選択する</label>
-                <input type="file" id="fileInput" accept="image/*" style="display:none;">
+                <input type="file" id="fileInput" name="image_path" accept="image/*" style="display:none;">
             </div>
             <div class="profile-form__group">
                 <label class="profile-form__label" for="name">ユーザー名</label>
@@ -83,6 +57,19 @@
             </div>
             <button class="profile-form__btn btn" type="submit">更新する</button>
         </form>
+
+        <script>
+        document.getElementById('fileInput').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('preview').src = e.target.result;
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+        </script>
 
     </div>
 </div>

@@ -69,6 +69,8 @@
 
 .profile-form__error-message {
     color: #FF5555;
+    font-size: 20px;
+    font-weight: 600;
 }
 
 .profile-form__btn {

@@ -114,3 +114,35 @@ body {
     text-decoration: none;
     cursor: pointer;
 }
+
+
+.modal {
+    top: 72px;
+    width: 100%;
+    height: 100%;
+    padding: 50px;
+    color: transparent;
+}
+
+.search-result__content {
+    width: calc(25% - 38px); /* 4つ並ぶ調整 */
+    text-align: left;
+    position: relative;
+}
+
+.search-result__link {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.search-result__img {
+    width: 100%;
+    aspect-ratio: 1 / 1; /* 画像正方形 */
+    object-fit: cover;
+}
+
+.search-result__name {
+    font-size: 25px;
+    color: #000;
+}
+

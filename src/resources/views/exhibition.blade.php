@@ -4,36 +4,6 @@
 <link rel="stylesheet" href="{{ asset('css/exhibition.css') }}">
 @endsection
 
-@section('header-nav')
-<div class="header-search-form">
-    <form class="header-search-form__form" action="" method="get">
-        @csrf
-        <input class="header-search-form__input" type="text" value="{{ request('search') }}" placeholder="なにをお探しですか？">
-    </form>
-</div>
-
-<nav class="header-nav">
-    <ul class="header-nav__list">
-        <li class="header-nav__item">
-            @auth
-            <form action="/logout" method="post">
-                @csrf
-                <input class="header-nav__link" type="submit" value="ログアウト">
-            </form>
-            @else
-            <a class="header-nav__link" href="/login">ログイン</a>
-            @endauth
-        </li>
-        <li class="header-nav__item">
-            <a class="header-nav__link" href="/mypage">マイページ</a>
-        </li>
-        <li class="header-nav__item">
-            <a class="header-nav__link header-nav__link-sell" href="/sell">出品</a>
-        </li>
-    </ul>
-</nav>
-@endsection
-
 @section('content')
 <div class="item">
     <div class="item-content">
