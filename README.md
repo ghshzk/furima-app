@@ -27,6 +27,10 @@ php artisan key:generate
 ```
 php artisan migrate
 ```
+7. シーディングの実行
+```
+php artisan db:seed
+```
 
 ## 使用技術（実行環境）
 - Laravel 8.83.29
@@ -35,6 +39,7 @@ php artisan migrate
 - Nginx 1.21.1
 
 ## ER図
+![def]: /furima.drawio.svg
 
 ## URL
 - 開発環境：http://localhost/
