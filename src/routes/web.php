@@ -27,7 +27,7 @@ Route::middleware(['auth'])->group(function(){
     Route::post('/item/{item_id}/comment',[CommentController::class,'comment'])->name('item.comment');
 
     Route::get('/mypage',[UserController::class,'index'])->name('mypage');
-    Route::get('/mypage/profile',[UserController::class,'edit']);
+    Route::get('/mypage/profile',[UserController::class,'edit'])->name('profile.setup');
     Route::post('/mypage/profile',[UserController::class,'update']);
 
     Route::get('/sell',[ItemController::class,'create']);
