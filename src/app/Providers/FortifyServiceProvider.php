@@ -28,22 +28,27 @@ class FortifyServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        //ユーザー作成アクションの指定
         Fortify::createUsersUsing(CreateNewUser::class);
 
+        //会員登録画面のカスタマイズ
         Fortify::registerView(function(){
             return view('auth.register');
         });
 
+        //ログイン画面のカスタマイズ
         Fortify::loginView(function(){
             return view('auth.login');
         });
 
+        //プロフィール更新アクションの指定
         Fortify::updateUserProfileInformationUsing(UpdateUserProfileInformation::class);
 
+        //ログイン時のレートリミット
         RateLimiter::for('login', function (Request $request) {
             $throttleKey = Str::transliterate(Str::lower($request->input(Fortify::username())).'|'.$request->ip());
 
-            return Limit::perMinute(5)->by($throttleKey);
+            return Limit::perMinute(10)->by($throttleKey);
         });
 
     }
