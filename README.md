@@ -1,16 +1,15 @@
-# coachtechフリマ（フリマアプリ）
+# 🛍 フリマアプリ
 
-## 環境構築
-#### Dockerビルド
-1. `git clone git@github.com:ghshzk/furima-app.git`
-2. DockerDesktopアプリを立ち上げる
-3. `docker-compose up -d --build`
+## 🛠 環境構築
+### Dockerビルド
+1. git clone git@github.com:ghshzk/furima-app.git
+2. docker-compose up -d --build
 
-#### Laravel環境構築
-1. `docker-compose exec php bash`
-2. `composer install`
-3. `cp .env.example .env`
-4. 「.env」ファイルに以下の環境変数を追加
+### Laravel環境構築
+1. docker-compose exec php bash
+2. composer install
+3. cp .env.example .env
+4. .envファイルの環境変数を変更
 ```
 DB_CONNECTION=mysql
 DB_HOST=mysql
@@ -19,32 +18,47 @@ DB_DATABASE=laravel_db
 DB_USERNAME=laravel_user
 DB_PASSWORD=laravel_pass
 ```
-5. アプリケーションキーの作成
-```
-php artisan key:generate
-```
-6. マイグレーションの実行
-```
-php artisan migrate
-```
-7. シンボリックリンクの設定
-```
-php artisan storage:link
-```
-8. シーディングの実行
-```
-php artisan db:seed
-```
+5. php artisan key:generate
+6. php artisan migrate:fresh --seed
+7. php artisan storage:link
 
-## 使用技術（実行環境）
-- Laravel 8.83.29
+## 💻 使用技術
+- Laravel 8
 - PHP 7.4.9
 - MySQL 8.0.26
 - Nginx 1.21.1
 
-## ER図
+## 📧 メール認証
+メール認証機能に Mailtrap を使用しています。開発環境では以下の手順で設定を行ってください。
+1. [Mailtrap](https://mailtrap.io/)に登録・ログイン、サイドバーの Inboxes から My Inbox を開く
+2. Integrations で「**laravel 7.x and 8.x**」を選択し、表示されるコードをコピーして、`.env`ファイルの`MAIL`セクションにペースト
+3. MAIL_FROM_ADDRESSは任意のメールアドレス、MAIL_FROM_NAMEは任意の名前を入力。
+```
+MAIL_MAILER=smtp
+MAIL_HOST=sandbox.smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=xxxxxxxxxxxxxx
+MAIL_PASSWORD=xxxxxxxxxxxxxx
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS="test@example.com"
+MAIL_FROM_NAME="${APP_NAME}"
+```
+## 🗂 テーブル仕様
+
+## 🗺 ER図
 ![ER図](/furima.drawio.svg)
 
-## URL
+## 🔑 テストアカウント
+### アカウント①
+name: test_user2
+email: test1@example.com
+password: password123
+
+### アカウント②
+name: test_user2
+email: test2@example.com
+password: password123
+
+## 🌐 URL
 - 開発環境：http://localhost/
 - phpMyAdmin：http://localhost:8080/

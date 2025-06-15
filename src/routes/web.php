@@ -25,23 +25,25 @@ Route::get('/',[ItemController::class,'index'])->name('top');
 Route::get('/search',[ItemController::class,'index'])->name('search');
 Route::get('/item/{item_id}',[ItemController::class,'show'])->name('item.show');
 
+
 //メール認証
 Route::get('/email/verify', function(){
     return view('auth.verify-email');
 })->name('verification.notice');
 
+//メール認証リンクの再送
 Route::post('/email/verification-notification', function(Request $request) {
     session()->get('unauthenticated_user')->sendEmailVerificationNotification();
     session()->put('resent',true);
     return back()->with('message', 'Verification link sent!');
 })->name('verification.send');
 
+//メール認証リンクで認証後、プロフィール設定画面へ遷移
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
     session()->forget('unauthenticated_user');
     return redirect()->route('profile.setup');
 })->name('verification.verify');
-
 
 
 //メール認証済みのユーザーのみアクセスOK

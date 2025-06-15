@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>coachtechフリマ</title>
-    <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+    <link rel="stylesheet" href="{{ asset('css/sanitize.css') }}">
     <link rel="stylesheet" href="{{ asset('css/common.css') }}">
     @yield('css')
 </head>
@@ -14,10 +14,10 @@
     <div class="app">
         <header class="header">
             <a href="{{ url('/') }}">
-                <img class="header-logo" src="{{ asset('images/logo.svg') }}" alt="サイトロゴ">
+                <img class="header-logo" src="{{ asset('img/logo.svg') }}" alt="サイトロゴ">
             </a>
 
-            @if(!in_array(Route::currentRouteName(),['login','register']))
+            @if(!in_array(Route::currentRouteName(),['login', 'register', 'verification.notice' ]))
                 <div class="header-search-form">
                     <form class="header-search-form__form" action="{{ route('search') }}" method="get">
                         @csrf
@@ -27,16 +27,18 @@
 
                 <nav class="header-nav">
                     <ul class="header-nav__list">
-                        <li class="header-nav__item">
-                            @auth
-                            <form action="/logout" method="post">
-                                @csrf
-                                <input class="header-nav__link" type="submit" value="ログアウト">
-                            </form>
-                            @else
-                            <a class="header-nav__link" href="/login">ログイン</a>
-                            @endauth
-                        </li>
+                        @auth
+                            <li class="header-nav__item">
+                                <form action="/logout" method="post">
+                                    @csrf
+                                    <input class="header-nav__btn" type="submit" value="ログアウト">
+                                </form>
+                            </li>
+                        @else
+                            <li class="header-nav__item">
+                                <a class="header-nav__link" href="/login">ログイン</a>
+                            </li>
+                        @endauth
                         <li class="header-nav__item">
                             <a class="header-nav__link" href="/mypage">マイページ</a>
                         </li>
@@ -47,7 +49,7 @@
                 </nav>
             @endif
         </header>
-        
+
         <div class="content">
             @yield('content')
         </div>

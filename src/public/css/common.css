@@ -1,38 +1,31 @@
-html,
 body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-    width: 100%;
-}
-
-.app {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    width: 100%;
+    width: 100vw;
 }
 
 .header {
-    background: #000;
-    font-size: 24px;
-    height: 82px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    height: 82px;
+    padding: 0 30px 0 25px;
+    background-color: #000;
     width: 100%;
 }
 
+@media (max-width: 850px) and (min-width: 768px) {
+    .header {
+        padding: 0 7px 0 10px;
+    }
 
+    .header-logo {
+        height: 28px;
+    }
+}
 
 .header-logo {
     display: flex;
     align-items: center;
-    margin: 20px;
 }
 
-/*ここから*/
 .header-search-form {
     display: flex;
     align-items: center;
@@ -52,43 +45,64 @@ body {
     width: 500px;
 }
 
+.header-search-form__input {
+    border: none;
+}
+
 .header-nav {
-    display: flex;
-    align-items: center;
-    margin-right: 20px;
+    width: 100%;
+    justify-items: end;
 }
 
 .header-nav__list {
     display: flex;
     align-items: center;
-    list-style: none;
 }
 
 .header-nav__item {
     flex: auto;
-    width: 135px;
     text-align: center;
     margin-left: 10px;
 }
 
+.header-nav__item:not(:last-child) {
+    margin-right: 23px;
+}
+
+@media (max-width: 850px) and (min-width: 768px) {
+    .header-nav-item:not(:last-child) {
+        margin-right: 8px;
+    }
+}
+
 .header-nav__item:last-child {
     background-color: #fff;
-    width: 100px;
-    height: 50px;
+    padding: 5px 20px;
     border-radius: 4px;
-    margin-left: 20px;
     align-content: center;
 }
 
-.header-nav__link {
+.header-nav__link,
+.header-nav__btn {
+    font-size: 24px;
+    font-weight: 400;
     color: #fff;
     text-decoration: none;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+@media (max-width: 850px) and (min-width: 768px) {
+    .header-nav-link,
+    .header-nav-btn {
+        font-size: 19px;
+    }
 }
 
 .header-nav__link-sell {
     color: #000;
 }
-/*ここまで*/
 
 .content {
     display: flex;
