@@ -24,21 +24,21 @@ class AddressRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required'],
+            //'name' => ['required'], 住所変更画面に氏名入力欄はないので削除
             'postcode' => ['required','regex:/^\d{3}-\d{4}$/'],
             'address' => ['required'],
-            'building' => ['required'],
+            //'building' => ['required'], 建物名が必ずしもあるとは限らないので削除
         ];
     }
 
     public function messages()
     {
         return [
-            'name.required' => 'お名前を入力してください',
+            //'name.required' => 'お名前を入力してください',
             'postcode.required' => '郵便番号を入力してください',
             'postcode.regex' => '郵便番号はハイフンありの8文字で入力してください',
             'address.required' => '住所を入力してください',
-            'building.required' => '建物名を入力してください',
+            //'building.required' => '建物名を入力してください',
         ];
     }
 }
