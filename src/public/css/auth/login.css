@@ -3,8 +3,13 @@
     flex-direction: column;
     justify-content: center;
     padding: 48px;
-    margin-top: 50px;
     font-size: 24px;
+}
+
+@media (max-width: 850px) and (min-width: 768px) {
+    .login-form {
+        padding: 50px 60px;
+    }
 }
 
 .login-form__heading {
@@ -16,7 +21,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 30px;
 }
 
 .login-form__form {
@@ -27,15 +31,7 @@
 .login-form__group {
     display: flex;
     flex-direction: column;
-    margin-top: 30px;
-}
-
-.login-form__link-container {
-    margin-top: 36px;
-}
-
-.login-form__link {
-    display: inline-block;
+    margin-top: 20px;
 }
 
 .login-form__label {
@@ -46,17 +42,33 @@
     display: block;
     border: 1px solid #5F5F5F;
     border-radius: 4px;
-    padding: 9.5px;
+    padding: 12px;
     margin: 2px 0;
+    font-size: 20px;
 }
 
 .login-form__error-message {
     color: #FF5555;
     font-weight: 600;
-    font-size: 20px;
+    font-size: 18px;
+    margin: 3px;
+    min-height: 24px;
+    visibility: hidden;
+}
+
+.login-form__error-message:not(:empty) {
+    visibility: visible;
 }
 
 .login-form__btn {
     width: 100%;
-    margin-top: 80px;
+    margin-top: 60px;
+}
+
+.login-form__link-container {
+    margin-top: 36px;
+}
+
+.login-form__link {
+    display: inline-block;
 }

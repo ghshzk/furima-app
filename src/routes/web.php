@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RegisteredUserController;
+use App\Http\Controllers\AuthenticatedSessionController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\OrderController;
@@ -8,7 +10,6 @@ use App\Http\Controllers\LikeController;
 use App\Http\Controllers\CommentController;
 use Illuminate\Http\Request;
 use App\Http\Requests\EmailVerificationRequest;
-use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,26 +23,30 @@ use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 */
 
 Route::get('/',[ItemController::class,'index'])->name('top');
-Route::get('/search',[ItemController::class,'index'])->name('search');
+//Route::get('/search',[ItemController::class,'index'])->name('search');
 Route::get('/item/{item_id}',[ItemController::class,'show'])->name('item.show');
+
+Route::post('/login', [AuthenticatedSessionController::class, 'store']);
+Route::post('/register',[RegisteredUserController::class,'store']);
 
 //メール認証
 Route::get('/email/verify', function(){
     return view('auth.verify-email');
 })->name('verification.notice');
 
+//メール認証リンクの再送
 Route::post('/email/verification-notification', function(Request $request) {
     session()->get('unauthenticated_user')->sendEmailVerificationNotification();
     session()->put('resent',true);
     return back()->with('message', 'Verification link sent!');
 })->name('verification.send');
 
+//メール認証リンクで認証後、プロフィール設定画面へ遷移
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
     session()->forget('unauthenticated_user');
     return redirect()->route('profile.setup');
 })->name('verification.verify');
-
 
 
 //メール認証済みのユーザーのみアクセスOK
@@ -68,5 +73,3 @@ Route::middleware(['web', 'auth'])->group(function(){
     Route::post('/purchase/address/{item_id}',[OrderController::class,'update'])->name('purchase.updateAddress');
     Route::post('/purchase/order/{item_id}',[OrderController::class,'order'])->name('purchase.order');
 });
-
-Route::post('login', [AuthenticatedSessionController::class, 'store'])->middleware('email');

@@ -22,16 +22,24 @@
 .mypage__btn {
     width: 310px;
     padding: 8px 18px;
-    align-content: center;
-    text-align: center;
     font-size: 26px;
     font-weight: 700;
     color: #FF5555;
+    background-color: transparent;
     border: 2px solid #FF5555;
     border-radius: 10px;
     cursor: pointer;
 }
 
+@media (max-width: 850px) and (min-width: 768px) {
+    .mypage__group {
+        display: block;
+    }
+
+    .mypage__img {
+        width: calc(35%);
+    }
+}
 
 /* タブ切替部分のデザイン */
 .tabs {
@@ -56,7 +64,7 @@
 .tab-nav__list {
     display: flex;
     list-style: none;
-    margin-left: 30px;
+    margin-bottom: 10px;
 }
 
 .tab-nav__item {
@@ -71,6 +79,17 @@
     width: 100%;
 }
 
+@media (max-width: 850px) and (min-width: 768px) {
+    .tabs {
+        font-size: 22px;
+    }
+
+    .tab-nav__item {
+        width: 20vw;
+        margin-left: 40px;
+    }
+}
+
 /* 商品 */
 .item-container {
     display: flex;
@@ -78,11 +97,11 @@
     gap: 50px; /* 画像間の余白 */
     margin: 0 auto;
     padding: 0 50px;
+    justify-content: flex-start;
 }
 
 .item-card {
     width: calc(25% - 38px); /* 4つ並ぶ調整 */
-    margin-bottom: 20px;
     text-align: left;
     box-sizing: border-box;
 }
@@ -100,6 +119,13 @@
 }
 
 .item-card__name {
-    margin-top: 5px;
-    font-size: 16px;
+    margin: 5px 0;
+    font-size: 25px;
+    font-weight: 400;
+}
+
+@media (max-width: 850px) and (min-width: 768px) {
+    .item-card {
+        width: calc(50% - 30px); /* 2つ並ぶ調整 */
+    }
 }

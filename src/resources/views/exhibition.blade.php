@@ -22,7 +22,7 @@
                     <form class="like-form"  action="{{ route('item.like', ['item_id' => $item->id]) }}" method="post">
                         @csrf
                         <button type="submit" class="like-form__btn {{ Auth::check() && $item->likedBy(Auth::user()) ? 'liked' : '' }}">
-                            <img class="like-form__icon" src="{{ asset('images/star.png') }}" alt="いいね">
+                            <img class="like-form__icon" src="{{ asset('img/star.png') }}" alt="いいね">
                         </button>
                     </form>
                     <span class="like-form__count">{{ $likeCount }}</span>
@@ -31,7 +31,7 @@
                 <!-- コメントアイコン -->
                 <div class="item-content__count-group">
                     <div>
-                        <img class="comment__icon" src="{{ asset('images/comment.png') }}" alt="コメント">
+                        <img class="comment__icon" src="{{ asset('img/comment.png') }}" alt="コメント">
                     </div>
                     <span class="comment__count">{{ $commentCount }}</span>
                 </div>
@@ -40,7 +40,7 @@
             <a class="item-content__btn btn" href="/purchase/{{ $item->id }}">購入手続きへ</a>
             <h3 class="item-content__ttl">商品説明</h3>
             <p class="item-content__description">{{ $item->description }}</p>
-    
+
             <h3 class="item-content__ttl">商品の情報</h3>
             <div class="item-content__group">
                 <strong class="item-content__label">カテゴリー</strong>
@@ -80,7 +80,7 @@
                 <p class="comment-user__content">{{ $comment->content }}</p>
             </div>
             @endforeach
-            
+
             <form class="comment-form" action="{{ route('item.comment', ['item_id' => $item->id]) }}" method="post">
                 @csrf
                 <strong class="comment-form__label">商品へのコメント</strong>

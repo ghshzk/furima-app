@@ -9,12 +9,12 @@
     <div class="tab-nav">
         <ul class="tab-nav__list">
             <li class="tab-nav__item">
-                <a class="{{ $tab == 'recommend' ? 'active' : '' }}" href="{{ route('top', ['tab' => 'recommend']) }}">
+                <a class="{{ $tab == 'recommend' ? 'active' : '' }}" href="{{ route('top', ['tab' => 'recommend', 'keyword' => request('keyword')]) }}">
                     おすすめ
                 </a>
             </li>
             <li class="tab-nav__item">
-                <a class="{{ $tab == 'mylist' ? 'active' : '' }}" href="{{ route('top', ['tab' => 'mylist']) }}">
+                <a class="{{ $tab == 'mylist' ? 'active' : '' }}" href="{{ route('top', ['tab' => 'mylist', 'keyword' => request('keyword')]) }}">
                     マイリスト
                 </a>
             </li>
@@ -29,7 +29,7 @@
                 <div class="item-card">
                     <a class="item-card__link" href="{{ url('/item/' . $item->id) }}">
                         <img class="item-card__img {{ $item->is_sold ? 'sold' : '' }}" src="{{ Storage::url($item->image_path) }}" alt="{{ $item->name }}">
-                        <p class="item-card__content">{{ $item->name }}</p>
+                        <p class="item-card__name">{{ $item->name }}</p>
                     </a>
                     @if($item->isSold())
                     <div class="sold-overlay">SOLD</div>
@@ -44,7 +44,7 @@
                 <div class="item-card">
                     <a class="item-card__link" href="{{ url('/item/' . $item->id) }}">
                         <img class="item-card__img" src="{{ Storage::url($item->image_path) }}" alt="{{ $item->name }}">
-                        <p class="item-card__content">{{ $item->name }}</p>
+                        <p class="item-card__name">{{ $item->name }}</p>
                     </a>
                     @if($item->isSold())
                     <div class="sold-overlay">SOLD</div>

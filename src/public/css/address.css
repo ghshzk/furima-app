@@ -7,9 +7,16 @@
     font-size: 24px;
 }
 
+@media (max-width: 850px) and (min-width: 768px) {
+    .profile-form {
+        padding: 50px 60px;
+    }
+}
+
 .address-form__heading {
     text-align: center;
     font-size: 36px;
+    margin: 20px;
 }
 
 .address-form__inner {
@@ -21,13 +28,13 @@
 .address-form__form {
     width: 100%;
     max-width: 680px;
-    margin-top: 50px;
+    margin-top: 35px;
 }
 
 .address-form__group {
     display: flex;
     flex-direction: column;
-    margin-top: 30px;
+    margin-top: 25px;
 }
 
 .address-form__label {
@@ -38,17 +45,18 @@
     display: block;
     border: 1px solid #5F5F5F;
     border-radius: 4px;
-    padding: 9.5px;
-    margin: 2px 0 20px;
+    padding: 10px;
+    font-size: 24px;
 }
 
 .address-form__error-message {
     color: #FF5555;
     font-weight: 600;
-    font-size: 20px;
+    font-size: 18px;
+    margin-top: 5px;
 }
 
 .address-form__btn {
     width: 100%;
-    margin-top: 80px;
+    margin-top: 50px;
 }

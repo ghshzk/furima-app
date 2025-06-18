@@ -48,7 +48,6 @@
             });
             </script>
 
-
             <h3 class="sell-form__ttl">商品詳細</h3>
             <div class="sell-form__group">
                 <label class="sell-form__label" for="">カテゴリー</label>

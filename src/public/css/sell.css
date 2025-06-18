@@ -1,24 +1,20 @@
-/* コンテンツのデザイン */
-.sell-form__ttl {
-    padding-bottom: 10px;
-    margin: 50px 0 35px;
-    font-size: 30px;
-    font-weight: 700;
-    color: #5F5F5F;
-    border-bottom: 1px solid #5F5F5F;
-}
-
 .sell-form {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     padding: 48px;
     font-size: 24px;
+}
+
+@media (max-width: 850px) and (min-width: 768px) {
+    .sell-form {
+        padding: 50px 60px;
+    }
 }
 
 .sell-form__heading {
     text-align: center;
     font-size: 36px;
+    margin: 20px;
 }
 
 .sell-form__inner {
@@ -31,6 +27,28 @@
 .sell-form__form {
     width: 100%;
     max-width: 680px;
+}
+
+.sell-form__group {
+    display: flex;
+    flex-direction: column;
+}
+
+.sell-form__group:nth-of-type(3) {
+    margin-top: 10px;
+}
+
+.sell-form__label {
+    font-weight: 700;
+}
+
+.sell-form__ttl {
+    padding-bottom: 10px;
+    margin: 35px 0;
+    font-size: 30px;
+    font-weight: 700;
+    color: #5F5F5F;
+    border-bottom: 1px solid #5F5F5F;
 }
 
 /*画像選択のデザイン*/
@@ -91,8 +109,8 @@ input[type="checkbox"]:checked + label {
     appearance: none;
     width: 100%;
     height: 45px;
-    padding: 9.5px 15px;
-    font-size: 16px;
+    padding: 10px 15px;
+    font-size: 20px;
     font-weight: 700;
     color: #000;
     border: 1px solid #5F5F5F;
@@ -132,28 +150,19 @@ input[type="checkbox"]:checked + label {
 
 .sell-from__price-input {
     width: 100%;
-    font-size: 16px;
+    font-size: 20px;
     font-weight: 700;
+    border: none;
 }
 
 /* その他入力箇所のデザイン */
-.sell-form__group {
-    display: flex;
-    flex-direction: column;
-    margin-top: 30px;
-}
-
-.sell-form__label {
-    font-weight: 700;
-}
-
 .sell-form__input {
     display: block;
     border: 1px solid #5F5F5F;
     border-radius: 4px;
-    padding: 9.5px 15px;
+    padding: 10px 15px;
     margin: 2px 0;
-    font-size: 16px;
+    font-size: 20px;
     font-weight: 700;
 }
 
@@ -164,12 +173,12 @@ textarea.sell-form__input{
 
 .sell-form__error-message {
     color: #FF5555;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 600;
     margin-top: 5px;
 }
 
 .sell-form__btn {
     width: 100%;
-    margin-top: 100px;
+    margin-top: 70px;
 }

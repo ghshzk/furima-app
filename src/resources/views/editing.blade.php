@@ -70,7 +70,6 @@
             }
         });
         </script>
-
     </div>
 </div>
 @endsection
