@@ -9,12 +9,12 @@
     <div class="tab-nav">
         <ul class="tab-nav__list">
             <li class="tab-nav__item">
-                <a class="{{ $tab == 'recommend' ? 'active' : '' }}" href="{{ route('top', ['tab' => 'recommend']) }}">
+                <a class="{{ $tab == 'recommend' ? 'active' : '' }}" href="{{ route('top', ['tab' => 'recommend', 'keyword' => request('keyword')]) }}">
                     おすすめ
                 </a>
             </li>
             <li class="tab-nav__item">
-                <a class="{{ $tab == 'mylist' ? 'active' : '' }}" href="{{ route('top', ['tab' => 'mylist']) }}">
+                <a class="{{ $tab == 'mylist' ? 'active' : '' }}" href="{{ route('top', ['tab' => 'mylist', 'keyword' => request('keyword')]) }}">
                     マイリスト
                 </a>
             </li>

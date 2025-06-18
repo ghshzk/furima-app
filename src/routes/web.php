@@ -23,9 +23,10 @@ use App\Http\Requests\EmailVerificationRequest;
 */
 
 Route::get('/',[ItemController::class,'index'])->name('top');
-Route::get('/search',[ItemController::class,'index'])->name('search');
+//Route::get('/search',[ItemController::class,'index'])->name('search');
 Route::get('/item/{item_id}',[ItemController::class,'show'])->name('item.show');
 
+Route::post('/login', [AuthenticatedSessionController::class, 'store']);
 Route::post('/register',[RegisteredUserController::class,'store']);
 
 //メール認証
@@ -47,7 +48,6 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
     return redirect()->route('profile.setup');
 })->name('verification.verify');
 
-Route::post('/login', [AuthenticatedSessionController::class, 'store']);
 
 //メール認証済みのユーザーのみアクセスOK
 Route::middleware(['auth'])->group(function(){

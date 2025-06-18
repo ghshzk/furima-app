@@ -19,9 +19,10 @@
 
             @if(!in_array(Route::currentRouteName(),['login', 'register', 'verification.notice' ]))
                 <div class="header-search-form">
-                    <form class="header-search-form__form" action="{{ route('search') }}" method="get">
+                    <form class="header-search-form__form" action="{{ route('top') }}" method="get">
                         @csrf
                         <input class="header-search-form__input" type="text" name="keyword" value="{{ request('keyword') }}" placeholder="なにをお探しですか？">
+                        <input type="hidden" name="tab" value="{{ request('tab', 'recommend') }}">
                     </form>
                 </div>
 
