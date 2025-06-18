@@ -22,19 +22,28 @@
 .tab-nav__list {
     display: flex;
     list-style: none;
-    margin-left: 30px;
+    margin-bottom: 10px;
 }
 
 .tab-nav__item {
-    width: 135px;
-    height: 40px;
+    width: 15vw;
     text-align: right;
-    margin-left: 75px;
 }
 
 .tab-content {
     margin: 50px auto;
     width: 100%;
+}
+
+@media (max-width: 850px) and (min-width: 768px) {
+    .tabs {
+        margin-top:50px;
+        font-size: 22px;
+    }
+
+    .tab-nav__item {
+        width: 20vw;
+    }
 }
 
 /* 商品 */
@@ -44,7 +53,7 @@
     gap: 50px; /* 画像間の余白 */
     margin: 0 auto;
     padding: 0 50px;
-    font-size: 25px;
+    justify-content: flex-start;
 }
 
 .item-card__link {
@@ -82,4 +91,16 @@
     color: white;
     font-size: 2em;
     font-weight: bold;
+}
+
+.item-card__name {
+    margin: 5px 0;
+    font-size: 25px;
+    font-weight: 400;
+}
+
+@media (max-width: 850px) and (min-width: 768px) {
+    .item-card {
+        width: calc(50% - 30px); /* 2つ並ぶ調整 */
+    }
 }

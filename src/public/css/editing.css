@@ -3,13 +3,20 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 48px;
+    padding: 35px;
     font-size: 24px;
+}
+
+@media (max-width: 850px) and (min-width: 768px) {
+    .profile-form {
+        padding: 50px 60px;
+    }
 }
 
 .profile-form__heading {
     text-align: center;
     font-size: 36px;
+    margin: 20px;
 }
 
 .profile-form__inner {
@@ -27,7 +34,8 @@
 .profile-form__group--img {
     display: flex;
     align-items: center;
-    margin-top: 30px;
+    margin-bottom: 30px;
+    gap: 20px;
 }
 
 .profile-form__img {
@@ -38,8 +46,6 @@
 
 .profile-form__upload {
     padding: 8px 18px;
-    align-content: center;
-    text-align: center;
     font-size: 20px;
     font-weight: 700;
     color: #FF5555;
@@ -48,11 +54,16 @@
     cursor: pointer;
 }
 
+@media (max-width: 850px) and (min-width: 768px) {
+    .profile-form__img {
+        right: 15px;
+    }
+}
+
 /* その他入力箇所のデザイン */
 .profile-form__group {
     display: flex;
     flex-direction: column;
-    margin-top: 30px;
 }
 
 .profile-form__label {
@@ -63,17 +74,18 @@
     display: block;
     border: 1px solid #5F5F5F;
     border-radius: 4px;
-    padding: 9.5px;
-    margin: 2px 0;
+    padding: 12px;
+    font-size: 24px;
 }
 
 .profile-form__error-message {
     color: #FF5555;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 600;
+    margin-top: 5px;
 }
 
 .profile-form__btn {
     width: 100%;
-    margin-top: 75px;
+    margin-top: 50px;
 }

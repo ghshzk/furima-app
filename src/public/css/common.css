@@ -11,42 +11,45 @@ body {
     width: 100%;
 }
 
+.header-logo {
+    display: flex;
+    margin-right: 7vw;
+    width: 22vw;
+}
+
 @media (max-width: 850px) and (min-width: 768px) {
     .header {
-        padding: 0 7px 0 10px;
+        padding: 0 10px;
     }
 
     .header-logo {
-        height: 28px;
+        width: 25vw;
+        margin-right: 5vw;
     }
 }
 
-.header-logo {
-    display: flex;
-    align-items: center;
-}
-
-.header-search-form {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 35%;
-    position: relative;
-    left: 15px;
-}
-
 .header-search-form__form {
-    display: flex;
-    align-items: center;
     background-color: #fff;
     border-radius: 5px;
-    padding:  5px 20px;
-    height: 50px;
-    width: 500px;
+    padding:  8px 20px;
+    width: 35vw;
 }
 
 .header-search-form__input {
     border: none;
+    font-size: 24px;
+    width: 100%;
+}
+
+@media (max-width: 850px) and (min-width: 768px) {
+    .header-search-form__form {
+        width: 28vw;
+        padding:  8px 15px;
+    }
+
+    .header-search-form__input {
+        font-size: 18px;
+    }
 }
 
 .header-nav {
@@ -60,19 +63,11 @@ body {
 }
 
 .header-nav__item {
-    flex: auto;
     text-align: center;
-    margin-left: 10px;
 }
 
 .header-nav__item:not(:last-child) {
-    margin-right: 23px;
-}
-
-@media (max-width: 850px) and (min-width: 768px) {
-    .header-nav-item:not(:last-child) {
-        margin-right: 8px;
-    }
+    margin-right: 25px;
 }
 
 .header-nav__item:last-child {
@@ -80,6 +75,16 @@ body {
     padding: 5px 20px;
     border-radius: 4px;
     align-content: center;
+}
+
+@media (max-width: 850px) and (min-width: 768px) {
+    .header-nav__item:not(:last-child) {
+        margin-right: 13px;
+    }
+
+    .header-nav__item:last-child {
+        padding: 5px 15px;
+    }
 }
 
 .header-nav__link,
@@ -94,37 +99,36 @@ body {
 }
 
 @media (max-width: 850px) and (min-width: 768px) {
-    .header-nav-link,
-    .header-nav-btn {
+    .header-nav__link,
+    .header-nav__btn {
         font-size: 19px;
     }
+}
+
+.header-nav-link:hover,
+.header-nav-btn:hover {
+    opacity: 50%;
 }
 
 .header-nav__link-sell {
     color: #000;
 }
 
-.content {
-    display: flex;
-    flex-direction: column;
-    height:  100%;
-    width: 100%;
-}
-
 .btn {
     display: block;
-    padding: 15px;
+    padding: 13px;
     background-color: #FF5555;
     color: #FFF;
     border-radius: 5px;
     font-size: 26px;
     font-weight: 700;
     cursor: pointer;
+    border: none;
 }
 
 .link {
     color: #0073CC;
-    font-size: 24.2px;
+    font-size: 20px;
     text-decoration: none;
     cursor: pointer;
 }

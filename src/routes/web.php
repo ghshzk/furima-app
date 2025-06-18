@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RegisteredUserController;
+use App\Http\Controllers\AuthenticatedSessionController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\OrderController;
@@ -8,7 +10,6 @@ use App\Http\Controllers\LikeController;
 use App\Http\Controllers\CommentController;
 use Illuminate\Http\Request;
 use App\Http\Requests\EmailVerificationRequest;
-use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,7 @@ Route::get('/',[ItemController::class,'index'])->name('top');
 Route::get('/search',[ItemController::class,'index'])->name('search');
 Route::get('/item/{item_id}',[ItemController::class,'show'])->name('item.show');
 
+Route::post('/register',[RegisteredUserController::class,'store']);
 
 //メール認証
 Route::get('/email/verify', function(){
@@ -45,6 +47,7 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
     return redirect()->route('profile.setup');
 })->name('verification.verify');
 
+Route::post('/login', [AuthenticatedSessionController::class, 'store']);
 
 //メール認証済みのユーザーのみアクセスOK
 Route::middleware(['auth'])->group(function(){
@@ -70,5 +73,3 @@ Route::middleware(['web', 'auth'])->group(function(){
     Route::post('/purchase/address/{item_id}',[OrderController::class,'update'])->name('purchase.updateAddress');
     Route::post('/purchase/order/{item_id}',[OrderController::class,'order'])->name('purchase.order');
 });
-
-Route::post('login', [AuthenticatedSessionController::class, 'store'])->middleware('email');

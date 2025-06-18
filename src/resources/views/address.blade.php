@@ -45,7 +45,6 @@
             </div>
             <button class="address-form__btn btn" type="submit">更新する</button>
         </form>
-
     </div>
 </div>
 @endsection

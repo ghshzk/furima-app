@@ -20,6 +20,24 @@
     gap: 50px;
 }
 
+@media (max-width: 850px) and (min-width: 768px) {
+    .purchase-container {
+        display: block;
+        justify-items: center;
+        margin: 65px auto;
+        width: 100%;
+    }
+
+    .purchase-group {
+        width: 85%;
+    }
+
+    .purchase-group:last-of-type {
+        width: 85%;
+        justify-items: center;
+        margin-top: 55px;
+    }
+}
 
 /*購入商品表示*/
 .purchase-content:first-of-type {
@@ -61,6 +79,7 @@
 .purchase-content__ttl {
     font-size: 20px;
     font-weight: 700;
+    margin: 0;
 }
 
 .purchase-content__inner {
@@ -73,13 +92,19 @@
 .payment-form__select-wrap {
     display: inline-block;
     position: relative;
-    width: 260px;
+    width: 20vw; /*265px*/
+}
+
+@media (max-width: 850px) and (min-width: 768px) {
+    .payment-form__select-wrap {
+        width: 35vw;
+    }
 }
 
 .payment-form__select-inner {
     appearance: none;
     width: 100%;
-    padding: 7px 10px;
+    padding: 8px 10px;
     font-size: 16px;
     font-weight: 700;
     color: #5F5F5F;
@@ -110,6 +135,7 @@
 .address__ttl {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .purchase-content__link {
@@ -118,7 +144,6 @@
     font-size: 20px;
     font-weight: 400;
 }
-
 
 /*画面右側*/
 .purchase-form {
@@ -141,10 +166,18 @@
     gap: 50px;
 }
 
+@media (max-width: 850px) and (min-width: 768px) {
+    .purchase-form__price,
+    .purchase-form__payment {
+        padding: 6% 20px;
+    }
+}
+
 .purchase-form__label {
     width: 40%;
     font-size: 20px;
     text-align: center;
+    margin: 0;
 }
 
 .purchase-form__data {

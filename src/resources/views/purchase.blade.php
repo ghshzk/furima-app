@@ -26,8 +26,8 @@
                         <div class="payment-form__select-wrap">
                             <select class="payment-form__select-inner" name="payment_method" onchange="this.form.submit()">
                                 <option value="" hidden>選択してください</option>
-                                <option value="コンビニ払い">コンビニ払い</option>
-                                <option value="カード支払い">カード支払い</option>
+                                <option value="コンビニ支払い" {{ $payment_method === 'コンビニ支払い' ? 'selected' : '' }}>コンビニ支払い</option>
+                                <option value="カード支払い" {{ $payment_method === 'カード支払い' ? 'selected' : '' }}>カード支払い</option>
                             </select>
                             <div class="payment-form__select-arrow"></div>
                         </div>
@@ -76,9 +76,7 @@
             @endif
             <button class="purchase-btn btn" type="submit">購入する</button>
         </form>
-
     </div>
 </div>
-
 
 @endsection
