@@ -57,7 +57,7 @@ class OrderController extends Controller
         }
         $item = Item::findOrFail($itemId);
         $paymentMethod = [
-            'コンビニ払い' => 1,
+            'コンビニ支払い' => 1,
             'カード支払い' => 2,
         ];
 

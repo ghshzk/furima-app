@@ -10,12 +10,6 @@
     <div class="address-form__inner">
         <form class="address-form__form" action="{{ route('purchase.updateAddress',['item_id' => $item->id]) }}" method="post">
             @csrf
-            <input type="hidden" name="name" value="{{ $user->name }}">
-            <p class="address-form__error-message">
-                @error('postcode')
-                {{ $message }}
-                @enderror
-            </p>
             <div class="address-form__group">
                 <label class="address-form__label" for="postcode">郵便番号</label>
                 <input class="address-form__input" type="text" id="postcode" name="postcode" value="{{ old('postcode', $user->postcode) }}">
