@@ -76,6 +76,13 @@
             @endif
             <button class="purchase-btn btn" type="submit">購入する</button>
         </form>
+        @if (session('cancel_message'))
+            <div class="cancel">
+                <p class="cancel-message">
+                    {{ session('cancel_message') }}
+                </p>
+            </div>
+        @endif
     </div>
 </div>
 
