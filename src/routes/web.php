@@ -23,7 +23,6 @@ use App\Http\Requests\EmailVerificationRequest;
 */
 
 Route::get('/',[ItemController::class,'index'])->name('top');
-//Route::get('/search',[ItemController::class,'index'])->name('search');
 Route::get('/item/{item_id}',[ItemController::class,'show'])->name('item.show');
 
 Route::post('/login', [AuthenticatedSessionController::class, 'store']);
@@ -72,4 +71,6 @@ Route::middleware(['web', 'auth'])->group(function(){
     Route::get('/purchase/address/{item_id}',[OrderController::class,'edit']);
     Route::post('/purchase/address/{item_id}',[OrderController::class,'update'])->name('purchase.updateAddress');
     Route::post('/purchase/order/{item_id}',[OrderController::class,'order'])->name('purchase.order');
+    Route::get('/checkout/success',[OrderController::class,'checkoutSuccess'])->name('checkout.success');
+    Route::get('/checkout/cancel',[OrderController::class,'checkoutCancel'])->name('checkout.cancel');
 });
