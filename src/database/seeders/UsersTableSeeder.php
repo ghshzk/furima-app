@@ -18,8 +18,8 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->insert([
             [
                 'name' => 'test_user1',
-                'email' => 'test1@example.com',
-                'password' => Hash::make('password123'),
+                'email' => 'user1@example.com',
+                'password' => Hash::make('password'),
                 'postcode' => '123-4567',
                 'address' => '東京都新宿区新宿1-1-1',
                 'building' => 'テストマンション101',
@@ -27,8 +27,8 @@ class UsersTableSeeder extends Seeder
             ],
             [
                 'name' => 'test_user2',
-                'email' => 'test2@example.com',
-                'password' => Hash::make('password123'),
+                'email' => 'user2@example.com',
+                'password' => Hash::make('password'),
                 'postcode' => '987-6543',
                 'address' => '大阪府大阪市梅田1-1-2',
                 'building' => null,

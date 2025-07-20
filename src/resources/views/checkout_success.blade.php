@@ -13,7 +13,7 @@
         <ul class="info-list">
             <li class="info-list__item">決済ID：{{ $session->id }}</li>
             <li class="info-list__item">合計：¥{{ number_format($session->amount_total) }}</li>
-            <li class="info-list__item">決済方法：{{ $session->payment_method_types[0] }}</li>
+            <li class="info-list__item">決済方法：{{ $displayPaymentMethod }}</li>
         </ul>
     </div>
 

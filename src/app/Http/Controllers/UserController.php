@@ -52,7 +52,7 @@ class UserController extends Controller
         $user->fill($request->only([
             'name', 'postcode', 'address', 'building'
         ]));
-        
+
         $user->save();
 
         return redirect()->route('mypage');

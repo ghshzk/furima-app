@@ -6,13 +6,21 @@ use App\Models\Item;
 use App\Models\Order;
 use App\Http\Requests\AddressRequest;
 use App\Http\Requests\PurchaseRequest;
+use App\Services\StripeService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Stripe\Stripe;
-use Stripe\Checkout\Session as StripeSession;
+//use Stripe\Stripe;
+//use Stripe\Checkout\Session as StripeSession;
 
 class OrderController extends Controller
 {
+    protected $stripe;
+
+    public function __construct(StripeService $stripe)
+    {
+        $this->stripe = $stripe;
+    }
+
     public function show(Request $request, $itemId)
     {
         $user = Auth::user();
@@ -59,8 +67,6 @@ class OrderController extends Controller
 
         $item = Item::findOrFail($itemId);
 
-        Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
-
         switch ($request->payment_method) {
             case 'コンビニ支払い':
                 $paymentMethodTypes = ['konbini'];
@@ -71,7 +77,7 @@ class OrderController extends Controller
         }
 
         try {
-            $checkoutSession = StripeSession::create([
+            $checkoutSession = $this->stripe->createCheckoutSession([
                 'payment_method_types' => $paymentMethodTypes,
                 'line_items' => [[
                     'price_data' => [
@@ -103,6 +109,8 @@ class OrderController extends Controller
 
     public function checkoutSuccess(Request $request)
     {
+        \Log::info('【テスト用】retrieveCheckoutSession呼ばれたよ');
+
         $sessionId = $request->query('session_id');
         $itemId = $request->query('item_id');
 
@@ -111,18 +119,19 @@ class OrderController extends Controller
                 ->withErrors(['error' => '決済情報が確認できませんでした']);
         }
 
-        Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
-
         try {
-            $session = StripeSession::retrieve($sessionId);
+            \Log::info('【確認】retrieveCheckoutSessionを呼んだよ');
+            $session = $this->stripe->retrieveCheckoutSession($sessionId);
 
-            \Log::info('Session retrieved:', (array)$session);
+            \Log::info('【確認】Session retrieved:', (array)$session);
 
             $item = Item::findOrFail($itemId);
             $paymentMethodMap = [
                 'コンビニ支払い' => 1,
                 'カード支払い' => 2,
             ];
+
+            \Log::info('payment_method:', [$session->metadata->payment_method]);
 
             Order::create([
                 'user_id' => $session->metadata->user_id,
@@ -134,7 +143,14 @@ class OrderController extends Controller
 
             session()->forget(['payment_method', 'shipping_address']);
 
-            return view('checkout_success', compact('session'));
+            $paymentMethodMapForDisplay = [
+                'card' => 'カード支払い',
+                'konbini' => 'コンビニ支払い',
+            ];
+
+            $paymentTypeCode = $session->payment_method_types[0] ?? 'unknown';
+            $displayPaymentMethod = $paymentMethodMapForDisplay[$paymentTypeCode] ?? '不明な支払い方法';
+            return view('checkout_success', compact('session', 'displayPaymentMethod'));
 
         } catch (\Exception $e) {
             \Log::error('Stripe Session Retrieve Error: ' . $e->getMessage());

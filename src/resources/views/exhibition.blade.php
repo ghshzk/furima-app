@@ -19,13 +19,21 @@
             <div class="item-content__count">
                 <!-- いいねアイコン -->
                 <div class="item-content__count-group">
-                    <form class="like-form"  action="{{ route('item.like', ['item_id' => $item->id]) }}" method="post">
-                        @csrf
-                        <button type="submit" class="like-form__btn {{ Auth::check() && $item->likedBy(Auth::user()) ? 'liked' : '' }}">
-                            <img class="like-form__icon" src="{{ asset('img/star.png') }}" alt="いいね">
-                        </button>
-                    </form>
-                    <span class="like-form__count">{{ $likeCount }}</span>
+                    <div class="like-form__wrapper">
+                        @if(Auth::check() && Auth::id() === $item->user_id)
+                            <button class="like-form__btn disabled" disabled>
+                                <img class="like-form__icon" src="{{ asset('img/star.png') }}" alt="いいね">
+                            </button>
+                        @else
+                            <form class="like-form"  action="{{ route('item.like', ['item_id' => $item->id]) }}" method="post">
+                                @csrf
+                                <button type="submit" class="like-form__btn {{ Auth::check() && $item->likedBy(Auth::user()) ? 'liked' : '' }}">
+                                    <img class="like-form__icon" src="{{ asset('img/star.png') }}" alt="いいね">
+                                </button>
+                            </form>
+                        @endif
+                        <span class="like-form__count">{{ $likeCount }}</span>
+                    </div>
                 </div>
 
                 <!-- コメントアイコン -->

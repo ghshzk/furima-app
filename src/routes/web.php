@@ -62,10 +62,8 @@ Route::middleware(['auth'])->group(function(){
     //出品
     Route::get('/sell',[ItemController::class,'create']);
     Route::post('/sell',[ItemController::class,'store'])->name('sell');
-});
 
-//メール認証済みのユーザーのみアクセスOK
-Route::middleware(['web', 'auth'])->group(function(){
+    //購入
     Route::get('/purchase/{item_id}',[OrderController::class,'show'])->name('purchase.show');
     Route::post('/purchase/{item_id}',[OrderController::class,'updatePayment'])->name('purchase.updatePayment');
     Route::get('/purchase/address/{item_id}',[OrderController::class,'edit']);

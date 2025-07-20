@@ -53,10 +53,20 @@
     justify-items: center;
 }
 
+.like-form__wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .like-form__btn {
     border: none;
     background-color: transparent;
     cursor: pointer;
+}
+
+.disabled {
+    cursor: default;
 }
 
 .like-form__btn.liked img {

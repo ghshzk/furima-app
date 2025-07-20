@@ -43,6 +43,11 @@ MAIL_ENCRYPTION=tls
 MAIL_FROM_ADDRESS="test@example.com"
 MAIL_FROM_NAME="${APP_NAME}"
 ```
+
+## 決済画面
+決済にはStripeというツールを使用しています。  
+
+
 ## 🗂 テーブル仕様
 
 ## 🗺 ER図
@@ -51,13 +56,13 @@ MAIL_FROM_NAME="${APP_NAME}"
 ## 🔑 テストアカウント
 ### アカウント①
 name: test_user2
-email: test1@example.com
-password: password123
+email: user1@example.com
+password: password
 
 ### アカウント②
 name: test_user2
-email: test2@example.com
-password: password123
+email: user2@example.com
+password: password
 
 ## 🌐 URL
 - 開発環境：http://localhost/

@@ -62,7 +62,7 @@ class Item extends Model
         return $this->hasMany(Order::class, 'item_id');
     }
 
-    public function isSold()
+    public function isSold(): bool //:bool足した
     {
         return $this->orders()->exists();
     }

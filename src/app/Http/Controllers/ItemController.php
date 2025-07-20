@@ -19,9 +19,9 @@ class ItemController extends Controller
 
         /* お気に入り商品のみ表示 */
         if ($tab == 'mylist') {
-            if($user) {
+            if ($user) {
                 $query = $user->likedItems()->with('orders');
-                if(!empty($keyword)) {
+                if (!empty($keyword)) {
                     $query->where('name', 'like', "%{$keyword}%");
                 }
                 $items = $query->get();
@@ -35,16 +35,16 @@ class ItemController extends Controller
             if ($user) {
                 $query->where('user_id', '!=', $user->id);
             }
-            if(!empty($keyword)){
+            if (!empty($keyword)){
                 $query->where('name', 'like', "%{$keyword}%");
             }
 
             $items = $query->with('orders')->get();
         }
 
-        $items->each(function ($item) {
+        /*$items->each(function ($item) {
             $item->sold = $item->orders()->exists();
-        });
+        });ここ削除*/
 
         return view('top',compact('tab', 'items', 'keyword'));
     }
@@ -71,7 +71,7 @@ class ItemController extends Controller
     {
         $user = Auth::user();
 
-        if($request->hasFile('image_path')){
+        if ($request->hasFile('image_path')) {
             $imagePath = $request->file('image_path')->store('public/items');
         } else {
             $imagePath = null;

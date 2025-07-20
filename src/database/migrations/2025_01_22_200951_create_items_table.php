@@ -20,7 +20,7 @@ class CreateItemsTable extends Migration
             $table->text('description');
             $table->tinyInteger('condition');
             $table->string('image_path');
-            $table->string('brand');
+            $table->string('brand')->nullable();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
