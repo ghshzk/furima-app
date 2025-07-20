@@ -62,7 +62,7 @@ class ShippingAddressTest extends TestCase
         $response->assertSeeText('東京都テスト区テスト町1-1-1');
         $response->assertSeeText('テストマンション101');
 
-        $this->actingAs($this->user)->post('/purchase/address/' . $this->item->id, [
+        $this->actingAs($this->user)->put('/purchase/address/' . $this->item->id, [
             'postcode' => '987-6543',
             'address' => '大阪府テスト市テスト1-1-1',
             'building' => null,
@@ -104,15 +104,14 @@ class ShippingAddressTest extends TestCase
         $response->assertSeeText('東京都テスト区テスト町1-1-1');
         $response->assertSeeText('テストマンション101');
 
-
-        $this->actingAs($this->user)->post('/purchase/address/' . $this->item->id, [
+        $this->actingAs($this->user)->put('/purchase/address/' . $this->item->id, [
             'postcode' => '987-6543',
             'address' => '大阪府テスト市テスト1-1-1',
             'building' => null,
         ])->assertStatus(302);
 
         $this->actingAs($this->user)
-            ->post('/purchase/order/' . $this->item->id, [
+            ->put('/purchase/order/' . $this->item->id, [
                 'payment_method' => 'カード支払い',
                 'shipping_address' => '987-6543 大阪府テスト市テスト1-1-1',
             ])

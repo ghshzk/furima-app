@@ -27,6 +27,7 @@
                         @else
                             <form class="like-form"  action="{{ route('item.like', ['item_id' => $item->id]) }}" method="post">
                                 @csrf
+                                @method('PUT')
                                 <button type="submit" class="like-form__btn {{ Auth::check() && $item->likedBy(Auth::user()) ? 'liked' : '' }}">
                                     <img class="like-form__icon" src="{{ asset('img/star.png') }}" alt="いいね">
                                 </button>
@@ -91,6 +92,7 @@
 
             <form class="comment-form" action="{{ route('item.comment', ['item_id' => $item->id]) }}" method="post">
                 @csrf
+                @method('PUT')
                 <strong class="comment-form__label">商品へのコメント</strong>
                 <textarea class="comment-form__input" name="content"></textarea>
                 <p class="comment-form__error-message">

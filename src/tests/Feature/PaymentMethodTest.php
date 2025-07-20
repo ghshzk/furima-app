@@ -41,7 +41,7 @@ class PaymentMethodTest extends TestCase
     {
         $this->actingAs($this->user)->get('/purchase/' . $this->item->id);
 
-        $response = $this->followingRedirects()->actingAs($this->user)->post('/purchase/' . $this->item->id, [
+        $response = $this->followingRedirects()->actingAs($this->user)->put('/purchase/' . $this->item->id, [
             'payment_method' => 'カード支払い',
         ]);
 

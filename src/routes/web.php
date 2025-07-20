@@ -48,11 +48,11 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
 })->name('verification.verify');
 
 
-//メール認証済みのユーザーのみアクセスOK
+//メール認証済みのユーザーのみアクセスOK postからputに修正した
 Route::middleware(['auth'])->group(function(){
     //いいね＆コメント機能
-    Route::post('/item/{item_id}/like',[LikeController::class,'like'])->name('item.like');
-    Route::post('/item/{item_id}/comment',[CommentController::class,'comment'])->name('item.comment');
+    Route::put('/item/{item_id}/like',[LikeController::class,'like'])->name('item.like');
+    Route::put('/item/{item_id}/comment',[CommentController::class,'comment'])->name('item.comment');
 
     //マイページ
     Route::get('/mypage',[UserController::class,'index'])->name('mypage');
@@ -63,12 +63,12 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/sell',[ItemController::class,'create']);
     Route::post('/sell',[ItemController::class,'store'])->name('sell');
 
-    //購入
+    //購入 postからputに修正した
     Route::get('/purchase/{item_id}',[OrderController::class,'show'])->name('purchase.show');
-    Route::post('/purchase/{item_id}',[OrderController::class,'updatePayment'])->name('purchase.updatePayment');
+    Route::put('/purchase/{item_id}',[OrderController::class,'updatePayment'])->name('purchase.updatePayment');
     Route::get('/purchase/address/{item_id}',[OrderController::class,'edit']);
-    Route::post('/purchase/address/{item_id}',[OrderController::class,'update'])->name('purchase.updateAddress');
-    Route::post('/purchase/order/{item_id}',[OrderController::class,'order'])->name('purchase.order');
+    Route::put('/purchase/address/{item_id}',[OrderController::class,'update'])->name('purchase.updateAddress');
+    Route::put('/purchase/order/{item_id}',[OrderController::class,'order'])->name('purchase.order');
     Route::get('/checkout/success',[OrderController::class,'checkoutSuccess'])->name('checkout.success');
     Route::get('/checkout/cancel',[OrderController::class,'checkoutCancel'])->name('checkout.cancel');
 });
