@@ -23,6 +23,7 @@
                 <div class="purchase-content__inner">
                     <form class="payment-form" action="{{ route('purchase.updatePayment',['item_id' => $item->id]) }}" method="post">
                         @csrf
+                        @method('PUT')
                         <div class="payment-form__select-wrap">
                             <select class="payment-form__select-inner" name="payment_method" onchange="this.form.submit()">
                                 <option value="" hidden>選択してください</option>
@@ -52,6 +53,7 @@
     <div class="purchase-group">
         <form class="purchase-form" action="{{ route('purchase.order', ['item_id' => $item->id]) }}" method="post">
             @csrf
+            @method('PUT')
             <input type="hidden" name="payment_method" value="{{ session('payment_method') }}">
             <input type="hidden" name="shipping_address" value="{{ session('shipping_address', $user->postcode . "\n" . $user->address . "\n" . $user->building) }}">
 

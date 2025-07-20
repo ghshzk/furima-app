@@ -75,7 +75,7 @@ class ItemOrderTest extends TestCase
         $this->actingAs($this->user)->get('/purchase/' . $this->item->id)->assertStatus(200);
 
         $this->actingAs($this->user)
-            ->post('/purchase/order/' . $this->item->id, [
+            ->put('/purchase/order/' . $this->item->id, [
                 'payment_method' => 'カード支払い',
                 'shipping_address' => '123-1234 東京都新宿区テスト1',
             ])
@@ -121,7 +121,7 @@ class ItemOrderTest extends TestCase
             ]);
 
         $this->actingAs($this->user)
-            ->post('/purchase/order/' . $this->item->id, [
+            ->put('/purchase/order/' . $this->item->id, [
                 'payment_method' => 'カード支払い',
                 'shipping_address' => '123-1234 東京都新宿区テスト1',
             ])
@@ -164,7 +164,7 @@ class ItemOrderTest extends TestCase
             ]);
 
         $this->actingAs($this->user)
-            ->post('/purchase/order/' . $this->item->id, [
+            ->put('/purchase/order/' . $this->item->id, [
                 'payment_method' => 'カード支払い',
                 'shipping_address' => '123-1234 東京都新宿区テスト1',
             ])

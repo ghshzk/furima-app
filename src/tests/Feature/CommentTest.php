@@ -39,7 +39,7 @@ class CommentTest extends TestCase
     //ログイン済みのユーザーはコメントを送信できる
     public function test_authenticated_user_can_post_comment()
     {
-        $response = $this->actingAs($this->user)->post('/item/' . $this->item->id . '/comment', [
+        $response = $this->actingAs($this->user)->put('/item/' . $this->item->id . '/comment', [
             'content' => 'テストコメント',
         ]);
 
@@ -58,7 +58,7 @@ class CommentTest extends TestCase
     //ログイン前のユーザーはコメントを送信できない
     public function test_guest_cannot_post_comment()
     {
-        $response = $this->post('/item/' . $this->item->id . '/comment', [
+        $response = $this->put('/item/' . $this->item->id . '/comment', [
             'content' => 'ゲストコメント',
         ]);
 
@@ -71,7 +71,7 @@ class CommentTest extends TestCase
     //コメントが入力されていない場合、バリデーションメッセージが表示される
     public function test_comment_validate_content()
     {
-        $response = $this->actingAs($this->user)->post('/item/' . $this->item->id . '/comment', [
+        $response = $this->actingAs($this->user)->put('/item/' . $this->item->id . '/comment', [
             'content' => '',
         ]);
 
@@ -86,7 +86,7 @@ class CommentTest extends TestCase
     {
         $longComment = str_repeat('あ', 256);
 
-        $response = $this->actingAs($this->user)->post('/item/' . $this->item->id . '/comment', [
+        $response = $this->actingAs($this->user)->put('/item/' . $this->item->id . '/comment', [
             'content' => $longComment
         ]);
 

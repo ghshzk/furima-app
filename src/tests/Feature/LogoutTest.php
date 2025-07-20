@@ -23,7 +23,7 @@ class LogoutTest extends TestCase
     //ログアウトができる
     public function test_logout()
     {
-        $user = User::find(1);
+        $user = User::first();
         $response = $this->actingAs($user)->post('/logout');
 
         $response->assertStatus(302);

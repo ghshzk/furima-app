@@ -41,19 +41,22 @@ class ItemLikeTest extends TestCase
     {
         $this->actingAs($this->user)->get('/item/' . $this->item->id);
 
-        $response = $this->actingAs($this->user)->post('/item/' . $this->item->id . '/like');
+        $response = $this->actingAs($this->user)->put('/item/' . $this->item->id . '/like');
         $response->assertStatus(302);
         $this->assertDatabaseHas('likes', [
             'user_id' => $this->user->id,
             'item_id' => $this->item->id,
         ]);
+
+        $response = $this->actingAs($this->user)->get('/item/' . $this->item->id);
+        $response->assertSee('<span class="like-form__count">1</span>', false);
     }
 
     //追加済みのアイコンは色が変化する
     public function test_like_icon_change_color()
     {
         $this->actingAs($this->user)->get('/item/' . $this->item->id);
-        $this->actingAs($this->user)->post('/item/' . $this->item->id . '/like');
+        $this->actingAs($this->user)->put('/item/' . $this->item->id . '/like');
         $response = $this->actingAs($this->user)->get('/item/' . $this->item->id);
 
         $response->assertSee('like-form__btn liked');
@@ -62,16 +65,22 @@ class ItemLikeTest extends TestCase
     public function test_unlike_item_on_click()
     {
         $this->actingAs($this->user)->get('/item/' . $this->item->id);
-        $this->actingAs($this->user)->post('/item/' . $this->item->id . '/like');
+        $this->actingAs($this->user)->put('/item/' . $this->item->id . '/like');
         $this->assertDatabaseHas('likes',[
             'user_id' => $this->user->id,
             'item_id' => $this->item->id,
         ]);
 
-        $this->actingAs($this->user)->post('/item/' . $this->item->id . '/like');
+        $response = $this->actingAs($this->user)->get('/item/' . $this->item->id);
+        $response->assertSee('<span class="like-form__count">1</span>', false);
+
+        $this->actingAs($this->user)->put('/item/' . $this->item->id . '/like');
         $this->assertDatabaseMissing('likes', [
             'user_id' => $this->user->id,
             'item_id' => $this->item->id,
         ]);
+
+        $response = $this->actingAs($this->user)->get('/item/' . $this->item->id);
+        $response->assertSee('<span class="like-form__count">0</span>', false);
     }
 }
