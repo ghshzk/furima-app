@@ -49,19 +49,94 @@ MAIL_FROM_NAME="${APP_NAME}"
 
 
 ## 🗂 テーブル仕様
+usersテーブル
+|カラム名       |型  |PRIMARY KEY|UNIQUE KEY|NOT NULL|FOREIGN KEY|
+|-----------------|------------|:-------:|:-----:|:----:|:----:|
+|id               |BIGINT UNSIGNED|○   |   |○  |   |
+|name             |VARCHAR(255)   |    |   |○  |   |
+|email            |VARCHAR(255)   |    |○  |○  |   |
+|email_verified_at|TIMESTAMP      |    |   |   |   |
+|password         |VARCHAR(255)   |    |   |○  |   |
+|postcode         |VARCHAR(255)   |    |   |   |   |
+|address          |VARCHAR(255)   |    |   |   |   |
+|building         |VARCHAR(255)   |    |   |   |   |
+|image_path       |VARCHAR(255)   |    |   |   |   |
+|remember_token   |VARCHAR(100)   |    |   |   |   |
+|created_at       |TIMESTAMP      |    |   |   |   |
+|updated_at       |TIMESTAMP      |    |   |   |   |
+
+itemsテーブル
+|カラム名    |型  |PRIMARY KEY|UNIQUE KEY|NOT NULL|FOREIGN KEY|
+|-----------|---|:---:|:---:|:---:|:---:|
+|id         |BIGINT UNSIGNED
+|name       |VARCHAR(255)
+|price      |
+|description|
+|condition  |
+|image_path |
+|brand      |
+|user_id    |
+|created_at |
+|updated_at |
+
+categoriesテーブル
+|カラム名|型|PRIMARY KEY|UNIQUE KEY|NOT NULL|FOREIGN KEY|
+|---|---|:---:|:---:|:---:|:---:|
+id
+content
+created_at
+updated_at
+
+categorizationsテーブル
+|カラム名|型|PRIMARY KEY|UNIQUE KEY|NOT NULL|FOREIGN KEY|
+|---|---|:---:|:---:|:---:|:---:|
+id
+item_id
+category_id
+
+likesテーブル
+|カラム名|型|PRIMARY KEY|UNIQUE KEY|NOT NULL|FOREIGN KEY|
+|---|---|:---:|:---:|:---:|:---:|
+id
+user_id
+item_id
+created_at
+updated_at
+
+commentsテーブル
+|カラム名|型|PRIMARY KEY|UNIQUE KEY|NOT NULL|FOREIGN KEY|
+|---|---|:---:|:---:|:---:|:---:|
+id
+user_id
+item_id
+content
+created_at
+updated_at
+
+ordersテーブル
+|カラム名|型|PRIMARY KEY|UNIQUE KEY|NOT NULL|FOREIGN KEY|
+|---|---|:---:|:---:|:---:|:---:|
+id
+user_id
+item_id
+price
+payment_method
+shipping_address
+created_at
+updated_at
 
 ## 🗺 ER図
 ![ER図](/furima.drawio.svg)
 
 ## 🔑 テストアカウント
 ### アカウント①
-name: test_user2
-email: user1@example.com
+name: test_user2\
+email: user1@example.com\
 password: password
 
 ### アカウント②
-name: test_user2
-email: user2@example.com
+name: test_user2\
+email: user2@example.com\
 password: password
 
 ## 🌐 URL
