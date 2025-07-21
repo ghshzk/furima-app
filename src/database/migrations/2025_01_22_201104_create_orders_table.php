@@ -17,7 +17,7 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('item_id')->constrained()->cascadeOnDelete();
-            $table->decimal('price',10,2);
+            $table->integer('price');
             $table->tinyInteger('payment_method');
             $table->string('shipping_address');
             $table->timestamps();
