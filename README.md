@@ -50,83 +50,83 @@ MAIL_FROM_NAME="${APP_NAME}"
 
 ## 🗂 テーブル仕様
 usersテーブル
-|カラム名       |型  |PRIMARY KEY|UNIQUE KEY|NOT NULL|FOREIGN KEY|
-|-----------------|------------|:-------:|:-----:|:----:|:----:|
-|id               |BIGINT UNSIGNED|○   |   |○  |   |
-|name             |VARCHAR(255)   |    |   |○  |   |
-|email            |VARCHAR(255)   |    |○  |○  |   |
-|email_verified_at|TIMESTAMP      |    |   |   |   |
-|password         |VARCHAR(255)   |    |   |○  |   |
-|postcode         |VARCHAR(255)   |    |   |   |   |
-|address          |VARCHAR(255)   |    |   |   |   |
-|building         |VARCHAR(255)   |    |   |   |   |
-|image_path       |VARCHAR(255)   |    |   |   |   |
-|remember_token   |VARCHAR(100)   |    |   |   |   |
-|created_at       |TIMESTAMP      |    |   |   |   |
-|updated_at       |TIMESTAMP      |    |   |   |   |
+|カラム名          |型      |PRIMARY KEY|UNIQUE KEY|NOT NULL|FOREIGN KEY|
+|-----------------|---------------|:---:|:---:|:---:|:---:|
+|id               |BIGINT UNSIGNED|○    |     |○   |   |
+|name             |VARCHAR(255)   |     |     |○   |   |
+|email            |VARCHAR(255)   |     |○    |○   |   |
+|email_verified_at|TIMESTAMP      |     |     |    |   |
+|password         |VARCHAR(255)   |     |     |○   |   |
+|postcode         |VARCHAR(255)   |     |     |    |   |
+|address          |VARCHAR(255)   |     |     |    |   |
+|building         |VARCHAR(255)   |     |     |    |   |
+|image_path       |VARCHAR(255)   |     |     |    |   |
+|remember_token   |VARCHAR(100)   |     |     |    |   |
+|created_at       |TIMESTAMP      |     |     |    |   |
+|updated_at       |TIMESTAMP      |     |     |    |   |
 
 itemsテーブル
-|カラム名    |型  |PRIMARY KEY|UNIQUE KEY|NOT NULL|FOREIGN KEY|
-|-----------|---|:---:|:---:|:---:|:---:|
-|id         |BIGINT UNSIGNED
-|name       |VARCHAR(255)
-|price      |
-|description|
-|condition  |
-|image_path |
-|brand      |
-|user_id    |
-|created_at |
-|updated_at |
+|カラム名    |型     |PRIMARY KEY|UNIQUE KEY|NOT NULL|FOREIGN KEY|
+|-----------|---------------|:---:|:---:|:---:|:------:|
+|id         |BIGINT UNSIGNED|○    |     |○   |         |
+|name       |VARCHAR(255)   |     |     |○   |         |
+|price      |INT            |     |     |○   |         |
+|description|VARCHAR(255)   |     |     |○   |         |
+|condition  |TINYINT        |     |     |○   |         |
+|image_path |VARCHAR(255)   |     |     |○   |         |
+|brand      |VARCHAR(255)   |     |     |    |         |
+|user_id    |BIGINT UNSIGNED|     |     |○   |users(id)|
+|created_at |TIMESTAMP      |     |     |    |         |
+|updated_at |TIMESTAMP      |     |     |    |         |
 
 categoriesテーブル
-|カラム名|型|PRIMARY KEY|UNIQUE KEY|NOT NULL|FOREIGN KEY|
-|---|---|:---:|:---:|:---:|:---:|
-id
-content
-created_at
-updated_at
+|カラム名   |型    |PRIMARY KEY|UNIQUE KEY|NOT NULL|FOREIGN KEY|
+|----------|---------------|:---:|:---:|:---:|:---:|
+|id        |BIGINT UNSIGNED|○    |     |○   |      |
+|content   |VARCHAR(255)   |     |     |○   |      |
+|created_at|TIMESTAMP      |     |     |    |      |
+|updated_at|TIMESTAMP      |     |     |    |      |
 
 categorizationsテーブル
-|カラム名|型|PRIMARY KEY|UNIQUE KEY|NOT NULL|FOREIGN KEY|
-|---|---|:---:|:---:|:---:|:---:|
-id
-item_id
-category_id
+|カラム名    |型    |PRIMARY KEY|UNIQUE KEY|NOT NULL|FOREIGN KEY|
+|-----------|---------------|:---:|:---:|:---:|:-----------:|
+|id         |BIGINT UNSIGNED|○    |     |○   |              |
+|item_id    |BIGINT UNSIGNED|     |     |○   |items(id)     |
+|category_id|BIGINT UNSIGNED|     |     |○   |categories(id)|
 
 likesテーブル
-|カラム名|型|PRIMARY KEY|UNIQUE KEY|NOT NULL|FOREIGN KEY|
-|---|---|:---:|:---:|:---:|:---:|
-id
-user_id
-item_id
-created_at
-updated_at
+|カラム名   |型      |PRIMARY KEY|UNIQUE KEY|NOT NULL|FOREIGN KEY|
+|----------|---------------|:---:|:---:|:---:|:------:|
+|id        |BIGINT UNSIGNED|○    |     |○   |         |
+|user_id   |BIGINT UNSIGNED|     |     |○   |users(id)|
+|item_id   |BIGINT UNSIGNED|     |     |○   |items(id)|
+|created_at|TIMESTAMP      |     |     |    |         |
+|updated_at|TIMESTAMP      |     |     |    |         |
 
 commentsテーブル
-|カラム名|型|PRIMARY KEY|UNIQUE KEY|NOT NULL|FOREIGN KEY|
-|---|---|:---:|:---:|:---:|:---:|
-id
-user_id
-item_id
-content
-created_at
-updated_at
+|カラム名   |型    |PRIMARY KEY|UNIQUE KEY|NOT NULL|FOREIGN KEY|
+|----------|---------------|:---:|:---:|:---:|:------:|
+|id        |BIGINT UNSIGNED|○    |     |○   |         |
+|user_id   |BIGINT UNSIGNED|     |     |○   |users(id)|
+|item_id   |BIGINT UNSIGNED|     |     |○   |items(id)|
+|content   |TEXT           |     |     |○   |         |
+|created_at|TIMESTAMP      |     |     |    |         |
+|updated_at|TIMESTAMP      |     |     |    |         |
 
 ordersテーブル
-|カラム名|型|PRIMARY KEY|UNIQUE KEY|NOT NULL|FOREIGN KEY|
-|---|---|:---:|:---:|:---:|:---:|
-id
-user_id
-item_id
-price
-payment_method
-shipping_address
-created_at
-updated_at
+|カラム名         |型    |PRIMARY KEY|UNIQUE KEY|NOT NULL|FOREIGN KEY|
+|----------------|---------------|:---:|:---:|:---:|:------:|
+|id              |BIGINT UNSIGNED|○    |     |○   |         |
+|user_id         |BIGINT UNSIGNED|     |     |○   |users(id)|
+|item_id         |BIGINT UNSIGNED|     |     |○   |items(id)|
+|price           |INT            |     |     |○   |         |
+|payment_method  |TINYINT        |     |     |○   |         |
+|shipping_address|VARCHAR(255)   |     |     |○   |         |
+|created_at      |TIMESTAMP      |     |     |    |         |
+|updated_at      |TIMESTAMP      |     |     |    |         |
 
 ## 🗺 ER図
-![ER図](/furima.drawio.svg)
+![ER図](furima-ER.png)
 
 ## 🔑 テストアカウント
 ### アカウント①
