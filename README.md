@@ -128,15 +128,20 @@ ordersテーブル
 ## 🗺 ER図
 ![ER図](furima-ER.png)
 
-## 🔑 テストアカウント
-### アカウント①
+## 🔑 ユーザーデータ
+### ユーザー①
 name: test_user2\
 email: user1@example.com\
 password: password
 
-### アカウント②
+### ユーザー②
 name: test_user2\
 email: user2@example.com\
+password: password
+
+### ユーザー②
+name: test_user3\
+email: user3@example.com\
 password: password
 
 ## 🌐 URL
