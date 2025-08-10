@@ -20,7 +20,9 @@ class UserController extends Controller
         $tab = $request->query('tab','sell');
 
         if ($tab === 'buy'){
-            $items = Item::whereIn('id',Order::where('user_id', $user->id)->pluck('item_id'))->get();
+            $items = Item::boughtBy($user->id)->get();
+        } elseif ($tab === 'transaction') {
+            $items = Item::inTransaction($user->id)->get();
         } else {
             $items = Item::where('user_id', $user->id)->get();
         }

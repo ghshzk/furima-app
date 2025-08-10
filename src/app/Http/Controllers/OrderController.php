@@ -125,21 +125,27 @@ class OrderController extends Controller
 
             \Log::info('【確認】Session retrieved:', (array)$session);
 
-            $item = Item::findOrFail($itemId);
+            $item = Item::findOrFail($session->metadata->item_id);
+
             $paymentMethodMap = [
                 'コンビニ支払い' => 1,
                 'カード支払い' => 2,
             ];
 
             \Log::info('payment_method:', [$session->metadata->payment_method]);
+            \Log::info('buyer_id:', [$session->metadata->user_id]);
 
             Order::create([
-                'user_id' => $session->metadata->user_id,
+                'buyer_id' => $session->metadata->user_id,
+                'seller_id' => $item->user_id,
                 'item_id' => $item->id,
                 'price' => $item->price,
                 'payment_method' => $paymentMethodMap[$session->metadata->payment_method] ?? 0,
                 'shipping_address' => $session->metadata->shipping_address,
+                'status' => 'trading',
             ]);
+
+            $item->update(['status' => 'sold_out']);
 
             session()->forget(['payment_method', 'shipping_address']);
 
@@ -150,6 +156,7 @@ class OrderController extends Controller
 
             $paymentTypeCode = $session->payment_method_types[0] ?? 'unknown';
             $displayPaymentMethod = $paymentMethodMapForDisplay[$paymentTypeCode] ?? '不明な支払い方法';
+
             return view('checkout_success', compact('session', 'displayPaymentMethod'));
 
         } catch (\Exception $e) {

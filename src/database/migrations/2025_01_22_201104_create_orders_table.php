@@ -21,7 +21,7 @@ class CreateOrdersTable extends Migration
             $table->integer('price');
             $table->tinyInteger('payment_method');
             $table->string('shipping_address');
-            $table->enum('status', ['pending', 'paid', 'shipping', 'completed'])->default('pending');
+            $table->enum('status', ['trading', 'completed'])->default('trading');
             $table->timestamp('completed_at')->nullable();
             $table->timestamps();
         });

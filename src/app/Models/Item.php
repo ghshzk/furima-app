@@ -10,13 +10,14 @@ class Item extends Model
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
         'name',
         'price',
         'description',
         'condition',
         'image_path',
         'brand',
-        'user_id'
+        'status',
     ];
 
     public function categories()
@@ -59,12 +60,17 @@ class Item extends Model
 
     public function orders()
     {
-        return $this->hasMany(Order::class, 'item_id');
+        return $this->hasMany(Order::class);
     }
 
-    public function isSold(): bool //:bool足した
+    /*public function isSold(): bool //:bool足した
     {
         return $this->orders()->exists();
+    }一旦残しておく問題なければ削除*/
+
+    public function isSold(): bool //この部分を追加した
+    {
+        return $this->status === 'sold_out';
     }
 
     public function scopeKeywordSearch($query, $keyword)
@@ -72,5 +78,25 @@ class Item extends Model
         if(!empty($keyword)){
             $query->where('name', 'like', '%' . $keyword . '%');
         }
+    }
+
+    public function scopeBoughtBy($query, $userId)
+    {
+        return $query->whereIn('id', Order::where('buyer_id', $userId)
+            ->where('status', 'completed')
+            ->pluck('item_id'));
+    }
+
+    public function scopeInTransaction($query, $userId)
+    {
+        return $query->whereHas('orders', function($q) use ($userId) {
+            $q->where('status', '!=', 'completed')
+                ->where(function($q2) use ($userId) {
+                    $q2->where('buyer_id', $userId)
+                        ->orWhereHas('item', function($q3) use ($userId) {
+                            $q3->where('seller_id', $userId);
+                        });
+                });
+        });
     }
 }
