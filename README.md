@@ -139,7 +139,7 @@ name: test_user2\
 email: user2@example.com\
 password: password
 
-### ユーザー②
+### ユーザー③
 name: test_user3\
 email: user3@example.com\
 password: password

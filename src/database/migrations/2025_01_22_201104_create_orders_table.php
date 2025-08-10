@@ -15,11 +15,14 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('item_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('buyer_id')->constrained('users');
+            $table->foreignId('seller_id')->constrained('users');
+            $table->foreignId('item_id')->constrained();
             $table->integer('price');
             $table->tinyInteger('payment_method');
             $table->string('shipping_address');
+            $table->enum('status', ['pending', 'paid', 'shipping', 'completed'])->default('pending');
+            $table->timestamp('completed_at')->nullable();
             $table->timestamps();
         });
     }
