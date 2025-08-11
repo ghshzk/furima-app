@@ -74,7 +74,7 @@
             <div class="item-container">
                 @foreach($items as $item)
                     <div class="item-card">
-                        <a class="item-card__link" href="{{ url('/item/' . $item->id) }}">
+                        <a class="item-card__link" href="{{ url('/transaction/item/' . $item->id) }}">
                             <img class="item-card__img" src="{{ asset('storage/' . $item->image_path) }}" alt="{{ $item->name }}">
                             <p class="item-card__name">{{ $item->name }}</p>
                         </a>

@@ -8,6 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\TransactionController;
 use Illuminate\Http\Request;
 use App\Http\Requests\EmailVerificationRequest;
 
@@ -58,6 +59,9 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/mypage',[UserController::class,'index'])->name('mypage');
     Route::get('/mypage/profile',[UserController::class,'edit'])->name('profile.setup');
     Route::post('/mypage/profile',[UserController::class,'update']);
+    //取引チャット
+    Route::get('/transaction/item/{item_id}',[TransactionController::class,'chat'])->name('transaction.show');
+
 
     //出品
     Route::get('/sell',[ItemController::class,'create']);
