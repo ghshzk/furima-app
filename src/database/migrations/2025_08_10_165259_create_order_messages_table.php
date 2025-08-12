@@ -18,6 +18,7 @@ class CreateOrderMessagesTable extends Migration
             $table->foreignId('order_id')->constrained()->cascadeOnDelete();
             $table->foreignId('sender_id')->constrained('users');
             $table->text('content');
+            $table->string('image_path')->nullable();
             $table->timestamp('read_at')->nullable();
             $table->timestamps();
         });

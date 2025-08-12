@@ -19,15 +19,23 @@ class UserController extends Controller
 
         $tab = $request->query('tab','sell');
 
+        $items = null;
+        $orders = null;
+
         if ($tab === 'buy'){
             $items = Item::boughtBy($user->id)->get();
+
         } elseif ($tab === 'transaction') {
-            $items = Item::inTransaction($user->id)->get();
+            $orders = Order::inTransaction($user->id)
+                ->get()
+                ->sortByDesc(function ($order) {
+                    return $order->latestMessage ? $order->latestMessage->created_at : $order->updated_at;
+                });
         } else {
             $items = Item::where('user_id', $user->id)->get();
         }
 
-        return view('mypage',compact('tab','user','items'));
+        return view('mypage',compact('tab','user','items', 'orders'));
     }
 
     /* 編集する情報の表示 */

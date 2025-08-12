@@ -72,11 +72,11 @@
             @elseif ($tab === 'transaction')
             <!-- 取引中の商品の一覧表示 -->
             <div class="item-container">
-                @foreach($items as $item)
+                @foreach($orders as $order)
                     <div class="item-card">
-                        <a class="item-card__link" href="{{ url('/transaction/item/' . $item->id) }}">
-                            <img class="item-card__img" src="{{ asset('storage/' . $item->image_path) }}" alt="{{ $item->name }}">
-                            <p class="item-card__name">{{ $item->name }}</p>
+                        <a class="item-card__link" href="{{ url('/transaction/' . $order->id) }}">
+                            <img class="item-card__img" src="{{ asset('storage/' . $order->item->image_path) }}" alt="{{ $order->item->name }}">
+                            <p class="item-card__name">{{ $order->item->name }}</p>
                         </a>
                     </div>
                 @endforeach

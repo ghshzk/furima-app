@@ -63,12 +63,12 @@ class Item extends Model
         return $this->hasMany(Order::class);
     }
 
-    /*public function isSold(): bool //:bool足した
+    public function currentOrder()
     {
-        return $this->orders()->exists();
-    }一旦残しておく問題なければ削除*/
+        return $this->hasOne(Order::class, 'item_id')->where('status', '!=', 'completed');
+    }
 
-    public function isSold(): bool //この部分を追加した
+    public function isSold(): bool
     {
         return $this->status === 'sold_out';
     }
@@ -83,20 +83,6 @@ class Item extends Model
     public function scopeBoughtBy($query, $userId)
     {
         return $query->whereIn('id', Order::where('buyer_id', $userId)
-            ->where('status', 'completed')
             ->pluck('item_id'));
-    }
-
-    public function scopeInTransaction($query, $userId)
-    {
-        return $query->whereHas('orders', function($q) use ($userId) {
-            $q->where('status', '!=', 'completed')
-                ->where(function($q2) use ($userId) {
-                    $q2->where('buyer_id', $userId)
-                        ->orWhereHas('item', function($q3) use ($userId) {
-                            $q3->where('seller_id', $userId);
-                        });
-                });
-        });
     }
 }

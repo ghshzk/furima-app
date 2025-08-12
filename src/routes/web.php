@@ -60,7 +60,8 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/mypage/profile',[UserController::class,'edit'])->name('profile.setup');
     Route::post('/mypage/profile',[UserController::class,'update']);
     //取引チャット
-    Route::get('/transaction/item/{item_id}',[TransactionController::class,'chat'])->name('transaction.show');
+    Route::get('/transaction/{order_id}',[TransactionController::class,'show'])->name('transaction.show');
+    Route::put('/transaction/{order_id}/message',[TransactionController::class, 'sendMessage'])->name('transaction.send');
 
 
     //出品

@@ -17,7 +17,7 @@
                 <img class="header-logo" src="{{ asset('img/logo.svg') }}" alt="サイトロゴ">
             </a>
 
-            @if(!in_array(Route::currentRouteName(),['login', 'register', 'verification.notice' ]))
+            @if(!in_array(Route::currentRouteName(),['login', 'register', 'verification.notice', 'transaction.show', '' ]))
                 <div class="header-search-form">
                     <form class="header-search-form__form" action="{{ route('top') }}" method="get">
                         @csrf

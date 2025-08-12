@@ -19,13 +19,33 @@ class Order extends Model
         'status',
     ];
 
-    public function user()
+    public function buyer()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'buyer_id');
+    }
+
+    public function seller()
+    {
+        return $this->belongsTo(User::class, 'seller_id');
     }
 
     public function item()
     {
         return $this->belongsTo(Item::class);
+    }
+
+    public function latestMessage()
+    {
+        return $this->hasOne(OrderMessage::class)->latestOfMany();
+    }
+
+    public function scopeInTransaction($query, $userId)
+    {
+        return $query->with('latestMessage', 'item')
+            ->where('status', '!=', 'completed')
+            ->where(function ($q) use ($userId) {
+                $q->where('buyer_id', $userId)
+                    ->orWhere('seller_id', $userId);
+            });
     }
 }
