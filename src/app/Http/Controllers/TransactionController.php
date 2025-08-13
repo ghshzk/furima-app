@@ -63,4 +63,32 @@ class TransactionController extends Controller
 
         return redirect()->route('transaction.show',['order_id' => $order->id]);
     }
+
+    public function updateMessage(Request $request, $messageId)
+    {
+        $orderMessage = OrderMessage::findOrFail($messageId);
+
+        if ($orderMessage->sender_id !== auth()->id()) {
+            abort(403);
+        }
+
+        $orderMessage->update([
+            'content' => $request->input('content'),
+        ]);
+
+        return redirect()->route('transaction.show', ['order_id' => $orderMessage->order_id]);
+    }
+
+    public function deleteMessage(Request $request, $messageId)
+    {
+        $orderMessage = OrderMessage::findOrFail($messageId);
+
+        if ($orderMessage->sender_id !== auth()->id()) {
+            abort(403);
+        }
+
+        $orderMessage->delete();
+
+        return redirect()->route('transaction.show', ['order_id' => $orderMessage->order_id]);
+    }
 }

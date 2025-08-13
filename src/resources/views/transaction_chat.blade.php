@@ -58,7 +58,26 @@
                                 <img class="user-card__img" src="{{ asset('storage/images/default_icon.png') }}" alt="NoImage">
                             @endif
                         </div>
-                        <p class="chat-message__content">{{ $orderMessage->content }}</p>
+                        <!--p class="chat-message__content">{{ $orderMessage->content }}</!--p-->
+
+                        <form class="chat-update-form" action="{{ route('transaction.update', ['message_id' => $orderMessage->id]) }}" method="post">
+                            @csrf
+                            @method('PATCH')
+                            <div class="update-form">
+                                <input type="text" class="update-form__input" name="content" value="{{ $orderMessage->content }}">
+                                <input type="hidden" name="id" value="{{ $orderMessage['id'] }}">
+                            </div>
+                            <button class="update-form__btn" type="submit">編集</button>
+                        </form>
+
+                        <form class="chat-delete-form" action="{{ route('transaction.delete', ['message_id' => $orderMessage->id]) }}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <div class="delete-form__btn">
+                                <input type="hidden" name="id" value="{{ $orderMessage['id'] }}">
+                                <button class="delete-form__btn-submit" type="submit">削除</button>
+                            </div>
+                        </form>
                     </div>
                     @else
                     <div class="chat-message">
@@ -76,10 +95,18 @@
                 </div>
             @endforeach
 
+            <p class="chat-form__error-message">
+                @error('content')
+                {{ $message }}
+                @enderror
+                @error('image_path')
+                {{ $message }}
+                @enderror
+            </p>
             <form class="chat-form" action="{{ route('transaction.send', ['order_id' => $transaction->id]) }}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
-                <textarea class="chat-form__textarea" name="content" placeholder="取引メッセージを入力してください"></textarea>
+                <textarea class="chat-form__textarea" id="chatTextarea" name="content" placeholder="取引メッセージを入力してください">{{ old('content') }}</textarea>
                 <div class="chat-form__upload-inner">
                     <input type="file" id="fileInput" name="image_path" accept="image/*" style="display:none;">
                     <label class="chat-form__upload" for="fileInput">画像を追加</label>
@@ -87,12 +114,27 @@
                 <button class="chat-form__btn" type="submit">
                     <img class="chat-form__icon" src="{{ asset('img/inputbutton.png') }}" alt="">
                 </button>
-                <p class="chat-form__error-message">
-                    @error('content')
-                    {{ $message }}
-                    @enderror
-                </p>
             </form>
+
+            <script>
+                const textarea = document.getElementById('chatTextarea');
+                const storageKey = 'chatContent_transaction_{{ $transaction->id }}';
+
+                window.addEventListener('load', () => {
+                    const saved = localStorage.getItem(storageKey);
+                    if (saved) {
+                        textarea.value = saved;
+                    }
+                });
+
+                textarea.addEventListener('input', () => {
+                    localStorage.setItem(storageKey, textarea.value);
+                });
+
+                document.querySelector('.chat-form').addEventListener('submit', () => {
+                    locakStorage.removeItem(storageKey);
+                });
+            </script>
         </div>
     </main>
 </div>

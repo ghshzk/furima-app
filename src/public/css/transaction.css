@@ -7,11 +7,27 @@
     display: flex;
     background-color: #868686;
     width: 15vw;
+}
 
+.sidebar-content {
+    width: 100%;
+    text-align: center;
 }
 
 .sidebar__heading {
     color: #fff;
+    font-size: 30px;
+}
+
+.other-item__link {
+    display: block;
+    width: 80%;
+    justify-self: center;
+    color: #000;
+    background-color: #EEEFEB;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 24px;
 }
 
 .main {

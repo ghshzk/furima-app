@@ -29,7 +29,7 @@ class OrderMessageRequest extends FormRequest
         ];
     }
 
-    public function message()
+    public function messages()
     {
         return [
             'content.required' => '本文を入力してください',
