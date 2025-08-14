@@ -23,12 +23,14 @@
     <!-- メインコンテンツ -->
     <main class="main">
         <div class="other-user-container">
-            @if ($otherUser->image_path)
-                <img class="other-user__img" src="{{ asset('storage/profile/' . $otherUser->image_path) }}" alt="{{ $otherUser->name }}">
-            @else
-                <img class="other-user__img" src="{{ asset('storage/images/default_icon.png') }}" alt="NoImage">
-            @endif
-            <h1 class="other-user__heading">「{{ $otherUser->name }}」さんとの取引画面</h1>
+            <div class="other-user-card">
+                @if ($otherUser->image_path)
+                    <img class="other-user-card__img" src="{{ Storage::url($otherUser->image_path) }}" alt="{{ $otherUser->name }}">
+                @else
+                    <img class="other-user-card__img" src="{{ asset('img/default_icon.png') }}" alt="NoImage">
+                @endif
+                <h1 class="other-user-card__heading">「{{ $otherUser->name }}」さんとの取引画面</h1>
+            </div>
 
             <!-- 購入側のみに表示 -->
             @if($transaction->buyer_id === auth()->id())
@@ -48,49 +50,54 @@
         <div class="chat-container">
             @foreach($orderMessages as $orderMessage)
                 <div class="chat {{ $orderMessage->sender_id == auth()->id() ? 'chat-right' : 'chat-left' }}">
-                    <div class="chat-message">
-                        @if($orderMessage->sender_id === Auth::id())
-                        <div class="user-card">
-                            <strong class="user-card__name">{{ $orderMessage->sender->name }}</strong>
-                            @if ($orderMessage->sender->image_path)
-                                <img class="user-card__img" src="{{ asset('storage/profile/' . $orderMessage->sender->image_path) }}" alt="{{ $orderMessage->sender->name }}">
-                            @else
-                                <img class="user-card__img" src="{{ asset('storage/images/default_icon.png') }}" alt="NoImage">
+                    @if($orderMessage->sender_id === Auth::id())
+                        <div class="chat-message">
+                            <div class="user-card">
+                                <strong class="user-card__name">{{ $orderMessage->sender->name }}</strong>
+                                @if ($orderMessage->sender->image_path)
+                                    <img class="user-card__img" src="{{ Storage::url($orderMessage->sender->image_path) }}" alt="{{ $orderMessage->sender->name }}">
+                                @else
+                                    <img class="user-card__img" src="{{ asset('img/default_icon.png') }}" alt="NoImage">
+                                @endif
+                            </div>
+
+                            @if ($orderMessage->image_path)
+                            <div class="chat-message__img">
+                                <img class="chat-message__img-path" src="{{ Storage::url($orderMessage->image_path) }}" alt="">
+                            </div>
                             @endif
+
+                            <form class="update-form" id="update-form-{{ $orderMessage->id }}" action="{{ route('transaction.update', ['message_id' => $orderMessage->id]) }}" method="post">
+                                @csrf
+                                @method('PATCH')
+                                <textarea class="update-form__textarea" name="content" id="">{{ $orderMessage->content }}</textarea>
+                            </form>
+                            <div class="chat-message__actions">
+                                <button class="update-form__btn chat-btn" form="update-form-{{ $orderMessage->id }}" type="submit">編集</button>
+                                <form class="delete-form" action="{{ route('transaction.delete', ['message_id' => $orderMessage->id]) }}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="delete-form__btn chat-btn" type="submit">削除</button>
+                                </form>
+                            </div>
                         </div>
-                        <!--p class="chat-message__content">{{ $orderMessage->content }}</!--p-->
-
-                        <form class="chat-update-form" action="{{ route('transaction.update', ['message_id' => $orderMessage->id]) }}" method="post">
-                            @csrf
-                            @method('PATCH')
-                            <div class="update-form">
-                                <input type="text" class="update-form__input" name="content" value="{{ $orderMessage->content }}">
-                                <input type="hidden" name="id" value="{{ $orderMessage['id'] }}">
-                            </div>
-                            <button class="update-form__btn" type="submit">編集</button>
-                        </form>
-
-                        <form class="chat-delete-form" action="{{ route('transaction.delete', ['message_id' => $orderMessage->id]) }}" method="post">
-                            @csrf
-                            @method('DELETE')
-                            <div class="delete-form__btn">
-                                <input type="hidden" name="id" value="{{ $orderMessage['id'] }}">
-                                <button class="delete-form__btn-submit" type="submit">削除</button>
-                            </div>
-                        </form>
-                    </div>
                     @else
-                    <div class="chat-message">
-                        <div class="user-card">
-                            @if ($orderMessage->sender->image_path)
-                                <img class="user-card__img" src="{{ asset('storage/profile/' . $orderMessage->sender->image_path) }}" alt="{{ $orderMessage->sender->name }}">
-                            @else
-                                <img class="user-card__img" src="{{ asset('storage/images/default_icon.png') }}" alt="NoImage">
+                        <div class="chat-message">
+                            <div class="user-card">
+                                @if ($orderMessage->sender->image_path)
+                                    <img class="user-card__img" src="{{ Storage::url($orderMessage->sender->image_path) }}" alt="{{ $orderMessage->sender->name }}">
+                                @else
+                                    <img class="user-card__img" src="{{ asset('img/default_icon.png') }}" alt="NoImage">
+                                @endif
+                                <strong class="user-card__name">{{ $orderMessage->sender->name }}</strong>
+                            </div>
+                            @if ($orderMessage->image_path)
+                            <div class="chat-message__img">
+                                <img class="chat-message__img-path" src="{{ Storage::url($orderMessage->image_path) }}" alt="">
+                            </div>
                             @endif
-                            <strong class="user-card__name">{{ $orderMessage->sender->name }}</strong>
+                            <p class="chat-message__content">{{ $orderMessage->content }}</p>
                         </div>
-                        <p class="chat-message__content">{{ $orderMessage->content }}</p>
-                    </div>
                     @endif
                 </div>
             @endforeach
@@ -132,7 +139,7 @@
                 });
 
                 document.querySelector('.chat-form').addEventListener('submit', () => {
-                    locakStorage.removeItem(storageKey);
+                    localStorage.removeItem(storageKey);
                 });
             </script>
         </div>

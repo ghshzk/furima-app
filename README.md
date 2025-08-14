@@ -136,6 +136,8 @@ order_messagesテーブル
 |order_id   |BIGINT UNSIGNED|     |     |○   |orders(id)|
 |sender_id  |BIGINT UNSIGNED|     |     |○   |users(id) |
 |content    |TEXT           |     |     |○   |          |
+|image_path |VARCHAR(255)   |     |     |    |          |
+|read_at    |TIMESTAMP      |     |     |    |          |
 |created_at |TIMESTAMP      |     |     |    |          |
 |updated_at |TIMESTAMP      |     |     |    |          |
 

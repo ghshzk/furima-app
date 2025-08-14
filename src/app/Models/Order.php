@@ -34,6 +34,11 @@ class Order extends Model
         return $this->belongsTo(Item::class);
     }
 
+    public function messages()
+    {
+        return $this->hasMany(OrderMessage::class);
+    }
+
     public function latestMessage()
     {
         return $this->hasOne(OrderMessage::class)->latestOfMany();

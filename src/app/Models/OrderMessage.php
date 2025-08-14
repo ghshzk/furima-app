@@ -27,4 +27,8 @@ class OrderMessage extends Model
         return $this->belongsTo(Order::class);
     }
 
+    public function scopeUnreadFor($query, $userId)
+    {
+        return $query->whereNull('read_at')->where('sender_id', '!=', $userId);
+    }
 }

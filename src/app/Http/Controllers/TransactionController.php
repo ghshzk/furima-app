@@ -7,6 +7,7 @@ use App\Models\OrderMessage;
 use App\Http\Requests\OrderMessageRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class TransactionController extends Controller
 {
@@ -14,12 +15,17 @@ class TransactionController extends Controller
     {
         $user = Auth::user();
 
-        $transaction = Order::with(['item', 'seller', 'buyer'])
+        $transaction = Order::with(['item', 'seller', 'buyer', 'messages.sender'])
             ->where(function ($query) use ($user) {
                 $query->where('seller_id', $user->id)
                     ->orWhere('buyer_id', $user->id);
             })
             ->findOrFail($orderId);
+
+        $transaction->messages()
+            ->where('sender_id', '!=', $user->id)
+            ->whereNull('read_at')
+            ->update(['read_at' => now()]);
 
         $otherUser = $transaction->seller_id === $user->id ? $transaction->buyer : $transaction->seller;
 
@@ -30,12 +36,12 @@ class TransactionController extends Controller
                     ->orWhere('buyer_id', $user->id);
         })
         ->where('id', '!=' , $orderId)
-        ->get();
+        ->get()
+        ->sortByDesc(function ($order) {
+            return $order->latestMessage ? $order->latestMessage->created_at : $order->updated_at;
+        });
 
-        $orderMessages = OrderMessage::with('sender')
-            ->where('order_id', $orderId)
-            ->orderBy('created_at', 'asc')
-            ->get();
+        $orderMessages = $transaction->messages->sortBy('created_at');
 
         return view('transaction_chat', compact('transaction', 'otherUser', 'otherTransactions', 'orderMessages'));
     }
@@ -86,6 +92,10 @@ class TransactionController extends Controller
         if ($orderMessage->sender_id !== auth()->id()) {
             abort(403);
         }
+
+        if($orderMessage->image_path){
+                Storage::delete($orderMessage->image_path);
+            }
 
         $orderMessage->delete();
 

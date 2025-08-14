@@ -85,7 +85,7 @@
             <h3 class="sell-form__ttl">商品名と説明</h3>
             <div class="sell-form__group">
                 <label class="sell-form__label" for="name">商品名</label>
-                <input class="sell-form__input" type="text" id="name" name="name">
+                <input class="sell-form__input" type="text" id="name" name="name" value="{{ old('name') }}">
                 <p class="sell-form__error-message">
                     @error('name')
                     {{ $message }}

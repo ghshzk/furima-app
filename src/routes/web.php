@@ -58,7 +58,8 @@ Route::middleware(['auth'])->group(function(){
     //マイページ
     Route::get('/mypage',[UserController::class,'index'])->name('mypage');
     Route::get('/mypage/profile',[UserController::class,'edit'])->name('profile.setup');
-    Route::post('/mypage/profile',[UserController::class,'update']);
+    Route::patch('/mypage/profile',[UserController::class,'update'])->name('profile.update');
+
     //取引チャット
     Route::get('/transaction/{order_id}',[TransactionController::class,'show'])->name('transaction.show');
     Route::put('/transaction/{order_id}/message',[TransactionController::class, 'sendMessage'])->name('transaction.send');
