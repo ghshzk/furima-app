@@ -62,10 +62,12 @@ Route::middleware(['auth'])->group(function(){
 
     //取引チャット
     Route::get('/transaction/{order_id}',[TransactionController::class,'show'])->name('transaction.show');
-    Route::put('/transaction/{order_id}/message',[TransactionController::class, 'sendMessage'])->name('transaction.send');
+    Route::post('/transaction/{order_id}/message',[TransactionController::class, 'sendMessage'])->name('transaction.send');
     Route::patch('/transaction/message/{message_id}/update',[TransactionController::class, 'updateMessage'])->name('transaction.update');
-    Route::delete('/transaction//message/{message_id}/delete',[TransactionController::class, 'deleteMessage'])->name('transaction.delete');
+    Route::delete('/transaction/message/{message_id}/delete',[TransactionController::class, 'deleteMessage'])->name('transaction.delete');
+    Route::post('/transaction/{order_id}/review', [TransactionController::class, 'review'])->name('transaction.review');
 
+    Route::post('/transaction/{order_id}/complete-by-buyer', [TransactionController::class, 'completeByBuyer'])->name('transaction.mail');
 
     //出品
     Route::get('/sell',[ItemController::class,'create']);

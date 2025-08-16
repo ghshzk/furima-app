@@ -72,6 +72,7 @@
     width: 100%;
     aspect-ratio: 1 / 1; /* 画像正方形 */
     object-fit: cover;
+    border-radius: 4px;
 }
 
 .item-card__img.sold {

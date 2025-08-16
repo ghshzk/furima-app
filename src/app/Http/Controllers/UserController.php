@@ -18,6 +18,8 @@ class UserController extends Controller
     {
         $user = Auth::user(); //現在ログインしているユーザーの情報を変数に代入
 
+        $averageRating = $user->averageRating();
+
         $unreadCount = OrderMessage::unreadFor($user->id)->count();
 
         $tab = $request->query('tab','sell');
@@ -43,7 +45,7 @@ class UserController extends Controller
             $items = Item::where('user_id', $user->id)->get();
         }
 
-        return view('mypage',compact('tab','user','items', 'orders', 'unreadCount'));
+        return view('mypage',compact('tab','user','items', 'orders', 'unreadCount', 'averageRating'));
     }
 
     /* 編集する情報の表示 */

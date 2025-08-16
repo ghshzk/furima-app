@@ -46,7 +46,19 @@
                 </div>
             </div>
 
-            <a class="item-content__btn btn" href="/purchase/{{ $item->id }}">購入手続きへ</a>
+            @if(Auth::check() && Auth::id() === $item->user_id)
+                <button class="item-content__btn" disabled="disabled">
+                    出品した商品です。
+                </button>
+            @elseif($item->isSold())
+                <button class="item-content__btn" disabled="disabled">
+                    SOLD OUT
+                </button>
+            @else
+                <a class="item-content__btn btn" href="/purchase/{{ $item->id }}">
+                    購入手続きへ
+                </a>
+            @endif
             <h3 class="item-content__ttl">商品説明</h3>
             <p class="item-content__description">{{ $item->description }}</p>
 
@@ -55,7 +67,7 @@
                 <strong class="item-content__label">カテゴリー</strong>
                 <div class="item-content__categories">
                     @foreach($item->categories as $category)
-                    <p class="item-content__category">{{ $category->content }}</p>
+                        <p class="item-content__category">{{ $category->content }}</p>
                     @endforeach
                 </div>
             </div>

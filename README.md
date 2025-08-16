@@ -124,7 +124,9 @@ ordersテーブル
 |price           |INT            |     |     |○   |         |
 |payment_method  |TINYINT        |     |     |○   |         |
 |shipping_address|VARCHAR(255)   |     |     |○   |         |
-|status   |ENUM('trading', 'completed) |     |     |○   |         |
+|buyer_rated     |BOOLEAN        |     |     |○   |         |
+|seller_rated    |BOOLEAN        |     |     |○   |         |
+|status|ENUM('trading','pending_complete','completed) |  |   |○ |   |
 |completed_at    |TIMESTAMP      |     |     |    |         |
 |created_at      |TIMESTAMP      |     |     |    |         |
 |updated_at      |TIMESTAMP      |     |     |    |         |

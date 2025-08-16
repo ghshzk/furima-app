@@ -9,11 +9,19 @@
     <div class="mypage__group">
         <div class="mypage__item">
             @if ($user->image_path)
-            <img class="mypage__img" src="{{ Storage::url($user->image_path) }}" alt="プロフィール画像">
+                <img class="mypage__img" src="{{ Storage::url($user->image_path) }}" alt="プロフィール画像">
             @else
-            <img class="mypage__img" src="{{ asset('img/default_icon.png') }}" alt="NoImage">
+                <img class="mypage__img" src="{{ asset('img/default_icon.png') }}" alt="NoImage">
             @endif
-            <h2 class="mypage__name"> {{ $user->name }}</h2>
+            <div class="mypage__info">
+                <h2 class="mypage__name"> {{ $user->name }}</h2>
+
+                @if(!is_null($averageRating))
+                    <div class="review-form__rating">
+                        <span class="star-rating" data-rate="{{ $averageRating }}"></span>
+                    </div>
+                @endif
+            </div>
         </div>
         <div class="mypage__item">
             <form action="/mypage/profile" method="GET">
@@ -36,11 +44,11 @@
                         購入した商品
                     </a>
                 </li>
-                <li class="tab-nav__item">
+                <li class="tab-nav__item tab-nav__item--transaction">
                     <a class="{{ $tab == 'transaction' ? 'active' : '' }}" href="{{ route('mypage',['tab' => 'transaction']) }}">
                         取引中の商品
                     </a>
-                    <span class="message__count">{{ $unreadCount }}</span>
+                    <span class="total-message__count">{{ $unreadCount }}</span>
                 </li>
             </ul>
         </div>

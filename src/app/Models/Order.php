@@ -47,10 +47,27 @@ class Order extends Model
     public function scopeInTransaction($query, $userId)
     {
         return $query->with('latestMessage', 'item')
-            ->where('status', '!=', 'completed')
+            ->whereIn('status', ['trading', 'pending_complete'])
             ->where(function ($q) use ($userId) {
-                $q->where('buyer_id', $userId)
-                    ->orWhere('seller_id', $userId);
+                $q->where(function ($q2) use ($userId) {
+                    $q2->where('buyer_id', $userId)
+                        ->where('buyer_rated', false);
+                })->orWhere(function ($q2) use ($userId) {
+                    $q2->where('seller_id', $userId)
+                        ->where('seller_rated', false);
+                });
             });
+    }
+
+    public function needsReviewBy(User $user): bool
+    {
+        if ($this->status !== 'pending_complete') {
+            return false;
+        }
+
+        if ($this->buyer_id === $user->id && !$this->buyer_rated) {
+            return true;
+        }
+        return false;
     }
 }
