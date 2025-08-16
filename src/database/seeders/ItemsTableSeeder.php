@@ -18,8 +18,6 @@ class ItemsTableSeeder extends Seeder
      */
     public function run()
     {
-        //$userIds = User::pluck('id')->toArray();
-
         $categories = Category::whereIn('content',[
             'ファッション', '家電', 'インテリア', 'レディース', 'メンズ', 'コスメ', 'ゲーム', 'キッチン', 'アクセサリー'
         ])->pluck('id','content')->toArray();
@@ -109,7 +107,7 @@ class ItemsTableSeeder extends Seeder
             [
                 'name' => 'メイクセット',
                 'price' => 2500 ,
-                'description' => '便利なメイクアップセット',                //'image_path' => 'public/img/item_img/item_img_10.jpg',
+                'description' => '便利なメイクアップセット',
                 'image_path' => 'item_img_10.jpg',
                 'condition' => 2, //目立った傷や汚れなし
                 'categories' => ['コスメ'],
@@ -132,7 +130,6 @@ class ItemsTableSeeder extends Seeder
                 'condition' => $item['condition'],
                 'brand' => Str::title(Str::random(rand(6,10))),
                 'user_id' => $item['user_id'],
-                //'user_id' => $userIds[array_rand($userIds)]
             ]);
 
             $categoryIds = array_map(fn($category) => $categories[$category], $item['categories']);

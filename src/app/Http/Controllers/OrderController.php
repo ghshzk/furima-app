@@ -9,8 +9,6 @@ use App\Http\Requests\PurchaseRequest;
 use App\Services\StripeService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-//use Stripe\Stripe;
-//use Stripe\Checkout\Session as StripeSession;
 
 class OrderController extends Controller
 {

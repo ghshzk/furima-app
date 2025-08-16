@@ -147,13 +147,21 @@
                         </div>
                         <input type="hidden" name="rating" id="rating-input" required>
                     </div>
-                    <div class="review-form__btn">
+                    <div class="review-form__btn {{ $errors->reviewErrors->any() ? 'has-error' : '' }}">
+                        @if ($errors->reviewErrors->any())
+                            <div class="review-form__error">
+                                @foreach ($errors->reviewErrors->all() as $error)
+                                    <p class="review-form__error-message">{{ $error }}</p>
+                                @endforeach
+                            </div>
+                        @endif
                         <button class="review-form__btn-submit" type="submit">送信する</button>
                     </div>
                 </form>
             </div>
         </div>
     </main>
+
     <script>
         const textarea = document.getElementById('chatTextarea');
         const storageKey = 'chatContent_transaction_{{ $transaction->id }}';
@@ -225,16 +233,6 @@
             });
         }
 
-        /*window.addEventListener('DOMContentLoaded', function () {
-            @if(
-                $transaction->seller_id === auth()->id() &&
-                $transaction->buyer_rated &&
-                !$transaction->seller_rated
-            )
-            document.getElementById('completed-modal').style.display = 'block';
-
-            @endif
-        });*/
         window.addEventListener('DOMContentLoaded', function () {
             @if(
                 $transaction->status === 'pending_complete' &&

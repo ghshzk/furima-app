@@ -71,7 +71,7 @@
                 <div class="error">
                     <p class="error-message">
                     @foreach ($errors->all() as $error)
-                    {{ $error }}
+                        {{ $error }}
                     @endforeach
                     </p>
                 </div>

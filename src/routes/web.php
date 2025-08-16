@@ -66,7 +66,6 @@ Route::middleware(['auth'])->group(function(){
     Route::patch('/transaction/message/{message_id}/update',[TransactionController::class, 'updateMessage'])->name('transaction.update');
     Route::delete('/transaction/message/{message_id}/delete',[TransactionController::class, 'deleteMessage'])->name('transaction.delete');
     Route::post('/transaction/{order_id}/review', [TransactionController::class, 'review'])->name('transaction.review');
-
     Route::post('/transaction/{order_id}/complete-by-buyer', [TransactionController::class, 'completeByBuyer'])->name('transaction.mail');
 
     //出品

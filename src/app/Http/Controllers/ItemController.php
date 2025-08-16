@@ -8,7 +8,6 @@ use App\Http\Requests\ExhibitionRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-
 class ItemController extends Controller
 {
     public function index(Request $request)
@@ -39,7 +38,6 @@ class ItemController extends Controller
                 $query->where('name', 'like', "%{$keyword}%");
             }
 
-            //$items = $query->with('orders')->get();
             $items = $query->get();
         }
 

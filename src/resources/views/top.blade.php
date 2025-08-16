@@ -32,7 +32,7 @@
                         <p class="item-card__name">{{ $item->name }}</p>
                     </a>
                     @if($item->isSold())
-                    <div class="sold-overlay">SOLD</div>
+                        <div class="sold-overlay">SOLD</div>
                     @endif
                 </div>
             @endforeach
@@ -47,7 +47,7 @@
                         <p class="item-card__name">{{ $item->name }}</p>
                     </a>
                     @if($item->isSold())
-                    <div class="sold-overlay">SOLD</div>
+                        <div class="sold-overlay">SOLD</div>
                     @endif
                 </div>
             @endforeach

@@ -53,8 +53,8 @@
                 <label class="sell-form__label" for="">カテゴリー</label>
                 <div class="sell-form__checkbox-inner">
                     @foreach($categories as $category)
-                    <input class="checkbox" type="checkbox" name="categories[]" id="category_{{ $category->id }}" value="{{ $category->id }}" {{ in_array($category->id, old('categories', [])) ? 'checked' : '' }} style="display:none; [input[type="checkbox"]:checked + label]">
-                    <label class="sell-form__checkbox" for="category_{{ $category->id }}">{{ $category->content }}</label>
+                        <input class="checkbox" type="checkbox" name="categories[]" id="category_{{ $category->id }}" value="{{ $category->id }}" {{ in_array($category->id, old('categories', [])) ? 'checked' : '' }} style="display:none; [input[type="checkbox"]:checked + label]">
+                        <label class="sell-form__checkbox" for="category_{{ $category->id }}">{{ $category->content }}</label>
                     @endforeach
                 </div>
                 <p class="sell-form__error-message">

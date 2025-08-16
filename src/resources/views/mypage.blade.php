@@ -55,44 +55,44 @@
 
         <div class="tab-content">
             @if ($tab == 'sell')
-            <!-- 出品した商品一覧を表示-->
-            <div class="item-container">
-                @foreach($items as $item)
-                    <div class="item-card">
-                        <a class="item-card__link" href="{{ url('/item/' . $item->id) }}">
-                            <img class="item-card__img" src="{{ Storage::url($item->image_path) }}" alt="{{ $item->name }}">
-                            <p class="item-card__name">{{ $item->name }}</p>
-                        </a>
-                    </div>
-                @endforeach
-            </div>
+                <!-- 出品した商品一覧を表示-->
+                <div class="item-container">
+                    @foreach($items as $item)
+                        <div class="item-card">
+                            <a class="item-card__link" href="{{ url('/item/' . $item->id) }}">
+                                <img class="item-card__img" src="{{ Storage::url($item->image_path) }}" alt="{{ $item->name }}">
+                                <p class="item-card__name">{{ $item->name }}</p>
+                            </a>
+                        </div>
+                    @endforeach
+                </div>
             @elseif ($tab == 'buy')
-            <!-- 購入した商品の一覧表示 -->
-            <div class="item-container">
-                @foreach($items as $item)
-                    <div class="item-card">
-                        <a class="item-card__link" href="{{ url('/item/' . $item->id) }}">
-                            <img class="item-card__img" src="{{ Storage::url($item->image_path) }}" alt="{{ $item->name }}">
-                            <p class="item-card__name">{{ $item->name }}</p>
-                        </a>
-                    </div>
-                @endforeach
-            </div>
+                <!-- 購入した商品の一覧表示 -->
+                <div class="item-container">
+                    @foreach($items as $item)
+                        <div class="item-card">
+                            <a class="item-card__link" href="{{ url('/item/' . $item->id) }}">
+                                <img class="item-card__img" src="{{ Storage::url($item->image_path) }}" alt="{{ $item->name }}">
+                                <p class="item-card__name">{{ $item->name }}</p>
+                            </a>
+                        </div>
+                    @endforeach
+                </div>
             @elseif ($tab === 'transaction')
-            <!-- 取引中の商品の一覧表示 -->
-            <div class="item-container">
-                @foreach($orders as $order)
-                    <div class="item-card">
-                        @if ($order->unread_messages_count > 0)
-                        <span class="message__count">{{ $order->unread_messages_count }}</span>
-                        @endif
-                        <a class="item-card__link" href="{{ url('/transaction/' . $order->id) }}">
-                            <img class="item-card__img" src="{{ Storage::url($order->item->image_path) }}" alt="{{ $order->item->name }}">
-                            <p class="item-card__name">{{ $order->item->name }}</p>
-                        </a>
-                    </div>
-                @endforeach
-            </div>
+                <!-- 取引中の商品の一覧表示 -->
+                <div class="item-container">
+                    @foreach($orders as $order)
+                        <div class="item-card">
+                            @if ($order->unread_messages_count > 0)
+                            <span class="message__count">{{ $order->unread_messages_count }}</span>
+                            @endif
+                            <a class="item-card__link" href="{{ url('/transaction/' . $order->id) }}">
+                                <img class="item-card__img" src="{{ Storage::url($order->item->image_path) }}" alt="{{ $order->item->name }}">
+                                <p class="item-card__name">{{ $order->item->name }}</p>
+                            </a>
+                        </div>
+                    @endforeach
+                </div>
             @endif
         </div>
     </div>

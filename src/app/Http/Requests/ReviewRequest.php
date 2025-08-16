@@ -28,13 +28,15 @@ class ReviewRequest extends FormRequest
         ];
     }
 
-    public function message()
+    public function messages()
     {
         return [
             'rating.required' => '評価を入力してください',
             'rating.integer' => '評価は1~5で入力してください',
             'rating.min' => '評価は最低1つ以上選択してください',
-            'rating.max' => '評価は5つまで選択できます'
+            'rating.max' => '評価は1~5で入力してください'
         ];
     }
+
+    protected $errorBag = 'reviewErrors';
 }

@@ -75,13 +75,13 @@
                 <strong class="item-content__label">商品の状態</strong>
                 <p class="item-content__condition">
                     @if($item['condition'] == 1)
-                    良好
+                        良好
                     @elseif($item['condition'] == 2)
-                    目立った傷や汚れはなし
+                        目立った傷や汚れはなし
                     @elseif($item['condition'] == 3)
-                    やや傷や汚れあり
+                        やや傷や汚れあり
                     @elseif($item['condition'] == 4)
-                    状態が悪い
+                        状態が悪い
                     @endif
                 </p>
             </div>
@@ -92,9 +92,9 @@
             <div class="item-content__comment">
                 <div class="comment-user">
                     @if ($comment->user->image_path)
-                    <img class="comment-user__img" src="{{ asset('storage/profile/' . $comment->user->image_path) }}" alt="{{ $comment->user->name }}">
+                        <img class="comment-user__img" src="{{ asset('storage/profile/' . $comment->user->image_path) }}" alt="{{ $comment->user->name }}">
                     @else
-                    <img class="comment-user__img" src="{{ asset('storage/images/default_icon.png') }}" alt="NoImage">
+                        <img class="comment-user__img" src="{{ asset('storage/images/default_icon.png') }}" alt="NoImage">
                     @endif
                     <strong class="comment-user__name">{{ $comment->user->name }}</strong>
                 </div>
