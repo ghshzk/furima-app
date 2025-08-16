@@ -67,7 +67,6 @@
 }
 
 .completed-action__btn {
-    margin-right: 30px;
     padding: 12px 16px;
     font-size: 20px;
     font-weight: 700;
@@ -107,7 +106,7 @@
 .item__price {
     font-size: 36px;
     font-weight: 400;
-    margin: auto;
+    margin: 0;
 }
 
 @media (max-width: 850px) and (min-width: 768px) {
@@ -116,14 +115,22 @@
     }
 
     .other-user-card__img {
-        width: calc(20%);
-        margin-right: 18px;
+        width: calc(18%);
+        margin: 20px;
+    }
+
+    .other-user-card__heading {
+        font-size: 28px;
     }
 
     .completed-action {
         width: 100%;
         text-align: right;
         margin-bottom: 15px;
+    }
+
+    .completed-action__btn {
+        margin-right: 30px;
     }
 
     .item__img {
@@ -223,6 +230,7 @@
 }
 
 .chat-btn {
+    font-size: 15px;
     border: none;
     background-color: transparent;
     color: #5F5F5F;
@@ -300,6 +308,16 @@
     margin: 0;
     padding: 0 20px;
     background-color: #fff;
+}
+
+@media (max-width: 850px) and (min-width: 768px) {
+    .chat-message {
+        max-width: 70%;
+    }
+
+    .user-card__name {
+    font-size: 25px;
+    }
 }
 
 .modal {

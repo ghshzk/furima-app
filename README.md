@@ -76,7 +76,7 @@ itemsテーブル
 |condition  |TINYINT        |     |     |○   |         |
 |image_path |VARCHAR(255)   |     |     |○   |         |
 |brand      |VARCHAR(255)   |     |     |    |         |
-|status   |ENUM('on_sale', 'sold_out')   |     |     |○   |         |
+|status   |ENUM(on_sale, sold_out)   |     |     |○   |         |
 |created_at |TIMESTAMP      |     |     |    |         |
 |updated_at |TIMESTAMP      |     |     |    |         |
 
@@ -126,7 +126,7 @@ ordersテーブル
 |shipping_address|VARCHAR(255)   |     |     |○   |         |
 |buyer_rated     |BOOLEAN        |     |     |○   |         |
 |seller_rated    |BOOLEAN        |     |     |○   |         |
-|status|ENUM('trading','pending_complete','completed) |  |   |○ |   |
+|status|ENUM(trading, pending_complete, completed) |  |   |○ |   |
 |completed_at    |TIMESTAMP      |     |     |    |         |
 |created_at      |TIMESTAMP      |     |     |    |         |
 |updated_at      |TIMESTAMP      |     |     |    |         |
@@ -155,7 +155,7 @@ order_reviewsテーブル
 |updated_at  |TIMESTAMP       |     |     |    |          |
 
 ## 🗺 ER図
-![ER図](furima-ER.png)
+![ER図](furima-app-ER.drawio.png)
 
 ## 🔑 ユーザーデータ
 ### ユーザー①

@@ -39,7 +39,9 @@
                     <button class="completed-action__btn" id="open-modal-btn" type="submit">取引を完了する</button>
                 </form>
             @elseif($transaction->status === 'pending_complete')
-                <button class="completed-action__btn" disabled>取引完了済み</button>
+                <div class="completed-action">
+                    <button class="completed-action__btn" disabled>取引完了済み</button>
+                </div>
             @endif
         </div>
 
