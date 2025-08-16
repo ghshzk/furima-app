@@ -69,13 +69,14 @@ itemsテーブル
 |カラム名    |型     |PRIMARY KEY|UNIQUE KEY|NOT NULL|FOREIGN KEY|
 |-----------|---------------|:---:|:---:|:---:|:------:|
 |id         |BIGINT UNSIGNED|○    |     |○   |         |
+|user_id    |BIGINT UNSIGNED|     |     |○   |users(id)|
 |name       |VARCHAR(255)   |     |     |○   |         |
 |price      |INT            |     |     |○   |         |
 |description|VARCHAR(255)   |     |     |○   |         |
 |condition  |TINYINT        |     |     |○   |         |
 |image_path |VARCHAR(255)   |     |     |○   |         |
 |brand      |VARCHAR(255)   |     |     |    |         |
-|user_id    |BIGINT UNSIGNED|     |     |○   |users(id)|
+|status   |ENUM(on_sale, sold_out)   |     |     |○   |         |
 |created_at |TIMESTAMP      |     |     |    |         |
 |updated_at |TIMESTAMP      |     |     |    |         |
 
@@ -117,26 +118,59 @@ ordersテーブル
 |カラム名         |型    |PRIMARY KEY|UNIQUE KEY|NOT NULL|FOREIGN KEY|
 |----------------|---------------|:---:|:---:|:---:|:------:|
 |id              |BIGINT UNSIGNED|○    |     |○   |         |
-|user_id         |BIGINT UNSIGNED|     |     |○   |users(id)|
+|buyer_id        |BIGINT UNSIGNED|     |     |○   |users(id)|
+|seller_id       |BIGINT UNSIGNED|     |     |○   |users(id)|
 |item_id         |BIGINT UNSIGNED|     |     |○   |items(id)|
 |price           |INT            |     |     |○   |         |
 |payment_method  |TINYINT        |     |     |○   |         |
 |shipping_address|VARCHAR(255)   |     |     |○   |         |
+|buyer_rated     |BOOLEAN        |     |     |○   |         |
+|seller_rated    |BOOLEAN        |     |     |○   |         |
+|status|ENUM(trading, pending_complete, completed) |  |   |○ |   |
+|completed_at    |TIMESTAMP      |     |     |    |         |
 |created_at      |TIMESTAMP      |     |     |    |         |
 |updated_at      |TIMESTAMP      |     |     |    |         |
 
-## 🗺 ER図
-![ER図](furima-ER.png)
+order_messagesテーブル
+|カラム名    |型    |PRIMARY KEY|UNIQUE KEY|NOT NULL|FOREIGN KEY|
+|-----------|---------------|:---:|:---:|:---:|:-------:|
+|id         |BIGINT UNSIGNED|○    |     |○   |          |
+|order_id   |BIGINT UNSIGNED|     |     |○   |orders(id)|
+|sender_id  |BIGINT UNSIGNED|     |     |○   |users(id) |
+|content    |TEXT           |     |     |○   |          |
+|image_path |VARCHAR(255)   |     |     |    |          |
+|read_at    |TIMESTAMP      |     |     |    |          |
+|created_at |TIMESTAMP      |     |     |    |          |
+|updated_at |TIMESTAMP      |     |     |    |          |
 
-## 🔑 テストアカウント
-### アカウント①
+order_reviewsテーブル
+|カラム名     |型    |PRIMARY KEY|UNIQUE KEY|NOT NULL|FOREIGN KEY|
+|------------|----------------|:---:|:---:|:---:|:-------:|
+|id          |BIGINT UNSIGNED |○    |     |○   |          |
+|order_id    |BIGINT UNSIGNED |     |     |○   |orders(id)|
+|reviewer_id |BIGINT UNSIGNED |     |     |○   |users(id) |
+|reviewee_id |BIGINT UNSIGNED |     |     |○   |users(id) |
+|rating      |TINYINT UNSIGNED|     |     |○   |          |
+|created_at  |TIMESTAMP       |     |     |    |          |
+|updated_at  |TIMESTAMP       |     |     |    |          |
+
+## 🗺 ER図
+![ER図](furima-app-ER.drawio.png)
+
+## 🔑 ユーザーデータ
+### ユーザー①
 name: test_user2\
 email: user1@example.com\
 password: password
 
-### アカウント②
+### ユーザー②
 name: test_user2\
 email: user2@example.com\
+password: password
+
+### ユーザー③
+name: test_user3\
+email: user3@example.com\
 password: password
 
 ## 🌐 URL

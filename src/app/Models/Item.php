@@ -10,13 +10,14 @@ class Item extends Model
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
         'name',
         'price',
         'description',
         'condition',
         'image_path',
         'brand',
-        'user_id'
+        'status',
     ];
 
     public function categories()
@@ -59,12 +60,17 @@ class Item extends Model
 
     public function orders()
     {
-        return $this->hasMany(Order::class, 'item_id');
+        return $this->hasMany(Order::class);
     }
 
-    public function isSold(): bool //:bool足した
+    public function currentOrder()
     {
-        return $this->orders()->exists();
+        return $this->hasOne(Order::class, 'item_id')->where('status', '!=', 'completed');
+    }
+
+    public function isSold(): bool
+    {
+        return $this->status === 'sold_out';
     }
 
     public function scopeKeywordSearch($query, $keyword)
@@ -72,5 +78,11 @@ class Item extends Model
         if(!empty($keyword)){
             $query->where('name', 'like', '%' . $keyword . '%');
         }
+    }
+
+    public function scopeBoughtBy($query, $userId)
+    {
+        return $query->whereIn('id', Order::where('buyer_id', $userId)
+            ->pluck('item_id'));
     }
 }

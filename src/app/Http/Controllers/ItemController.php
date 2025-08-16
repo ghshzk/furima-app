@@ -39,12 +39,9 @@ class ItemController extends Controller
                 $query->where('name', 'like', "%{$keyword}%");
             }
 
-            $items = $query->with('orders')->get();
+            //$items = $query->with('orders')->get();
+            $items = $query->get();
         }
-
-        /*$items->each(function ($item) {
-            $item->sold = $item->orders()->exists();
-        });ここ削除*/
 
         return view('top',compact('tab', 'items', 'keyword'));
     }

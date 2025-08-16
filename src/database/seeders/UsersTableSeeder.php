@@ -21,7 +21,7 @@ class UsersTableSeeder extends Seeder
                 'email' => 'user1@example.com',
                 'password' => Hash::make('password'),
                 'postcode' => '123-4567',
-                'address' => '東京都新宿区新宿1-1-1',
+                'address' => '東京都新宿区テスト1-1-1',
                 'building' => 'テストマンション101',
                 'image_path' => null
             ],
@@ -30,10 +30,19 @@ class UsersTableSeeder extends Seeder
                 'email' => 'user2@example.com',
                 'password' => Hash::make('password'),
                 'postcode' => '987-6543',
-                'address' => '大阪府大阪市梅田1-1-2',
+                'address' => '大阪府大阪市テスト1-1-2',
                 'building' => null,
                 'image_path' => null
-            ]
+            ],
+            [
+                'name' => 'test_user3',
+                'email' => 'user3@example.com',
+                'password' => Hash::make('password'),
+                'postcode' => '567-1234',
+                'address' => '愛知県名古屋市テスト3-2-1',
+                'building' => 'メゾン・テスト301',
+                'image_path' => null,
+            ],
             ]);
     }
 }

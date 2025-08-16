@@ -17,6 +17,7 @@
 
 .mypage__name {
     font-size: 36px;
+    margin-bottom: 10px;
 }
 
 .mypage__btn {
@@ -41,6 +42,40 @@
     }
 }
 
+
+.star-rating {
+    display: inline-block;
+    position: relative;
+    font-size: 2rem;
+    width: 12rem;
+    height: 2rem;
+    white-space: nowrap;
+    letter-spacing: 0.4rem;
+}
+
+.star-rating::before,
+.star-rating::after {
+    content: '★★★★★';
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.star-rating::before {
+    color: #D9D9D9;
+}
+
+.star-rating::after {
+    color: #FFF048;
+    overflow: hidden;
+}
+
+.star-rating[data-rate="5"]:after{ width: 100%; }/* 星5 */
+.star-rating[data-rate="4"]:after{ width: 80%; } /* 星4 */
+.star-rating[data-rate="3"]:after{ width: 60%; } /* 星3 */
+.star-rating[data-rate="2"]:after{ width: 40%; } /* 星2 */
+.star-rating[data-rate="1"]:after{ width: 20%; } /* 星1 */
+
 /* タブ切替部分のデザイン */
 .tabs {
     font-size: 24px;
@@ -55,6 +90,7 @@
     text-decoration: none;
     color: #5F5F5F;
     font-weight: 700;
+    white-space: nowrap;
 }
 
 .tab-nav a.active {
@@ -90,6 +126,40 @@
     }
 }
 
+.tab-nav__item--transaction {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.total-message__count,
+.message__count {
+    display: inline-block;
+    font-weight: 700;
+    color: #FFF;
+    background-color: #FF0000;
+    text-align: center;
+}
+
+.total-message__count {
+    border-radius: 10px;
+    min-width: 27px;
+    height: 26px;
+    line-height: 26px;
+}
+
+.message__count {
+    font-size: 10px;
+    border-radius: 50%;
+    min-width: 20px;
+    height: 20px;
+    line-height: 20px;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+}
+
+
 /* 商品 */
 .item-container {
     display: flex;
@@ -104,6 +174,7 @@
     width: calc(25% - 38px); /* 4つ並ぶ調整 */
     text-align: left;
     box-sizing: border-box;
+    position: relative;
 }
 
 .item-card__link {
@@ -116,6 +187,7 @@
     width: 100%;
     aspect-ratio: 1 / 1; /* 画像正方形 */
     object-fit: cover;
+    border-radius: 4px;
 }
 
 .item-card__name {

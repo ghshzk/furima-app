@@ -70,4 +70,19 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Order::class);
     }
+
+    public function receivedReviews()
+    {
+        return $this->hasMany(OrderReview::class, 'reviewee_id');
+    }
+
+    public function averageRating()
+    {
+        $average = $this->receivedReviews()->avg('rating');
+
+        if (is_null($average)) {
+            return null;
+        }
+        return round($average);
+    }
 }
